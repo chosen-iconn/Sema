@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Support | SEMA Help Center</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Support | SEMA Emotional Wellness Institution</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- GLOBAL APP SCRIPT (IMPORTANT) -->
+    <script src="assets/js/app.js" defer></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -27,11 +30,13 @@
                             600: '#0d9488',
                             700: '#0f766e',
                             800: '#115e59',
-                            900: '#134e4a'
+                            900: '#134e4a',
                         }
                     },
                     boxShadow: {
-                        soft: '0 10px 30px rgba(2, 6, 23, 0.06)'
+                        'soft': '0 10px 40px -5px rgba(2, 6, 23, 0.05)',
+                        'card': '0 15px 40px -5px rgba(20, 184, 166, 0.08)',
+                        'danger': '0 15px 40px -5px rgba(220, 38, 38, 0.12)',
                     }
                 }
             }
@@ -40,207 +45,192 @@
 
     <style>
         body {
-            background: #f8fafc;
+            background-color: #f8fafc;
             color: #334155;
             -webkit-font-smoothing: antialiased;
         }
 
         .smooth-transition {
-            transition: all .25s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .hover-lift:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
         }
 
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* REVEAL SYSTEM (GLOBAL COMPATIBLE) */
         .reveal {
             opacity: 0;
-            transform: translateY(18px);
-            transition: all .7s ease;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(.2,.65,.2,1);
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        .bg-grid {
-            background-image:
-                linear-gradient(to right, rgba(20,184,166,0.06) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(20,184,166,0.06) 1px, transparent 1px);
-            background-size: 42px 42px;
-        }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <!-- HEADER -->
-    <div id="header"></div>
+<!-- HEADER (Dynamically Loaded) -->
+<div id="header" class="relative z-50"></div>
 
-    <main class="flex-grow">
+<main class="flex-grow">
 
-        <!-- HERO -->
-        <section class="relative bg-brand-900 text-white overflow-hidden">
-            <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80"
-                     class="w-full h-full object-cover opacity-20"
-                     alt="">
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden bg-brand-900 text-white">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80" 
+                class="w-full h-full object-cover opacity-20 mix-blend-luminosity" 
+                alt="SEMA Support Center">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/90 to-brand-900/50"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 reveal active">
+            <div class="max-w-3xl">
+                <span class="uppercase tracking-[0.3em] text-brand-300 text-sm font-bold bg-brand-900/50 px-4 py-2 rounded-full border border-brand-500/30">
+                    SEMA Support Center
+                </span>
+
+                <h1 class="text-5xl md:text-6xl font-black leading-tight mt-8 mb-6">
+                    Support is immediate, confidential, and always available.
+                </h1>
+
+                <p class="text-xl text-brand-100 leading-relaxed font-light border-l-4 border-brand-500 pl-6">
+                    Whether you're in crisis, overwhelmed, or simply need someone to talk to, SEMA connects you to professional care pathways in real time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN SUPPORT PATHWAYS -->
+    <section class="py-24 bg-white bg-grid-pattern relative z-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-white/80 to-transparent"></div>
+
+        <div class="relative max-w-6xl mx-auto px-6 z-10">
+
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-4xl font-black text-slate-900 leading-tight">
+                    Choose your support pathway
+                </h2>
+                <p class="text-slate-500 text-lg mt-4 font-light">
+                    Each option routes you to a different level of care depending on urgency and personal need.
+                </p>
             </div>
 
-            <div class="relative max-w-6xl mx-auto px-6 py-24">
-                <div class="reveal active max-w-3xl">
-                    <span class="uppercase tracking-[0.25em] text-brand-300 text-xs font-bold">
-                        SEMA Support Center
-                    </span>
+            <!-- EMERGENCY BLOCK -->
+            <div class="reveal bg-red-50 border border-red-100 rounded-3xl p-8 lg:p-10 shadow-soft hover-lift hover:shadow-danger smooth-transition mb-12 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
+                
+                <div class="relative flex flex-col md:flex-row gap-8 md:items-center z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-inner">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
 
-                    <h1 class="text-4xl md:text-5xl font-black mt-5 leading-tight">
-                        Support is immediate, confidential, and always available.
-                    </h1>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-black text-red-900">
+                            Immediate emergency support
+                        </h3>
+                        <p class="text-red-700 mt-2 text-base leading-relaxed max-w-2xl">
+                            If you are in immediate physical danger, experiencing severe distress, or having thoughts of self-harm, please use the emergency channels below right away.
+                        </p>
+                    </div>
 
-                    <p class="text-brand-100 text-lg mt-6 leading-relaxed">
-                        Whether you're in crisis, overwhelmed, or simply need someone to talk to,
-                        SEMA connects you to professional care pathways in real time.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- MAIN SUPPORT -->
-        <section class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-
-                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
-                    <h2 class="text-3xl font-black text-slate-900">
-                        Choose your support pathway
-                    </h2>
-                    <p class="text-slate-600 mt-4">
-                        Each option routes you to a different level of care depending on urgency and need.
-                    </p>
-                </div>
-
-                <!-- EMERGENCY -->
-                <div class="reveal bg-red-50 border border-red-100 rounded-2xl p-8 shadow-soft hover-lift smooth-transition mb-10">
-                    <div class="flex flex-col md:flex-row gap-6 md:items-start">
-
-                        <div class="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                            </svg>
-                        </div>
-
-                        <div class="flex-1">
-                            <h3 class="text-xl font-black text-red-900">
-                                Immediate emergency support
-                            </h3>
-
-                            <p class="text-red-700 mt-2 text-sm leading-relaxed">
-                                If you are in immediate danger or experiencing severe distress, use emergency channels below.
-                            </p>
-
-                            <div class="flex flex-wrap gap-3 mt-5">
-                                <a href="tel:988"
-                                   class="bg-red-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-red-700 smooth-transition">
-                                    Call Crisis Line
-                                </a>
-
-                                <a href="tel:911"
-                                   class="bg-white text-red-700 border border-red-200 px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-red-100 smooth-transition">
-                                    Medical Emergency
-                                </a>
-                            </div>
-                        </div>
+                    <div class="flex flex-col sm:flex-row gap-4 shrink-0 mt-4 md:mt-0">
+                        <a href="tel:988"
+                           class="bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-center shadow-md hover:bg-red-700 hover:shadow-lg smooth-transition flex items-center justify-center gap-2">
+                            Call Crisis Line
+                        </a>
+                        <a href="tel:911"
+                           class="bg-white text-red-700 border border-red-200 px-8 py-4 rounded-xl font-bold text-center hover:bg-red-50 smooth-transition flex items-center justify-center gap-2">
+                            Medical Emergency
+                        </a>
                     </div>
                 </div>
-
-                <!-- OPTIONS -->
-                <div class="grid md:grid-cols-2 gap-6">
-
-                    <!-- TALK -->
-                    <a href="#"
-                       class="reveal group bg-white border border-slate-200 rounded-2xl p-8 shadow-soft hover-lift smooth-transition">
-
-                        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white smooth-transition">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.25-.95L3 20l1.4-3.7C3.5 15 3 13.6 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/>
-                            </svg>
-                        </div>
-
-                        <h3 class="text-lg font-bold mt-5 text-slate-900">
-                            Speak to a counselor
-                        </h3>
-
-                        <p class="text-sm text-slate-600 mt-2">
-                            Connect via chat or video with a licensed professional.
-                        </p>
-                    </a>
-
-                    <!-- CALM -->
-                    <a href="#"
-                       class="reveal group bg-white border border-slate-200 rounded-2xl p-8 shadow-soft hover-lift smooth-transition">
-
-                        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white smooth-transition">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-
-                        <h3 class="text-lg font-bold mt-5 text-slate-900">
-                            Calm & grounding tools
-                        </h3>
-
-                        <p class="text-sm text-slate-600 mt-2">
-                            Breathing exercises, guided audio, and stabilization techniques.
-                        </p>
-                    </a>
-
-                </div>
             </div>
-        </section>
 
-        <!-- FOOT NOTE -->
-        <section class="py-10 bg-slate-50 border-t border-slate-200">
-            <div class="max-w-6xl mx-auto px-6 text-center text-xs text-slate-500">
+            <!-- OPTIONS GRID -->
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- TALK CARD -->
+                <a href="#" class="reveal group bg-white border border-slate-100 rounded-3xl p-10 shadow-soft hover-lift hover:shadow-card hover:border-brand-200 smooth-transition relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-400 to-brand-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white smooth-transition mb-8">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.25-.95L3 20l1.4-3.7C3.5 15 3 13.6 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/>
+                        </svg>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-slate-900 group-hover:text-brand-600 smooth-transition">
+                        Speak to a counselor
+                    </h3>
+                    <p class="text-base text-slate-500 mt-3 leading-relaxed">
+                        Connect securely via chat, voice, or video with a licensed clinical professional tailored to your specific needs.
+                    </p>
+                </a>
+
+                <!-- CALM CARD -->
+                <a href="#" class="reveal group bg-white border border-slate-100 rounded-3xl p-10 shadow-soft hover-lift hover:shadow-card hover:border-brand-200 smooth-transition relative overflow-hidden" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-400 to-brand-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white smooth-transition mb-8">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-slate-900 group-hover:text-brand-600 smooth-transition">
+                        Calm & grounding tools
+                    </h3>
+                    <p class="text-base text-slate-500 mt-3 leading-relaxed">
+                        Access our library of somatic exercises, guided audio sessions, and stabilization techniques to help regulate your nervous system.
+                    </p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOT NOTE -->
+    <section class="py-12 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-6 text-center reveal">
+            <div class="inline-flex items-center justify-center gap-3 text-sm font-semibold text-slate-600 bg-white border border-slate-200 px-6 py-4 rounded-full shadow-sm">
+                <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                 All sessions are confidential and handled under strict clinical privacy standards.
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
+<!-- FOOTER (Dynamically Loaded) -->
+<div id="footer"></div>
 
-    <!-- PARTIAL LOADER -->
-    <script>
-        async function loadComponent(id, file) {
-            const res = await fetch(file);
-            document.getElementById(id).innerHTML = await res.text();
-        }
+<!-- PARTIAL LOADER -->
+<script>
+async function loadComponent(id, file) {
+    const response = await fetch(file);
+    const data = await response.text();
+    document.getElementById(id).innerHTML = data;
+}
 
-        loadComponent("header", "header.html");
-        loadComponent("footer", "footer.html");
-    </script>
-
-    <!-- REVEAL SCRIPT (GLOBAL STYLE COMPATIBLE) -->
-    <script>
-        const items = document.querySelectorAll('.reveal');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-
-        items.forEach(el => observer.observe(el));
-    </script>
+loadComponent("header", "header.html");
+loadComponent("footer", "footer.html");
+</script>
 
 </body>
 </html>
