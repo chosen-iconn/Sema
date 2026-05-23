@@ -1,61 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Support | SEMA Emotional Wellness Institution</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | SEMA Emotional Wellness Institution</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] }, colors: { brand: { 50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a' } }, boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)', 'card': '0 10px 30px -5px rgba(20, 184, 166, 0.08)' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
     </script>
+
     <style>
-        body { background-color: #f8fafc; color: #334155; }
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .smooth-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <div class="bg-brand-900 text-brand-50 py-2 px-4 text-xs font-medium border-b border-brand-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="font-bold text-red-300">24/7 CRISIS HELPLINE: 988</span>
-        </div>
-    </div>
-    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html"><img src="https://sema-learn.mutavatosh.workers.dev/assets/sema-logo-BGg-cRRb.png" alt="SEMA Logo" class="h-12 w-auto"></a>
-            <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm text-slate-700">
-                <a href="about.html" class="hover:text-brand-600">About Us</a>
-                <a href="support.html" class="text-brand-600">Contact Support</a>
-            </nav>
-        </div>
-    </header>
 
-    <main class="flex-grow py-20 max-w-7xl mx-auto px-4 w-full">
-        <div class="grid lg:grid-cols-2 gap-16">
-            <div class="bg-white p-10 rounded-2xl shadow-soft border border-slate-100">
-                <h1 class="text-4xl font-bold mb-6">Get in Touch</h1>
-                <form class="space-y-6">
-                    <input type="text" placeholder="Full Name" class="w-full p-4 border rounded outline-none focus:ring-2 ring-brand-500">
-                    <input type="email" placeholder="Email Address" class="w-full p-4 border rounded outline-none focus:ring-2 ring-brand-500">
-                    <textarea placeholder="Your Message" class="w-full p-4 border rounded outline-none focus:ring-2 ring-brand-500 h-32"></textarea>
-                    <button class="w-full bg-brand-600 text-white font-bold py-4 rounded hover:bg-brand-700">Send Message</button>
-                </form>
+<body class="flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main class="flex-grow">
+
+        <!-- HERO -->
+        <section class="bg-brand-900 text-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="max-w-3xl">
+                    <span class="uppercase tracking-[0.3em] text-brand-300 text-sm font-bold">
+                        Contact SEMA
+                    </span>
+
+                    <h1 class="text-5xl md:text-6xl font-black leading-tight mt-6 mb-6">
+                        Reach Out. We're Ready To Support You.
+                    </h1>
+
+                    <p class="text-xl text-brand-100 leading-relaxed">
+                        Connect with our wellness specialists, support teams,
+                        and institutional departments.
+                    </p>
+                </div>
+
             </div>
-            <div class="bg-slate-900 text-white p-10 rounded-2xl">
-                <h2 class="text-3xl font-bold mb-8">Emergency Resources</h2>
-                <div class="space-y-6">
-                    <p class="text-xl font-bold text-red-400">Police / Medical: 911</p>
-                    <p class="text-xl font-bold text-brand-300">Crisis Line: 988</p>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="grid lg:grid-cols-2 gap-16">
+
+                    <!-- FORM -->
+                    <div>
+
+                        <div class="mb-10">
+                            <span class="text-brand-600 uppercase tracking-wider font-bold text-sm">
+                                Send a Message
+                            </span>
+
+                            <h2 class="text-4xl font-black text-slate-900 mt-4">
+                                Contact Our Team
+                            </h2>
+                        </div>
+
+                        <form class="space-y-6">
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                        First Name
+                                    </label>
+
+                                    <input type="text"
+                                        class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                        Last Name
+                                    </label>
+
+                                    <input type="text"
+                                        class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Email Address
+                                </label>
+
+                                <input type="email"
+                                    class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Department
+                                </label>
+
+                                <select class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    <option>Clinical Support</option>
+                                    <option>Research Department</option>
+                                    <option>Admissions & Intake</option>
+                                    <option>Community Outreach</option>
+                                    <option>Corporate Partnerships</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Message
+                                </label>
+
+                                <textarea rows="6"
+                                    class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                            </div>
+
+                            <button
+                                class="bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-lg font-bold smooth-transition">
+                                Send Message
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <!-- INFO -->
+                    <div>
+
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-10 mb-8">
+
+                            <span class="text-brand-600 uppercase tracking-wider font-bold text-sm">
+                                Headquarters
+                            </span>
+
+                            <h2 class="text-3xl font-black text-slate-900 mt-4 mb-8">
+                                Institutional Contact Information
+                            </h2>
+
+                            <div class="space-y-8">
+
+                                <div>
+                                    <h3 class="font-bold text-slate-900 mb-2">
+                                        Main Office
+                                    </h3>
+
+                                    <p class="text-slate-600">
+                                        SEMA Emotional Wellness Institution<br>
+                                        Nairobi Wellness District<br>
+                                        Nairobi, Kenya
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 class="font-bold text-slate-900 mb-2">
+                                        Email
+                                    </h3>
+
+                                    <p class="text-slate-600">
+                                        support@semawellness.org
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 class="font-bold text-slate-900 mb-2">
+                                        Crisis Support
+                                    </h3>
+
+                                    <p class="text-brand-600 font-black text-2xl">
+                                        Call or Text 988
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 class="font-bold text-slate-900 mb-2">
+                                        Operating Hours
+                                    </h3>
+
+                                    <p class="text-slate-600">
+                                        Monday — Friday<br>
+                                        8:00 AM — 6:00 PM EAT
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="overflow-hidden rounded-2xl shadow-xl">
+                            <img
+                                src="https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=80"
+                                class="w-full h-[350px] object-cover"
+                                alt="SEMA Office">
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
-        </div>
+        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-brand-500">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-            &copy; 2026 SEMA Emotional Wellness Institution. All Rights Reserved.
-        </div>
-    </footer>
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- LOAD PARTIALS -->
+    <script>
+        async function loadComponent(id, file) {
+            const response = await fetch(file);
+            const data = await response.text();
+            document.getElementById(id).innerHTML = data;
+        }
+
+        loadComponent("header", "header.html");
+        loadComponent("footer", "footer.html");
+    </script>
+
 </body>
 </html>
