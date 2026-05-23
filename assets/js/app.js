@@ -1,139 +1,145 @@
-/* =========================
-   SEMA GLOBAL APP SCRIPT
-   Shared across all pages
-========================= */
+/*
+|--------------------------------------------------------------------------
+| SEMA Shared Common Script
+|--------------------------------------------------------------------------
+| Shared globally across all pages:
+| - Header/Footer partial loading
+| - Reveal animations
+| - Active navigation highlighting
+| - Smooth scrolling
+| - Mobile nav helpers
+|--------------------------------------------------------------------------
+*/
 
-(function () {
-  "use strict";
+class SEMAApp {
 
-  /**
-   * COMPONENT LOADER (HEADER + FOOTER)
-   */
-  async function loadComponent(id, file, callback) {
-    const el = document.getElementById(id);
-    if (!el) return;
+  static async loadComponent(id, file) {
+
+    const element = document.getElementById(id);
+
+    if (!element) return;
 
     try {
-      const res = await fetch(file);
-      const html = await res.text();
-      el.innerHTML = html;
 
-      if (typeof callback === "function") callback();
-    } catch (err) {
-      console.error("Component load failed:", file, err);
+      const response = await fetch(file);
+
+      if (!response.ok) {
+        throw new Error(`Failed to load ${file}`);
+      }
+
+      const html = await response.text();
+
+      element.innerHTML = html;
+
+    } catch (error) {
+
+      console.error(error);
+
+      element.innerHTML = `
+        <div class="p-4 text-sm text-red-500">
+          Failed to load component.
+        </div>
+      `;
     }
   }
 
-  /**
-   * INTERSECTION REVEAL SYSTEM
-   */
-  function initReveal() {
-    const items = document.querySelectorAll(".reveal");
+  static initRevealAnimations() {
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const revealElements = document.querySelectorAll('.reveal');
 
-    items.forEach((el) => observer.observe(el));
-  }
+    if (!revealElements.length) return;
 
-  /**
-   * MOBILE MENU (ROBUST + REUSABLE)
-   */
-  function initMobileMenu() {
-    const btn = document.getElementById("mobile-menu-btn");
-    const closeBtn = document.getElementById("close-mobile-menu");
-    const overlay = document.getElementById("mobile-menu-overlay");
-    const panel = document.getElementById("mobile-menu-panel");
+    const observer = new IntersectionObserver((entries) => {
 
-    if (!btn || !closeBtn || !overlay || !panel) return;
+      entries.forEach((entry) => {
 
-    const open = () => {
-      overlay.classList.remove("hidden");
-      setTimeout(() => {
-        overlay.classList.remove("opacity-0");
-        panel.classList.remove("translate-x-full");
-        document.body.style.overflow = "hidden";
-      }, 10);
-    };
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
 
-    const close = () => {
-      overlay.classList.add("opacity-0");
-      panel.classList.add("translate-x-full");
-      document.body.style.overflow = "";
-
-      setTimeout(() => {
-        overlay.classList.add("hidden");
-      }, 250);
-    };
-
-    btn.addEventListener("click", open);
-    closeBtn.addEventListener("click", close);
-    overlay.addEventListener("click", close);
-  }
-
-  /**
-   * FIX DROPDOWN HOVER ISSUE (IMPORTANT)
-   * Ensures hover works even after fetch injection
-   */
-  function initDropdownFix() {
-    const groups = document.querySelectorAll(".group");
-
-    groups.forEach((group) => {
-      const menu = group.querySelector(".dropdown-menu");
-      if (!menu) return;
-
-      group.addEventListener("mouseenter", () => {
-        menu.classList.add("opacity-100", "visible", "translate-y-0");
       });
 
-      group.addEventListener("mouseleave", () => {
-        menu.classList.remove("opacity-100", "visible", "translate-y-0");
-      });
+    }, {
+      threshold: 0.1
+    });
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
     });
   }
 
-  /**
-   * HEADER INITIALIZATION (RUN AFTER LOAD)
-   */
-  function initHeaderBehaviors() {
-    const header = document.querySelector("header");
+  static initSmoothScrolling() {
 
-    if (header) {
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          header.classList.add("shadow-md");
-        } else {
-          header.classList.remove("shadow-md");
-        }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+      anchor.addEventListener('click', function (e) {
+
+        const targetId = this.getAttribute('href');
+
+        if (targetId === '#') return;
+
+        const target = document.querySelector(targetId);
+
+        if (!target) return;
+
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+
       });
-    }
 
-    initMobileMenu();
-    initDropdownFix();
+    });
+
   }
 
-  /**
-   * BOOTSTRAP APP
-   */
-  function initApp() {
-    initReveal();
+  static highlightCurrentNav() {
+
+    const currentPath = window.location.pathname.split('/').pop();
+
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+
+    navLinks.forEach(link => {
+
+      const href = link.getAttribute('href');
+
+      if (!href) return;
+
+      if (href === currentPath) {
+
+        link.classList.add(
+          'text-brand-600',
+          'font-semibold'
+        );
+
+      }
+
+    });
+
   }
 
-  /**
-   * GLOBAL INIT (CALL THIS FROM PAGES)
-   */
-  window.SEMA_APP = {
-    loadComponent,
-    initApp,
-    initHeaderBehaviors,
-  };
-})();
+  static async init() {
+
+    await Promise.all([
+      this.loadComponent('header-container', 'header.html'),
+      this.loadComponent('footer-container', 'footer.html'),
+      this.loadComponent('header', 'header.html'),
+      this.loadComponent('footer', 'footer.html')
+    ]);
+
+    this.initRevealAnimations();
+
+    this.initSmoothScrolling();
+
+    this.highlightCurrentNav();
+
+  }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  SEMAApp.init();
+});
