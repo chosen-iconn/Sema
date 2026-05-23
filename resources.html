@@ -7,6 +7,7 @@
   <title>Research & Resources | SEMA</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/app.js" defer></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -357,40 +358,6 @@
 
 <div id="footer-container"></div>
 
-<script>
-
-async function loadComponent(id, file){
-  const el = document.getElementById(id);
-  if(!el) return;
-
-  const response = await fetch(file);
-  const html = await response.text();
-
-  el.innerHTML = html;
-}
-
-loadComponent('header-container', 'header.html');
-loadComponent('footer-container', 'footer.html');
-
-const reveals = document.querySelectorAll('.reveal');
-
-const observer = new IntersectionObserver((entries)=>{
-
-  entries.forEach(entry=>{
-
-    if(entry.isIntersecting){
-      entry.target.classList.add('active');
-    }
-
-  });
-
-},{
-  threshold:.1
-});
-
-reveals.forEach(el=>observer.observe(el));
-
-</script>
 
 </body>
 </html>
