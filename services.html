@@ -1,548 +1,721 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Care Programs | SEMA National Emotional Wellness</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6', // Core Teal
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a', // Institutional Dark Teal
-                        }
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'card': '0 10px 30px -5px rgba(20, 184, 166, 0.08)',
-                    }
-                }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Care Programs | SEMA National Emotional Wellness</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
             }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #f8fafc;
-            color: #334155;
-            -webkit-font-smoothing: antialiased;
-        }
+          },
 
-        /* Subtle Institutional Grid Background */
-        .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(20, 184, 166, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+          boxShadow: {
+            soft: '0 10px 40px rgba(15, 23, 42, 0.06)',
+            premium: '0 25px 60px rgba(20, 184, 166, 0.12)',
+            glow: '0 0 0 1px rgba(20,184,166,.12), 0 20px 40px rgba(20,184,166,.15)',
+          },
 
-        .smooth-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            pulseSoft: 'pulseSoft 3s infinite',
+            shine: 'shine 5s linear infinite',
+          },
 
-        .hover-lift:hover {
-            transform: translateY(-4px);
-        }
+          keyframes: {
+            float: {
+              '0%,100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
 
-        /* Glassmorphism for specific elements */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
+            pulseSoft: {
+              '0%,100%': { opacity: '.6' },
+              '50%': { opacity: '1' },
+            },
 
-        /* Scrollbar styling for lists */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
+            shine: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(200%)' },
+            }
+          }
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
+      }
+    }
+  </script>
 
-        /* Scroll Reveal Animation Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .reveal.delay-100 { transition-delay: 100ms; }
-        .reveal.delay-200 { transition-delay: 200ms; }
-        .reveal.delay-300 { transition-delay: 300ms; }
+    body {
+      background: #f8fafc;
+      color: #334155;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .reveal-active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Dropdown styles */
-        .dropdown-menu {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .group:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-    </style>
+    /* BACKGROUND GRID */
+    .bg-grid {
+      background-image:
+        linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* PREMIUM REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px) scale(.98);
+      transition:
+        opacity .9s cubic-bezier(.2,.65,.2,1),
+        transform .9s cubic-bezier(.2,.65,.2,1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+    .delay-4 { transition-delay: .4s; }
+
+    /* GLASS */
+    .glass {
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+
+    /* PROGRAM CARD */
+    .program-card {
+      transition:
+        transform .6s cubic-bezier(.2,.65,.2,1),
+        box-shadow .6s cubic-bezier(.2,.65,.2,1),
+        border-color .4s ease;
+      transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 80px rgba(15,23,42,.12);
+      border-color: rgba(20,184,166,.25);
+    }
+
+    .program-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,.35),
+        transparent 80%
+      );
+      transform: translateX(-120%);
+      transition: transform 1.3s ease;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .program-card:hover::before {
+      transform: translateX(130%);
+    }
+
+    /* IMAGE ZOOM */
+    .image-wrap img {
+      transition: transform 1.2s cubic-bezier(.2,.65,.2,1);
+    }
+
+    .program-card:hover img {
+      transform: scale(1.08);
+    }
+
+    /* MAGNETIC BUTTON */
+    .magnetic-btn {
+      transition:
+        transform .25s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+    }
+
+    .magnetic-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(20,184,166,.25);
+    }
+
+    /* FLOATING ORBS */
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: .15;
+      pointer-events: none;
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* STAT CARD */
+    .stat-card {
+      transition: all .4s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+    }
+
+    /* FILTER LINK */
+    .filter-link {
+      transition: all .3s ease;
+      position: relative;
+    }
+
+    .filter-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #14b8a6;
+      transition: width .3s ease;
+    }
+
+    .filter-link:hover::after {
+      width: 100%;
+    }
+
+    /* PARALLAX */
+    .parallax {
+      transform: translateY(var(--offset, 0px));
+      transition: transform .2s linear;
+    }
+  </style>
 </head>
+
 <body class="flex flex-col min-h-screen">
 
-    <!-- TOP UTILITY BAR (UON Style) -->
-    <div class="bg-brand-900 text-brand-50 py-2 px-4 sm:px-6 lg:px-8 text-xs font-medium border-b border-brand-800">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1 text-red-300 font-bold">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    24/7 CRISIS HELPLINE: 988
-                </span>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 divide-x divide-brand-700">
-                <a href="#" class="hover:text-white smooth-transition pl-4 sm:pl-0">Patient Portal</a>
-                <a href="#" class="hover:text-white smooth-transition pl-4">Staff Intranet</a>
-                <a href="#" class="hover:text-white smooth-transition pl-4">Research Directory</a>
-                <a href="#" class="hover:text-white smooth-transition pl-4">Alumni & Donors</a>
-                <a href="#" class="hover:text-white smooth-transition pl-4">Webmail</a>
-            </div>
-        </div>
-    </div>
+  <!-- HEADER -->
+  <div id="header-container"></div>
 
-    <!-- MAIN HEADER / NAVIGATION -->
-    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4 lg:py-5">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html">
-                        <img src="https://sema-learn.mutavatosh.workers.dev/assets/sema-logo-BGg-cRRb.png" alt="SEMA Institution Logo" class="h-12 md:h-14 w-auto object-contain">
-                    </a>
-                </div>
+  <main class="flex-grow">
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm text-slate-700">
-                    <div class="group relative py-2">
-                        <a href="about.html" class="hover:text-brand-600 inline-flex items-center gap-1">
-                            About Us
-                            <svg class="w-4 h-4 text-slate-400 group-hover:text-brand-500 smooth-transition transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </a>
-                        <!-- Dropdown -->
-                        <div class="dropdown-menu absolute top-full left-0 w-48 bg-white border border-slate-200 rounded-md shadow-lg py-2 z-50">
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Our Mission</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Clinical Board</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">History & Impact</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Careers</a>
-                        </div>
-                    </div>
-                    
-                    <div class="group relative py-2">
-                        <a href="services.html" class="text-brand-600 inline-flex items-center gap-1 border-b-2 border-brand-600">
-                            Care Programs
-                            <svg class="w-4 h-4 text-brand-500 smooth-transition transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </a>
-                         <!-- Dropdown -->
-                        <div class="dropdown-menu absolute top-full left-0 w-56 bg-white border border-slate-200 rounded-md shadow-lg py-2 z-50">
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Individual Psychotherapy</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Group Support Dynamics</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Psychiatric Services</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-600">Crisis Intervention</a>
-                        </div>
-                    </div>
-                    <a href="resources.html" class="hover:text-brand-600 py-2">Research & Impact</a>
-                    <a href="#" class="hover:text-brand-600 py-2">Community Resources</a>
-                    <a href="#" class="hover:text-brand-600 py-2">Admissions & Intake</a>
-                </nav>
+    <!-- HERO -->
+    <section class="relative overflow-hidden py-24 bg-white border-b border-slate-200 bg-grid">
 
-                <!-- Search & CTA -->
-                <div class="hidden lg:flex items-center gap-4">
-                    <button class="text-slate-400 hover:text-brand-600 p-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </button>
-                    <a href="support.html" class="bg-brand-600 text-white px-6 py-2.5 rounded text-sm font-semibold hover:bg-brand-700 smooth-transition shadow-sm">
-                        Request Support
-                    </a>
-                </div>
+      <div class="orb bg-brand-400 w-72 h-72 top-0 -left-20"></div>
+      <div class="orb bg-cyan-300 w-80 h-80 bottom-0 right-0"></div>
 
-                <!-- Mobile menu button -->
-                <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-600 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto shadow-2xl flex flex-col">
-        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
-            <img src="https://sema-learn.mutavatosh.workers.dev/assets/sema-logo-BGg-cRRb.png" alt="SEMA" class="h-8 w-auto">
-            <button id="close-mobile-menu" class="text-slate-500 hover:text-brand-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        
-        <div class="p-6 flex-grow flex flex-col space-y-6">
-            <div>
-                <a href="about.html" class="text-lg font-bold text-slate-800 block mb-2">About Us</a>
-                <ul class="pl-4 space-y-2 border-l-2 border-slate-100 text-sm text-slate-600">
-                    <li><a href="#" class="block hover:text-brand-600">Our Mission</a></li>
-                    <li><a href="#" class="block hover:text-brand-600">Clinical Board</a></li>
-                    <li><a href="#" class="block hover:text-brand-600">History & Impact</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <a href="services.html" class="text-lg font-bold text-brand-600 block mb-2">Care Programs</a>
-                <ul class="pl-4 space-y-2 border-l-2 border-brand-500 text-sm text-slate-800 font-medium">
-                    <li><a href="#" class="block hover:text-brand-600">Individual Psychotherapy</a></li>
-                    <li><a href="#" class="block hover:text-brand-600">Group Support Dynamics</a></li>
-                    <li><a href="#" class="block hover:text-brand-600">Psychiatric Services</a></li>
-                    <li><a href="#" class="block hover:text-brand-600">Crisis Intervention</a></li>
-                </ul>
-            </div>
-            
-            <a href="resources.html" class="text-lg font-bold text-slate-800 block">Research & Impact</a>
-            <a href="#" class="text-lg font-bold text-slate-800 block">Community Resources</a>
-            <a href="#" class="text-lg font-bold text-slate-800 block">Admissions & Intake</a>
-        </div>
-        
-        <div class="p-6 border-t border-slate-100 bg-slate-50">
-            <a href="support.html" class="w-full block text-center bg-brand-600 text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-brand-700">
-                Request Immediate Support
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="max-w-4xl reveal">
+
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold tracking-widest uppercase mb-6">
+            Clinical Excellence
+          </span>
+
+          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-slate-900 mb-8">
+            Personalized Care Programs Built Around Human Healing
+          </h1>
+
+          <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl">
+            SEMA delivers evidence-based emotional wellness programs through
+            integrated clinical pathways, compassionate care systems,
+            modern digital support, and institutional-grade therapeutic frameworks.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#programs"
+              class="magnetic-btn bg-brand-600 hover:bg-brand-700 text-white px-7 py-4 rounded-xl font-semibold">
+              Explore Programs
             </a>
-            <p class="text-center text-xs text-slate-500 mt-4">Crisis Line: <a href="tel:988" class="font-bold text-brand-600">988</a></p>
-        </div>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow">
-        
-        <!-- Programs Header -->
-        <section class="bg-white border-b border-slate-200 py-16 relative overflow-hidden bg-grid-pattern">
-            <div class="absolute inset-0 bg-white/80"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal">
-                <span class="inline-block px-3 py-1 bg-brand-100 text-brand-700 text-xs font-bold tracking-wider uppercase rounded-sm mb-4 border border-brand-200">
-                    Care Directory
-                </span>
-                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Clinical Faculties & Care Programs</h1>
-                <p class="text-slate-600 max-w-3xl text-lg leading-relaxed">
-                    Comprehensive, evidence-based therapeutic pathways designed to support individuals through various stages of their emotional wellness journey. We provide a safe, institutional foundation for healing.
+            <a href="#"
+              class="magnetic-btn bg-white border border-slate-200 hover:border-brand-300 text-slate-700 px-7 py-4 rounded-xl font-semibold">
+              Clinical Assessment
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="py-10 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div class="stat-card glass rounded-2xl p-6 reveal delay-1">
+            <div class="text-4xl font-extrabold text-brand-600 counter" data-target="12000">0</div>
+            <p class="mt-2 text-sm text-slate-500">Individuals Supported</p>
+          </div>
+
+          <div class="stat-card glass rounded-2xl p-6 reveal delay-2">
+            <div class="text-4xl font-extrabold text-brand-600 counter" data-target="48">0</div>
+            <p class="mt-2 text-sm text-slate-500">Licensed Specialists</p>
+          </div>
+
+          <div class="stat-card glass rounded-2xl p-6 reveal delay-3">
+            <div class="text-4xl font-extrabold text-brand-600 counter" data-target="24">0</div>
+            <p class="mt-2 text-sm text-slate-500">24/7 Support Access</p>
+          </div>
+
+          <div class="stat-card glass rounded-2xl p-6 reveal delay-4">
+            <div class="text-4xl font-extrabold text-brand-600 counter" data-target="96">0</div>
+            <p class="mt-2 text-sm text-slate-500">Recovery Satisfaction %</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section id="programs" class="py-20 relative overflow-hidden">
+
+      <div class="absolute inset-0 bg-grid opacity-40"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="grid lg:grid-cols-4 gap-10">
+
+          <!-- SIDEBAR -->
+          <aside class="lg:col-span-1 reveal">
+
+            <div class="glass rounded-3xl p-8 sticky top-28 shadow-soft">
+
+              <h3 class="font-bold text-slate-900 mb-6 text-lg">
+                Care Categories
+              </h3>
+
+              <div class="space-y-4">
+
+                <a href="#" class="filter-link block text-brand-600 font-semibold">
+                  All Programs
+                </a>
+
+                <a href="#" class="filter-link block text-slate-600 hover:text-brand-600">
+                  Anxiety & Depression
+                </a>
+
+                <a href="#" class="filter-link block text-slate-600 hover:text-brand-600">
+                  Trauma & PTSD
+                </a>
+
+                <a href="#" class="filter-link block text-slate-600 hover:text-brand-600">
+                  Student Wellness
+                </a>
+
+                <a href="#" class="filter-link block text-slate-600 hover:text-brand-600">
+                  Addiction Recovery
+                </a>
+
+                <a href="#" class="filter-link block text-slate-600 hover:text-brand-600">
+                  Workplace Wellness
+                </a>
+
+              </div>
+
+              <div class="mt-10 p-6 rounded-2xl bg-brand-50 border border-brand-100 relative overflow-hidden">
+
+                <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-brand-200 opacity-30"></div>
+
+                <h4 class="font-bold text-brand-900 mb-3 relative z-10">
+                  Need Guidance?
+                </h4>
+
+                <p class="text-sm text-slate-600 leading-relaxed relative z-10">
+                  Begin with our intelligent wellness assessment to discover the most appropriate therapeutic path.
                 </p>
-            </div>
-        </section>
 
-        <!-- Directory Layout -->
-        <section class="py-16 bg-slate-50 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-10">
-                
-                <!-- Sidebar Navigation / Filter -->
-                <aside class="w-full lg:w-1/4 reveal delay-100">
-                    <div class="bg-white rounded-xl shadow-soft border border-slate-200 p-6 sticky top-28">
-                        <h3 class="font-bold text-slate-800 mb-4 uppercase text-xs tracking-wider border-b border-slate-100 pb-3">Filter by Need</h3>
-                        <ul class="space-y-3 text-sm font-medium text-slate-600">
-                            <li><a href="#" class="text-brand-600 flex items-center justify-between">All Programs <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span></a></li>
-                            <li><a href="#" class="hover:text-brand-600 block transition-colors">Anxiety & Depression</a></li>
-                            <li><a href="#" class="hover:text-brand-600 block transition-colors">Trauma & PTSD</a></li>
-                            <li><a href="#" class="hover:text-brand-600 block transition-colors">Youth & Student Wellness</a></li>
-                            <li><a href="#" class="hover:text-brand-600 block transition-colors">Addiction Recovery</a></li>
-                            <li><a href="#" class="hover:text-brand-600 block transition-colors">Corporate/Workplace</a></li>
-                        </ul>
-                        
-                        <div class="mt-10 bg-brand-50 p-5 rounded-lg border border-brand-100 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-3 opacity-10 text-brand-600">
-                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"/></svg>
-                            </div>
-                            <h4 class="font-bold text-brand-900 text-sm mb-2 relative z-10">Unsure where to start?</h4>
-                            <p class="text-xs text-slate-600 mb-4 leading-relaxed relative z-10">Complete our brief clinical assessment to get expertly matched with the right therapeutic program.</p>
-                            <a href="#" class="inline-block bg-brand-600 text-white text-xs font-bold px-4 py-2.5 rounded hover:bg-brand-700 transition-colors shadow-sm relative z-10">
-                                Start Assessment
-                            </a>
-                        </div>
-                    </div>
-                </aside>
+                <a href="#"
+                  class="magnetic-btn inline-block mt-5 bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 rounded-xl text-sm font-semibold relative z-10">
+                  Start Assessment
+                </a>
 
-                <!-- Programs Grid (Fleshy & Structured) -->
-                <div class="w-full lg:w-3/4 space-y-8">
-                    
-                    <!-- Program Card 1 -->
-                    <div class="reveal delay-200 bg-white rounded-xl shadow-soft border border-slate-200 overflow-hidden flex flex-col sm:flex-row hover-lift smooth-transition group">
-                        <div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1543807535-eceef0bc6599?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Individual Therapy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700">
-                        </div>
-                        <div class="p-8 w-full sm:w-3/5 flex flex-col justify-center">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="px-2 py-1 bg-brand-50 text-brand-600 text-[10px] font-bold uppercase tracking-widest rounded border border-brand-100">Primary Care</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Individual Psychotherapy</h3>
-                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">One-on-one sessions with licensed clinical psychologists utilizing Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), and humanistic approaches to deeply address personal anxiety, trauma, and mood disorders.</p>
-                            <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <div class="flex -space-x-2">
-                                    <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Clinician">
-                                    <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Clinician">
-                                    <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-600">+12</div>
-                                </div>
-                                <a href="#" class="text-brand-600 font-bold text-sm hover:text-brand-800 flex items-center group-hover:translate-x-1 smooth-transition">View Program <span class="ml-1">&rarr;</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Program Card 2 -->
-                    <div class="reveal delay-300 bg-white rounded-xl shadow-soft border border-slate-200 overflow-hidden flex flex-col sm:flex-row hover-lift smooth-transition group">
-                        <div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group Support" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700">
-                        </div>
-                        <div class="p-8 w-full sm:w-3/5 flex flex-col justify-center">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest rounded border border-blue-100">Community</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">Guided Group Support</h3>
-                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Professionally moderated environments where individuals can share experiences, build robust resilience, and learn healthy coping mechanisms alongside peers facing similar challenges with grief or addiction.</p>
-                            <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-xs text-slate-500 font-medium flex items-center">
-                                    <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    Weekly Sessions
-                                </span>
-                                <a href="#" class="text-blue-600 font-bold text-sm hover:text-blue-800 flex items-center group-hover:translate-x-1 smooth-transition">Explore Groups <span class="ml-1">&rarr;</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Program Card 3 -->
-                    <div class="reveal bg-white rounded-xl shadow-soft border border-slate-200 overflow-hidden flex flex-col sm:flex-row hover-lift smooth-transition group">
-                        <div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Health" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700">
-                        </div>
-                        <div class="p-8 w-full sm:w-3/5 flex flex-col justify-center">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="px-2 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold uppercase tracking-widest rounded border border-purple-100">Digital Health</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">Virtual Care Platform</h3>
-                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Access tele-therapy, guided somatic exercises, comprehensive daily mood tracking, and asynchronous counselor messaging directly through our highly secure, digital patient portal from anywhere.</p>
-                            <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-xs text-slate-500 font-medium flex items-center">
-                                    <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                    24/7 Access
-                                </span>
-                                <a href="#" class="text-purple-600 font-bold text-sm hover:text-purple-800 flex items-center group-hover:translate-x-1 smooth-transition">Access Portal <span class="ml-1">&rarr;</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Program Card 4 -->
-                    <div class="reveal delay-100 bg-white rounded-xl shadow-soft border border-slate-200 overflow-hidden flex flex-col sm:flex-row hover-lift smooth-transition group">
-                        <div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Wellness" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 smooth-transition duration-700">
-                        </div>
-                        <div class="p-8 w-full sm:w-3/5 flex flex-col justify-center">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="px-2 py-1 bg-orange-50 text-orange-600 text-[10px] font-bold uppercase tracking-widest rounded border border-orange-100">Partnerships</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors">Corporate Wellness Initiatives</h3>
-                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Partnering with forward-thinking organizations to provide holistic employee assistance programs (EAPs), burnout prevention workshops, and on-demand mental health support for demanding workplaces.</p>
-                            <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-xs text-slate-500 font-medium flex items-center">
-                                    <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                                    B2B Solutions
-                                </span>
-                                <a href="#" class="text-orange-600 font-bold text-sm hover:text-orange-800 flex items-center group-hover:translate-x-1 smooth-transition">View Corporate Plans <span class="ml-1">&rarr;</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- INSTITUTIONAL FOOTER (UON Style) -->
-    <footer class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-brand-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                
-                <!-- Column 1: Institutional Info -->
-                <div>
-                    <img src="https://sema-learn.mutavatosh.workers.dev/assets/sema-logo-BGg-cRRb.png" alt="SEMA Logo" class="h-12 w-auto mb-6 brightness-0 invert opacity-90">
-                    <p class="text-sm text-slate-400 mb-6 leading-relaxed">
-                        SEMA is a premier emotional wellness institution dedicated to advancing psychological care, promoting mental health awareness, and building resilient communities.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white smooth-transition">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-                        </a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white smooth-transition">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        </a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white smooth-transition">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Column 2: Quick Links -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider border-b border-slate-700 pb-2">Quick Access</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Patient Portal</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Book a Consultation</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Find a Clinician</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Intake Forms & Documents</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Insurance & Billing</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Centers & Institutes -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider border-b border-slate-700 pb-2">Departments</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Center for Child Psychology</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Addiction & Recovery Unit</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Trauma & PTSD Division</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; Corporate Wellness Institute</a></li>
-                        <li><a href="#" class="hover:text-brand-400 smooth-transition flex items-center">&rsaquo; SEMA Research Foundation</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Emergency Contacts -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider border-b border-slate-700 pb-2">Emergency Assistance</h4>
-                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
-                        <p class="text-xs text-slate-400 mb-2">If you or someone you know is in immediate physical danger, call emergency services.</p>
-                        <p class="text-red-400 font-bold text-lg mb-1">Police / Med: 911</p>
-                        <hr class="border-slate-700 my-2">
-                        <p class="text-xs text-slate-400 mb-1">24/7 National Mental Health Crisis Lifeline:</p>
-                        <p class="text-brand-400 font-bold text-lg">Call or Text 988</p>
-                    </div>
-                </div>
+              </div>
 
             </div>
 
-            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
-                <p>&copy; 2026 SEMA Emotional Wellness Institution. All Rights Reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-white smooth-transition">Privacy Policy</a>
-                    <span class="text-slate-700">|</span>
-                    <a href="#" class="hover:text-white smooth-transition">Terms of Service</a>
-                    <span class="text-slate-700">|</span>
-                    <a href="#" class="hover:text-white smooth-transition">HIPAA Compliance</a>
-                    <span class="text-slate-700">|</span>
-                    <a href="#" class="hover:text-white smooth-transition">Accessibility</a>
+          </aside>
+
+          <!-- PROGRAM LIST -->
+          <div class="lg:col-span-3 space-y-10">
+
+            <!-- CARD -->
+            <div class="program-card reveal delay-1 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
+
+              <div class="image-wrap relative min-h-[320px]">
+                <img
+                  src="https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&w=1200&q=80"
+                  class="absolute inset-0 w-full h-full object-cover"
+                  alt="">
+              </div>
+
+              <div class="p-10 flex flex-col justify-center">
+
+                <span class="inline-flex w-fit px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-xs font-bold uppercase tracking-widest border border-brand-100">
+                  Primary Therapy
+                </span>
+
+                <h2 class="mt-5 text-3xl font-bold text-slate-900">
+                  Individual Psychotherapy
+                </h2>
+
+                <p class="mt-5 text-slate-600 leading-relaxed">
+                  Deeply personalized therapeutic engagement through CBT,
+                  DBT, trauma-informed interventions, emotional regulation
+                  systems, and evidence-based psychological support.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">CBT</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Trauma Care</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Anxiety Support</span>
                 </div>
+
+                <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-6">
+
+                  <div class="flex -space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80">
+
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80">
+
+                    <div class="w-10 h-10 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-600">
+                      +14
+                    </div>
+                  </div>
+
+                  <a href="#"
+                    class="group text-brand-600 font-bold flex items-center gap-2">
+                    View Program
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+
+                </div>
+
+              </div>
             </div>
+
+            <!-- CARD -->
+            <div class="program-card reveal delay-2 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
+
+              <div class="image-wrap relative min-h-[320px]">
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+                  class="absolute inset-0 w-full h-full object-cover"
+                  alt="">
+              </div>
+
+              <div class="p-10 flex flex-col justify-center">
+
+                <span class="inline-flex w-fit px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest border border-blue-100">
+                  Community Wellness
+                </span>
+
+                <h2 class="mt-5 text-3xl font-bold text-slate-900">
+                  Guided Group Support
+                </h2>
+
+                <p class="mt-5 text-slate-600 leading-relaxed">
+                  Structured peer healing environments facilitated by professionals
+                  to encourage resilience, healthy coping mechanisms,
+                  emotional safety, and collective recovery pathways.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Peer Therapy</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Weekly Sessions</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Recovery Circles</span>
+                </div>
+
+                <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-6">
+
+                  <span class="text-sm text-slate-500">
+                    Weekly moderated sessions
+                  </span>
+
+                  <a href="#"
+                    class="group text-blue-600 font-bold flex items-center gap-2">
+                    Explore Groups
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div class="program-card reveal delay-3 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
+
+              <div class="image-wrap relative min-h-[320px]">
+                <img
+                  src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?auto=format&fit=crop&w=1200&q=80"
+                  class="absolute inset-0 w-full h-full object-cover"
+                  alt="">
+              </div>
+
+              <div class="p-10 flex flex-col justify-center">
+
+                <span class="inline-flex w-fit px-3 py-1 rounded-full bg-purple-50 text-purple-600 text-xs font-bold uppercase tracking-widest border border-purple-100">
+                  Digital Care
+                </span>
+
+                <h2 class="mt-5 text-3xl font-bold text-slate-900">
+                  Virtual Wellness Platform
+                </h2>
+
+                <p class="mt-5 text-slate-600 leading-relaxed">
+                  Secure teletherapy systems, mood tracking,
+                  wellness journaling, AI-assisted emotional support,
+                  and clinician communication accessible from anywhere.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Telehealth</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">24/7 Access</span>
+                  <span class="px-3 py-2 rounded-full bg-slate-100 text-xs font-medium text-slate-600">Secure Platform</span>
+                </div>
+
+                <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-6">
+
+                  <span class="text-sm text-slate-500">
+                    HIPAA compliant infrastructure
+                  </span>
+
+                  <a href="#"
+                    class="group text-purple-600 font-bold flex items-center gap-2">
+                    Access Platform
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // ----------------------------------------------------
-            // 1. Scroll Reveal Animations (Intersection Observer)
-            // ----------------------------------------------------
-            
-            const revealElements = document.querySelectorAll('.reveal');
-            
-            const revealOptions = {
-                threshold: 0.1, 
-                rootMargin: "0px 0px -50px 0px"
-            };
 
-            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.classList.add('reveal-active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, revealOptions);
+      </div>
+    </section>
 
-            revealElements.forEach(el => {
-                revealOnScroll.observe(el);
-            });
+  </main>
 
-            // ----------------------------------------------------
-            // 2. Dynamic Sticky Header Enhancement
-            // ----------------------------------------------------
-            
-            const header = document.querySelector('header');
-            
-            if (header) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        header.classList.add('shadow-md');
-                        header.classList.replace('bg-white/95', 'bg-white/100');
-                    } else {
-                        header.classList.remove('shadow-md');
-                        header.classList.replace('bg-white/100', 'bg-white/95');
-                    }
-                });
-            }
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
 
-            // ----------------------------------------------------
-            // 3. Mobile Navigation Toggle (Custom implementation)
-            // ----------------------------------------------------
-            
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-            
-            const openMobileMenu = () => {
-                mobileMenuOverlay.classList.remove('hidden');
-                // Small delay to allow display:block to apply before transitioning opacity
-                setTimeout(() => {
-                    mobileMenuOverlay.classList.remove('opacity-0');
-                    mobileMenuPanel.classList.remove('translate-x-full');
-                    document.body.style.overflow = 'hidden';
-                }, 10);
-            };
-            
-            const closeMobileMenu = () => {
-                mobileMenuOverlay.classList.add('opacity-0');
-                mobileMenuPanel.classList.add('translate-x-full');
-                document.body.style.overflow = '';
-                
-                // Wait for animation to finish before hiding
-                setTimeout(() => {
-                    mobileMenuOverlay.classList.add('hidden');
-                }, 300);
-            };
-            
-            if (mobileMenuBtn && closeMobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', openMobileMenu);
-                closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
-                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            }
-        });
-    </script>
+  <!-- =========================================================
+  PREMIUM ANIMATIONS SCRIPT
+  ========================================================= -->
+  <script>
+
+    // LOAD HEADER / FOOTER
+    async function loadComponent(id, file) {
+      const el = document.getElementById(id);
+
+      if (!el) return;
+
+      const response = await fetch(file);
+      const html = await response.text();
+
+      el.innerHTML = html;
+    }
+
+    loadComponent('header-container', 'header.html');
+    loadComponent('footer-container', 'footer.html');
+
+    // ---------------------------------------------------
+    // REVEAL ON SCROLL
+    // ---------------------------------------------------
+    const revealItems = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+
+      });
+
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealItems.forEach(item => observer.observe(item));
+
+    // ---------------------------------------------------
+    // COUNTER ANIMATION
+    // ---------------------------------------------------
+    const counters = document.querySelectorAll('.counter');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        const counter = entry.target;
+        const target = +counter.dataset.target;
+
+        let current = 0;
+
+        const increment = target / 80;
+
+        const updateCounter = () => {
+
+          current += increment;
+
+          if (current < target) {
+            counter.innerText = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target + (target > 100 ? '+' : '');
+          }
+
+        };
+
+        updateCounter();
+
+        counterObserver.unobserve(counter);
+
+      });
+
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    // ---------------------------------------------------
+    // PARALLAX EFFECT
+    // ---------------------------------------------------
+    window.addEventListener('scroll', () => {
+
+      const scrolled = window.pageYOffset;
+
+      document.querySelectorAll('.parallax').forEach(el => {
+        el.style.setProperty('--offset', `${scrolled * 0.08}px`);
+      });
+
+    });
+
+    // ---------------------------------------------------
+    // MAGNETIC BUTTONS
+    // ---------------------------------------------------
+    document.querySelectorAll('.magnetic-btn').forEach(button => {
+
+      button.addEventListener('mousemove', (e) => {
+
+        const rect = button.getBoundingClientRect();
+
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        button.style.transform =
+          `translate(${x * 0.08}px, ${y * 0.08}px)`;
+
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = '';
+      });
+
+    });
+
+    // ---------------------------------------------------
+    // PREMIUM CARD TILT
+    // ---------------------------------------------------
+    document.querySelectorAll('.program-card').forEach(card => {
+
+      card.addEventListener('mousemove', (e) => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+
+        card.style.transform =
+          `perspective(1000px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-8px)`;
+
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+
+    });
+
+    // ---------------------------------------------------
+    // PAGE FADE-IN
+    // ---------------------------------------------------
+    document.body.animate(
+      [
+        { opacity: 0, transform: 'translateY(10px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ],
+      {
+        duration: 700,
+        easing: 'ease-out'
+      }
+    );
+
+  </script>
+
 </body>
 </html>
