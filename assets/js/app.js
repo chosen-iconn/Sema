@@ -1,22 +1,18 @@
-// ===============================
-// SEMA GLOBAL APP SCRIPT
-// ===============================
+// ================================
+// SEMA GLOBAL SCRIPT
+// ================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeComponents();
-  initializeRevealAnimations();
+  loadPartials();
+  initRevealAnimations();
 });
 
-// ===============================
-// LOAD HEADER & FOOTER
-// ===============================
+// ================================
+// LOAD COMPONENTS
+// ================================
 
 async function loadComponent(id, file) {
   try {
-    const element = document.getElementById(id);
-
-    if (!element) return;
-
     const response = await fetch(file);
 
     if (!response.ok) {
@@ -25,44 +21,47 @@ async function loadComponent(id, file) {
 
     const html = await response.text();
 
-    element.innerHTML = html;
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.innerHTML = html;
+    }
+
   } catch (error) {
-    console.error("Component loading error:", error);
+    console.error(error);
   }
 }
 
-async function initializeComponents() {
-  await Promise.all([
-    loadComponent("header-container", "header.html"),
-    loadComponent("footer-container", "footer.html"),
-    loadComponent("header", "header.html"),
-    loadComponent("footer", "footer.html"),
-  ]);
+function loadPartials() {
+  loadComponent("header", "header.html");
+  loadComponent("footer", "footer.html");
 }
 
-// ===============================
+// ================================
 // REVEAL ANIMATIONS
-// ===============================
+// ================================
 
-function initializeRevealAnimations() {
+function initRevealAnimations() {
+
   const reveals = document.querySelectorAll(".reveal");
 
   if (!reveals.length) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-    }
-  );
+  const observer = new IntersectionObserver((entries) => {
 
-  reveals.forEach((element) => {
-    observer.observe(element);
+    entries.forEach((entry) => {
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      }
+
+    });
+
+  }, {
+    threshold: 0.12
+  });
+
+  reveals.forEach((el) => {
+    observer.observe(el);
   });
 }
