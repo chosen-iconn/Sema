@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research & Impact | SEMA Emotional Wellness Institution</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- GLOBAL APP SCRIPT (IMPORTANT) -->
+    <script src="assets/js/app.js" defer></script>
+<link href="assets/style.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+                            800: '#115e59', 900: '#134e4a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'card': '0 10px 40px -5px rgba(20, 184, 166, 0.1)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover { transform: translateY(-6px); }
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .glass-panel-dark {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ffffff, #99f6e4);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(.2,.65,.2,1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .blob {
+            position: absolute; filter: blur(80px); z-index: 0; opacity: 0.4;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- HEADER (Dynamically Loaded) -->
+    <div id="header" class="relative z-50"></div>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section class="relative overflow-hidden bg-slate-900 text-white min-h-[60vh] flex items-center">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80" 
+                     class="w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="Research Facility">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-900/90 via-slate-900/80 to-slate-900/90"></div>
+            </div>
+
+            <div class="blob bg-brand-500 w-96 h-96 rounded-full top-[-10%] right-[-5%] mix-blend-screen"></div>
+            <div class="blob bg-blue-400 w-72 h-72 rounded-full bottom-[-10%] left-[10%] mix-blend-screen" style="animation-delay: -2s;"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 reveal">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-dark border-brand-500/30 mb-8 shadow-glass">
+                        <span class="uppercase tracking-[0.2em] text-brand-200 text-xs font-bold">SEMA Research Foundation</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-tight mt-2 mb-8 text-gradient">
+                        Advancing the science of healing.
+                    </h1>
+
+                    <p class="text-xl text-slate-300 leading-relaxed max-w-2xl font-light border-l-4 border-brand-500 pl-6">
+                        Bridging the gap between clinical psychological research and accessible, digital-first community interventions.
+                    </p>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent z-10"></div>
+        </section>
+
+        <!-- FOCUS AREAS -->
+        <section class="py-24 bg-white relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="text-4xl font-black text-slate-900 leading-tight">Clinical Focus Areas</h2>
+                    <p class="text-slate-500 text-lg mt-4 font-light">Our institutional research prioritizes modern environmental stressors and their impact on emotional regulation.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-8 shadow-soft hover-lift hover:shadow-card hover:border-brand-200 smooth-transition reveal group relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-400 to-brand-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                        <h3 class="font-black text-xl text-slate-900 mb-4 group-hover:text-brand-600 smooth-transition">Adolescent Psychiatry</h3>
+                        <p class="text-slate-500 leading-relaxed text-sm">Investigating the physiological and psychological impacts of academic pressure and developmental transitions.</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-8 shadow-soft hover-lift hover:shadow-card hover:border-brand-200 smooth-transition reveal group relative overflow-hidden" style="transition-delay: 100ms;">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-400 to-brand-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                        <h3 class="font-black text-xl text-slate-900 mb-4 group-hover:text-brand-600 smooth-transition">Digital Burnout</h3>
+                        <p class="text-slate-500 leading-relaxed text-sm">Longitudinal studies on social media consumption, screen fatigue, and their correlation to dopamine dysregulation.</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-8 shadow-soft hover-lift hover:shadow-card hover:border-brand-200 smooth-transition reveal group relative overflow-hidden" style="transition-delay: 200ms;">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-400 to-brand-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                        <h3 class="font-black text-xl text-slate-900 mb-4 group-hover:text-brand-600 smooth-transition">Somatic Interventions</h3>
+                        <p class="text-slate-500 leading-relaxed text-sm">Efficacy of body-based therapeutic modalities in treating complex trauma and chronic physiological anxiety.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PUBLICATIONS -->
+        <section class="py-24 bg-slate-50 bg-grid-pattern border-t border-slate-200 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-slate-200 pb-6 reveal">
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900">Recent Publications</h2>
+                        <p class="text-slate-500 mt-2">Peer-reviewed findings from the SEMA Clinical Board.</p>
+                    </div>
+                    <a href="#" class="text-brand-600 font-bold hover:text-brand-800 smooth-transition mt-4 md:mt-0 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">Search Directory &rarr;</a>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Publication 1 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-card hover:border-brand-300 smooth-transition reveal group cursor-pointer">
+                        <div class="flex flex-col lg:flex-row gap-6">
+                            <div class="lg:w-1/4 shrink-0 border-r border-slate-100 pr-6">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Published</p>
+                                <p class="text-brand-600 font-black text-lg">May 2026</p>
+                                <div class="mt-4">
+                                    <span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-1 rounded uppercase">Journal of Modern Psychiatry</span>
+                                </div>
+                            </div>
+                            <div class="lg:w-3/4 flex-grow">
+                                <h3 class="text-2xl font-bold text-slate-900 group-hover:text-brand-600 smooth-transition mb-3">The Intersections of Social Media and Adolescent Emotional Dysregulation</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed mb-4">A landmark study detailing modern environmental stressors on youth mental health paradigms, highlighting the direct correlation between algorithm exposure and baseline anxiety levels in adolescents.</p>
+                                <p class="text-xs text-slate-500 font-semibold">Authors: Dr. Marcus Cole, Dr. Sarah Jenkins</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Publication 2 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-card hover:border-brand-300 smooth-transition reveal group cursor-pointer">
+                        <div class="flex flex-col lg:flex-row gap-6">
+                            <div class="lg:w-1/4 shrink-0 border-r border-slate-100 pr-6">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Published</p>
+                                <p class="text-brand-600 font-black text-lg">Feb 2026</p>
+                                <div class="mt-4">
+                                    <span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-1 rounded uppercase">SEMA Clinical Reports</span>
+                                </div>
+                            </div>
+                            <div class="lg:w-3/4 flex-grow">
+                                <h3 class="text-2xl font-bold text-slate-900 group-hover:text-brand-600 smooth-transition mb-3">Efficacy of Digital-First Interventions in Rural Communities</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed mb-4">An analysis of accessibility metrics evaluating how asynchronous therapeutic modalities perform against traditional in-person clinical sessions in low-resource environments.</p>
+                                <p class="text-xs text-slate-500 font-semibold">Authors: Elena Rodriguez, LCSW</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Dynamically Loaded) -->
+    <div id="footer"></div>
+
+    <script>
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if(response.ok) { document.getElementById(id).innerHTML = await response.text(); }
+            } catch (e) { console.error(`Error fetching ${file}`, e); }
+        }
+        loadComponent("header", "header.html");
+        loadComponent("footer", "footer.html");
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            reveals.forEach(reveal => revealObserver.observe(reveal));
+        });
+    </script>
+</body>
+</html>
