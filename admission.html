@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admissions & Intake | SEMA Emotional Wellness Institution</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- GLOBAL APP SCRIPT (IMPORTANT) -->
+    <script src="assets/js/app.js" defer></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+                            800: '#115e59', 900: '#134e4a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'card': '0 10px 40px -5px rgba(20, 184, 166, 0.1)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover { transform: translateY(-6px); }
+        
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* PREMIUM GLASSMORPHISM */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .glass-panel-dark {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ffffff, #99f6e4);
+        }
+
+        /* REVEAL SYSTEM */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(.2,.65,.2,1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ANIMATED BLOB */
+        .blob {
+            position: absolute; filter: blur(80px); z-index: 0; opacity: 0.4;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        /* CUSTOM PATHWAY LINE */
+        .pathway-line {
+            position: absolute;
+            top: 3rem;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(20,184,166,0) 0%, rgba(20,184,166,0.3) 50%, rgba(20,184,166,0) 100%);
+            z-index: -1;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- HEADER (Dynamically Loaded) -->
+    <div id="header" class="relative z-50"></div>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section class="relative overflow-hidden bg-slate-900 text-white min-h-[65vh] flex items-center">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1920&q=80" 
+                     class="w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="Intake Consultation">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-900/95 via-slate-900/90 to-slate-900/90"></div>
+            </div>
+
+            <div class="blob bg-brand-400 w-96 h-96 rounded-full top-[10%] right-[10%] mix-blend-screen"></div>
+            <div class="blob bg-blue-500 w-72 h-72 rounded-full bottom-[-10%] left-[-5%] mix-blend-screen" style="animation-delay: -4s;"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 reveal">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-dark border-brand-500/30 mb-8 shadow-glass">
+                        <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                        <span class="uppercase tracking-[0.2em] text-brand-200 text-xs font-bold">Admissions & Intake</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-tight mt-2 mb-8 text-gradient">
+                        Begin your journey to wellness.
+                    </h1>
+
+                    <p class="text-xl text-slate-300 leading-relaxed max-w-2xl font-light border-l-4 border-brand-500 pl-6">
+                        A compassionate, straightforward onboarding process designed to connect you with the right clinical professionals and care pathways.
+                    </p>
+
+                    <div class="mt-10 flex flex-wrap gap-4">
+                        <a href="#intake-form" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-400 smooth-transition shadow-lg shadow-brand-500/20">
+                            Start Confidential Assessment
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-10"></div>
+        </section>
+
+        <!-- THE INTAKE PROCESS -->
+        <section class="py-24 bg-slate-50 relative z-20 overflow-hidden border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                    <h2 class="text-4xl font-black text-slate-900 leading-tight mb-4">What to Expect</h2>
+                    <p class="text-slate-500 text-lg font-light">We’ve structured our admissions to eliminate anxiety, ensuring you feel heard, understood, and safely guided from day one.</p>
+                </div>
+
+                <div class="relative">
+                    <!-- Desktop Connecting Line -->
+                    <div class="hidden lg:block pathway-line"></div>
+
+                    <div class="grid lg:grid-cols-3 gap-12 lg:gap-8">
+                        <!-- Step 1 -->
+                        <div class="reveal relative text-center group">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-2xl shadow-card border border-brand-100 flex items-center justify-center mb-8 relative z-10 group-hover:-translate-y-2 smooth-transition">
+                                <span class="text-3xl font-black text-brand-600">1</span>
+                                <div class="absolute inset-0 bg-brand-50 rounded-2xl transform scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Pre-Screening Assessment</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4">A brief, secure digital questionnaire to understand your current emotional baseline and immediate needs.</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="reveal relative text-center group" style="transition-delay: 100ms;">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-2xl shadow-card border border-brand-100 flex items-center justify-center mb-8 relative z-10 group-hover:-translate-y-2 smooth-transition">
+                                <span class="text-3xl font-black text-brand-600">2</span>
+                                <div class="absolute inset-0 bg-brand-50 rounded-2xl transform scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Clinical Consultation</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4">A 30-minute virtual or in-person session with an intake specialist to discuss your history and therapeutic goals.</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="reveal relative text-center group" style="transition-delay: 200ms;">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-2xl shadow-card border border-brand-100 flex items-center justify-center mb-8 relative z-10 group-hover:-translate-y-2 smooth-transition">
+                                <span class="text-3xl font-black text-brand-600">3</span>
+                                <div class="absolute inset-0 bg-brand-50 rounded-2xl transform scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Care Plan & Matching</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4">You are paired with a specialized clinician or group program, and your tailored schedule is established.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INSURANCE & BILLING -->
+        <section class="py-24 bg-white bg-grid-pattern relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="reveal">
+                        <span class="text-brand-600 font-extrabold uppercase tracking-widest text-xs bg-brand-50 px-3 py-1 rounded-full mb-4 inline-block">Financial Transparency</span>
+                        <h2 class="text-4xl font-black text-slate-900 mb-6 leading-tight">Insurance & Accessibility</h2>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-6 font-light">
+                            We believe financial constraints should never be a barrier to emotional wellness. SEMA partners with major national health insurance providers and offers tiered sliding-scale programs for uninsured individuals.
+                        </p>
+                        
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 font-medium">
+                                <svg class="w-5 h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                In-network with NHIF and major private providers.
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 font-medium">
+                                <svg class="w-5 h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Transparent out-of-pocket pricing available upfront.
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 font-medium">
+                                <svg class="w-5 h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Corporate wellness coverage & employee assistance processing.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Fleshy Insurance Card Graphic -->
+                    <div class="reveal glass-panel border border-brand-200 rounded-3xl p-10 shadow-card relative overflow-hidden bg-gradient-to-br from-white to-brand-50" style="transition-delay: 100ms;">
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-200 rounded-full blur-3xl opacity-50"></div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-2">Need Benefits Verified?</h3>
+                        <p class="text-slate-500 text-sm mb-6">Submit your details securely, and our billing coordination team will outline your coverage within 24 hours.</p>
+                        <a href="#" class="inline-flex w-full items-center justify-center bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-brand-600 smooth-transition shadow-md">
+                            Verify My Insurance
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECURE INTAKE FORM AREA -->
+        <section id="intake-form" class="py-24 relative overflow-hidden">
+            <div class="absolute inset-0 bg-brand-900 z-0"></div>
+            <div class="absolute top-0 right-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80')] opacity-10 mix-blend-overlay object-cover z-0"></div>
+            
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+                <div class="glass-panel-dark p-8 lg:p-12 rounded-3xl shadow-2xl border border-brand-500/20">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-black text-white mb-3">Begin Intake Assessment</h2>
+                        <p class="text-brand-200 text-sm font-light">This connection is encrypted and HIPAA/Data Protection compliant.</p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-300 mb-2">Legal First Name</label>
+                                <input type="text" class="w-full bg-slate-800/50 border border-slate-600 text-white rounded-xl p-4 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none smooth-transition placeholder-slate-500" placeholder="Jane">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-300 mb-2">Legal Last Name</label>
+                                <input type="text" class="w-full bg-slate-800/50 border border-slate-600 text-white rounded-xl p-4 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none smooth-transition placeholder-slate-500" placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-300 mb-2">Email Address</label>
+                                <input type="email" class="w-full bg-slate-800/50 border border-slate-600 text-white rounded-xl p-4 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none smooth-transition placeholder-slate-500" placeholder="jane@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-300 mb-2">Phone Number</label>
+                                <input type="tel" class="w-full bg-slate-800/50 border border-slate-600 text-white rounded-xl p-4 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none smooth-transition placeholder-slate-500" placeholder="+254 --- --- ---">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-300 mb-2">Primary Reason for Seeking Care</label>
+                            <select class="w-full bg-slate-800/50 border border-slate-600 text-white rounded-xl p-4 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none smooth-transition appearance-none">
+                                <option>Select a category...</option>
+                                <option>Anxiety & Stress Management</option>
+                                <option>Depression & Mood Disorders</option>
+                                <option>Trauma & PTSD</option>
+                                <option>Addiction Recovery</option>
+                                <option>Relationship & Family Dynamics</option>
+                                <option>Other / Unsure</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="button" class="w-full bg-brand-500 text-slate-900 font-black text-lg py-4 rounded-xl shadow-lg hover:bg-brand-400 hover:-translate-y-1 smooth-transition">
+                                Proceed to Next Step &rarr;
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Dynamically Loaded) -->
+    <div id="footer"></div>
+
+    <!-- PARTIAL LOADER & ANIMATIONS -->
+    <script>
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if(response.ok) { document.getElementById(id).innerHTML = await response.text(); }
+            } catch (e) { console.error(`Error fetching ${file}`, e); }
+        }
+        loadComponent("header", "header.html");
+        loadComponent("footer", "footer.html");
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            reveals.forEach(reveal => revealObserver.observe(reveal));
+        });
+    </script>
+</body>
+</html>
