@@ -1,54 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About SEMA | National Emotional Wellness & Mental Health Institution</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | SEMA Emotional Wellness Institution</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] }, colors: { brand: { 50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a' } }, boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)', 'card': '0 10px 30px -5px rgba(20, 184, 166, 0.08)' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
     </script>
+
     <style>
-        body { background-color: #f8fafc; color: #334155; -webkit-font-smoothing: antialiased; }
-        .bg-grid-pattern { background-image: linear-gradient(to right, rgba(20, 184, 166, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(20, 184, 166, 0.05) 1px, transparent 1px); background-size: 40px 40px; }
-        .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-active { opacity: 1; transform: translateY(0); }
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .smooth-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <div class="bg-brand-900 text-brand-50 py-2 px-4 text-xs font-medium border-b border-brand-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="flex items-center gap-1 text-red-300 font-bold">24/7 CRISIS HELPLINE: 988</span>
-        </div>
-    </div>
-    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html"><img src="https://sema-learn.mutavatosh.workers.dev/assets/sema-logo-BGg-cRRb.png" alt="SEMA Logo" class="h-12 w-auto"></a>
-            <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm text-slate-700">
-                <a href="about.html" class="text-brand-600">About Us</a>
-                <a href="services.html" class="hover:text-brand-600">Care Programs</a>
-                <a href="support.html" class="bg-brand-600 text-white px-6 py-2.5 rounded">Request Support</a>
-            </nav>
-        </div>
-    </header>
 
-    <main class="flex-grow py-20">
-        <section class="max-w-7xl mx-auto px-4 reveal">
-            <h1 class="text-5xl font-extrabold text-slate-900 mb-8">About SEMA</h1>
-            <div class="bg-white p-10 rounded-2xl shadow-soft border border-slate-100">
-                <p class="text-lg text-slate-600 leading-relaxed">SEMA is a national institution dedicated to emotional wellness. We provide evidence-based, human-centered clinical care to empower individuals and foster resilience across every community.</p>
+<body class="flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main class="flex-grow">
+
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-brand-900 text-white">
+            <div class="absolute inset-0">
+                <img
+                    src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?auto=format&fit=crop&w=1400&q=80"
+                    class="w-full h-full object-cover opacity-20"
+                    alt="SEMA Institution">
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+                <div class="max-w-3xl">
+                    <span class="uppercase tracking-[0.3em] text-brand-300 text-sm font-bold">
+                        About SEMA
+                    </span>
+
+                    <h1 class="text-5xl md:text-6xl font-black leading-tight mt-6 mb-6">
+                        Building Emotionally Resilient Communities Through Compassionate Care.
+                    </h1>
+
+                    <p class="text-xl text-brand-100 leading-relaxed">
+                        SEMA exists at the intersection of clinical excellence,
+                        emotional wellness advocacy, and transformative community healing.
+                    </p>
+                </div>
             </div>
         </section>
+
+        <!-- MISSION -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                    <div>
+                        <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                            Our Mission
+                        </span>
+
+                        <h2 class="text-4xl font-black text-slate-900 mt-4 mb-6 leading-tight">
+                            Advancing modern mental wellness with dignity, science, and humanity.
+                        </h2>
+
+                        <p class="text-slate-600 leading-relaxed mb-6 text-lg">
+                            SEMA was founded to redefine emotional and psychological support systems
+                            for modern individuals, institutions, and communities.
+                        </p>
+
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Through evidence-based interventions, therapeutic innovation,
+                            educational outreach, and digital wellness ecosystems,
+                            we continue to create safe and transformative healing spaces.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-6 mt-10">
+                            <div>
+                                <h3 class="text-4xl font-black text-brand-600">15K+</h3>
+                                <p class="text-sm text-slate-500 mt-2">Individuals Supported</p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-4xl font-black text-brand-600">24/7</h3>
+                                <p class="text-sm text-slate-500 mt-2">Crisis Intervention Access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <img
+                            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=80"
+                            class="rounded-2xl shadow-2xl"
+                            alt="SEMA Team">
+
+                        <div class="absolute -bottom-8 -left-8 bg-white shadow-xl rounded-xl p-6 border border-slate-100">
+                            <p class="text-sm uppercase tracking-wider text-brand-600 font-bold">
+                                Since 2016
+                            </p>
+
+                            <h4 class="text-xl font-bold text-slate-900 mt-2">
+                                National Wellness Leadership
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- VALUES -->
+        <section class="py-20 bg-slate-50 bg-grid-pattern">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                        Institutional Values
+                    </span>
+
+                    <h2 class="text-4xl font-black text-slate-900 mt-4 mb-6">
+                        Principles That Define Our Work
+                    </h2>
+
+                    <p class="text-slate-600 text-lg">
+                        Every therapeutic, educational, and research initiative at SEMA
+                        is grounded in these core pillars.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm hover-lift smooth-transition">
+                        <div class="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6">
+                            ❤
+                        </div>
+
+                        <h3 class="font-bold text-xl text-slate-900 mb-3">
+                            Compassion
+                        </h3>
+
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Human-centered emotional care rooted in empathy and understanding.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm hover-lift smooth-transition">
+                        <div class="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6">
+                            🧠
+                        </div>
+
+                        <h3 class="font-bold text-xl text-slate-900 mb-3">
+                            Clinical Excellence
+                        </h3>
+
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Evidence-based therapeutic frameworks and research-backed systems.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm hover-lift smooth-transition">
+                        <div class="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6">
+                            🌍
+                        </div>
+
+                        <h3 class="font-bold text-xl text-slate-900 mb-3">
+                            Community
+                        </h3>
+
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Strengthening collective resilience through shared support systems.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm hover-lift smooth-transition">
+                        <div class="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6">
+                            🚀
+                        </div>
+
+                        <h3 class="font-bold text-xl text-slate-900 mb-3">
+                            Innovation
+                        </h3>
+
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Integrating digital wellness tools into accessible mental healthcare.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-20 bg-brand-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+                <h2 class="text-4xl font-black mb-6">
+                    Together, We Can Transform Emotional Wellness.
+                </h2>
+
+                <p class="text-brand-100 text-lg leading-relaxed mb-10">
+                    Whether you need immediate support, institutional partnership,
+                    or educational resources, SEMA is here to help.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="contact.html"
+                        class="bg-white text-brand-900 px-8 py-4 rounded-lg font-bold hover:bg-brand-50 smooth-transition">
+                        Contact Our Team
+                    </a>
+
+                    <a href="services.html"
+                        class="border border-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-brand-900 smooth-transition">
+                        Explore Programs
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-brand-500">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-            &copy; 2026 SEMA Emotional Wellness Institution. All Rights Reserved.
-        </div>
-    </footer>
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- LOAD PARTIALS -->
+    <script>
+        async function loadComponent(id, file) {
+            const response = await fetch(file);
+            const data = await response.text();
+            document.getElementById(id).innerHTML = data;
+        }
+
+        loadComponent("header", "header.html");
+        loadComponent("footer", "footer.html");
+    </script>
+
 </body>
 </html>
