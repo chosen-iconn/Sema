@@ -7,8 +7,12 @@
   <title>Care Programs | SEMA National Emotional Wellness</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/app.js" defer></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <script>
     tailwind.config = {
@@ -34,15 +38,14 @@
           },
 
           boxShadow: {
-            soft: '0 10px 40px rgba(15, 23, 42, 0.06)',
-            premium: '0 25px 60px rgba(20, 184, 166, 0.12)',
+            soft: '0 10px 40px rgba(15,23,42,.06)',
+            premium: '0 25px 60px rgba(20,184,166,.12)',
             glow: '0 0 0 1px rgba(20,184,166,.12), 0 20px 40px rgba(20,184,166,.15)',
           },
 
           animation: {
             float: 'float 6s ease-in-out infinite',
             pulseSoft: 'pulseSoft 3s infinite',
-            shine: 'shine 5s linear infinite',
           },
 
           keyframes: {
@@ -52,13 +55,8 @@
             },
 
             pulseSoft: {
-              '0%,100%': { opacity: '.6' },
+              '0%,100%': { opacity: '.5' },
               '50%': { opacity: '1' },
-            },
-
-            shine: {
-              '0%': { transform: 'translateX(-100%)' },
-              '100%': { transform: 'translateX(200%)' },
             }
           }
         }
@@ -67,186 +65,170 @@
   </script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
+
+    html{
+      scroll-behavior:smooth;
     }
 
-    body {
-      background: #f8fafc;
-      color: #334155;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+    body{
+      background:#f8fafc;
+      color:#334155;
+      font-family:"Plus Jakarta Sans",sans-serif;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* BACKGROUND GRID */
-    .bg-grid {
+    .bg-grid{
       background-image:
-        linear-gradient(to right, rgba(20,184,166,0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(20,184,166,0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(to right, rgba(20,184,166,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20,184,166,.05) 1px, transparent 1px);
+      background-size:40px 40px;
     }
 
-    /* PREMIUM REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px) scale(.98);
+    .glass{
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.6);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
       transition:
         opacity .9s cubic-bezier(.2,.65,.2,1),
         transform .9s cubic-bezier(.2,.65,.2,1);
-      will-change: transform, opacity;
     }
 
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
     }
 
-    .delay-1 { transition-delay: .1s; }
-    .delay-2 { transition-delay: .2s; }
-    .delay-3 { transition-delay: .3s; }
-    .delay-4 { transition-delay: .4s; }
+    .delay-1{ transition-delay:.1s; }
+    .delay-2{ transition-delay:.2s; }
+    .delay-3{ transition-delay:.3s; }
+    .delay-4{ transition-delay:.4s; }
 
-    /* GLASS */
-    .glass {
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,.6);
-    }
-
-    /* PROGRAM CARD */
-    .program-card {
+    .program-card{
+      position:relative;
+      overflow:hidden;
       transition:
         transform .6s cubic-bezier(.2,.65,.2,1),
         box-shadow .6s cubic-bezier(.2,.65,.2,1),
         border-color .4s ease;
-      transform-style: preserve-3d;
-      position: relative;
-      overflow: hidden;
     }
 
-    .program-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 30px 80px rgba(15,23,42,.12);
-      border-color: rgba(20,184,166,.25);
+    .program-card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 35px 90px rgba(15,23,42,.12);
+      border-color:rgba(20,184,166,.2);
     }
 
-    .program-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
+    .program-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
         120deg,
         transparent 20%,
-        rgba(255,255,255,.35),
+        rgba(255,255,255,.3),
         transparent 80%
       );
-      transform: translateX(-120%);
-      transition: transform 1.3s ease;
-      z-index: 2;
-      pointer-events: none;
+      transform:translateX(-120%);
+      transition:transform 1.2s ease;
+      pointer-events:none;
+      z-index:2;
     }
 
-    .program-card:hover::before {
-      transform: translateX(130%);
+    .program-card:hover::before{
+      transform:translateX(120%);
     }
 
-    /* IMAGE ZOOM */
-    .image-wrap img {
-      transition: transform 1.2s cubic-bezier(.2,.65,.2,1);
+    .image-wrap img{
+      transition:transform 1.3s cubic-bezier(.2,.65,.2,1);
     }
 
-    .program-card:hover img {
-      transform: scale(1.08);
+    .program-card:hover img{
+      transform:scale(1.08);
     }
 
-    /* MAGNETIC BUTTON */
-    .magnetic-btn {
+    .magnetic-btn{
       transition:
         transform .25s ease,
         box-shadow .3s ease,
         background .3s ease;
     }
 
-    .magnetic-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(20,184,166,.25);
+    .magnetic-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 15px 35px rgba(20,184,166,.25);
     }
 
-    /* FLOATING ORBS */
-    .orb {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(60px);
-      opacity: .15;
-      pointer-events: none;
+    .stat-card{
+      transition:all .4s ease;
     }
 
-    /* CUSTOM SCROLLBAR */
-    ::-webkit-scrollbar {
-      width: 8px;
+    .stat-card:hover{
+      transform:translateY(-6px);
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 999px;
+    .filter-link{
+      position:relative;
+      transition:all .3s ease;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
+    .filter-link::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-4px;
+      width:0;
+      height:2px;
+      background:#14b8a6;
+      transition:width .3s ease;
     }
 
-    /* STAT CARD */
-    .stat-card {
-      transition: all .4s ease;
+    .filter-link:hover::after{
+      width:100%;
     }
 
-    .stat-card:hover {
-      transform: translateY(-6px);
+    .orb{
+      position:absolute;
+      border-radius:999px;
+      filter:blur(70px);
+      opacity:.15;
+      pointer-events:none;
     }
 
-    /* FILTER LINK */
-    .filter-link {
-      transition: all .3s ease;
-      position: relative;
+    ::-webkit-scrollbar{
+      width:8px;
     }
 
-    .filter-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: #14b8a6;
-      transition: width .3s ease;
+    ::-webkit-scrollbar-thumb{
+      background:#cbd5e1;
+      border-radius:999px;
     }
 
-    .filter-link:hover::after {
-      width: 100%;
+    ::-webkit-scrollbar-thumb:hover{
+      background:#94a3b8;
     }
 
-    /* PARALLAX */
-    .parallax {
-      transform: translateY(var(--offset, 0px));
-      transition: transform .2s linear;
-    }
   </style>
 </head>
 
 <body class="flex flex-col min-h-screen">
 
   <!-- HEADER -->
-  <div id="header-container"></div>
+  <div id="header"></div>
 
   <main class="flex-grow">
 
     <!-- HERO -->
     <section class="relative overflow-hidden py-24 bg-white border-b border-slate-200 bg-grid">
 
-      <div class="orb bg-brand-400 w-72 h-72 top-0 -left-20"></div>
-      <div class="orb bg-cyan-300 w-80 h-80 bottom-0 right-0"></div>
+      <div class="orb bg-brand-400 w-72 h-72 top-0 -left-20 animate-pulseSoft"></div>
+      <div class="orb bg-cyan-300 w-80 h-80 bottom-0 right-0 animate-pulseSoft"></div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -267,15 +249,17 @@
           </p>
 
           <div class="mt-10 flex flex-wrap gap-4">
+
             <a href="#programs"
               class="magnetic-btn bg-brand-600 hover:bg-brand-700 text-white px-7 py-4 rounded-xl font-semibold">
               Explore Programs
             </a>
 
-            <a href="#"
+            <a href="contact.html"
               class="magnetic-btn bg-white border border-slate-200 hover:border-brand-300 text-slate-700 px-7 py-4 rounded-xl font-semibold">
-              Clinical Assessment
+              Book Consultation
             </a>
+
           </div>
 
         </div>
@@ -285,6 +269,7 @@
 
     <!-- STATS -->
     <section class="py-10 bg-slate-50 border-b border-slate-200">
+
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -310,7 +295,9 @@
           </div>
 
         </div>
+
       </div>
+
     </section>
 
     <!-- PROGRAMS -->
@@ -368,10 +355,10 @@
                 </h4>
 
                 <p class="text-sm text-slate-600 leading-relaxed relative z-10">
-                  Begin with our intelligent wellness assessment to discover the most appropriate therapeutic path.
+                  Begin with our wellness assessment to discover the right therapeutic support pathway.
                 </p>
 
-                <a href="#"
+                <a href="contact.html"
                   class="magnetic-btn inline-block mt-5 bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 rounded-xl text-sm font-semibold relative z-10">
                   Start Assessment
                 </a>
@@ -382,17 +369,17 @@
 
           </aside>
 
-          <!-- PROGRAM LIST -->
+          <!-- PROGRAMS -->
           <div class="lg:col-span-3 space-y-10">
 
-            <!-- CARD -->
+            <!-- CARD 1 -->
             <div class="program-card reveal delay-1 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
 
               <div class="image-wrap relative min-h-[320px]">
                 <img
                   src="https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&w=1200&q=80"
                   class="absolute inset-0 w-full h-full object-cover"
-                  alt="">
+                  alt="Therapy Session">
               </div>
 
               <div class="p-10 flex flex-col justify-center">
@@ -407,8 +394,8 @@
 
                 <p class="mt-5 text-slate-600 leading-relaxed">
                   Deeply personalized therapeutic engagement through CBT,
-                  DBT, trauma-informed interventions, emotional regulation
-                  systems, and evidence-based psychological support.
+                  trauma-informed interventions, emotional regulation systems,
+                  and evidence-based psychological support.
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -420,18 +407,20 @@
                 <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-6">
 
                   <div class="flex -space-x-3">
-                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover"
-                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80">
 
-                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover"
-                      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80">
+                    <img
+                      class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80"
+                      alt="">
 
-                    <div class="w-10 h-10 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-600">
-                      +14
-                    </div>
+                    <img
+                      class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80"
+                      alt="">
+
                   </div>
 
-                  <a href="#"
+                  <a href="contact.html"
                     class="group text-brand-600 font-bold flex items-center gap-2">
                     View Program
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
@@ -440,16 +429,17 @@
                 </div>
 
               </div>
+
             </div>
 
-            <!-- CARD -->
+            <!-- CARD 2 -->
             <div class="program-card reveal delay-2 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
 
               <div class="image-wrap relative min-h-[320px]">
                 <img
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
                   class="absolute inset-0 w-full h-full object-cover"
-                  alt="">
+                  alt="Support Group">
               </div>
 
               <div class="p-10 flex flex-col justify-center">
@@ -480,7 +470,7 @@
                     Weekly moderated sessions
                   </span>
 
-                  <a href="#"
+                  <a href="contact.html"
                     class="group text-blue-600 font-bold flex items-center gap-2">
                     Explore Groups
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
@@ -489,16 +479,17 @@
                 </div>
 
               </div>
+
             </div>
 
-            <!-- CARD -->
+            <!-- CARD 3 -->
             <div class="program-card reveal delay-3 bg-white rounded-3xl border border-slate-200 shadow-soft grid md:grid-cols-2 overflow-hidden">
 
               <div class="image-wrap relative min-h-[320px]">
                 <img
                   src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?auto=format&fit=crop&w=1200&q=80"
                   class="absolute inset-0 w-full h-full object-cover"
-                  alt="">
+                  alt="Virtual Wellness">
               </div>
 
               <div class="p-10 flex flex-col justify-center">
@@ -512,9 +503,9 @@
                 </h2>
 
                 <p class="mt-5 text-slate-600 leading-relaxed">
-                  Secure teletherapy systems, mood tracking,
-                  wellness journaling, AI-assisted emotional support,
-                  and clinician communication accessible from anywhere.
+                  Secure teletherapy systems, wellness journaling,
+                  emotional tracking, and clinician communication
+                  accessible from anywhere.
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -526,10 +517,10 @@
                 <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-6">
 
                   <span class="text-sm text-slate-500">
-                    HIPAA compliant infrastructure
+                    Secure digital infrastructure
                   </span>
 
-                  <a href="#"
+                  <a href="contact.html"
                     class="group text-purple-600 font-bold flex items-center gap-2">
                     Access Platform
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
@@ -538,6 +529,7 @@
                 </div>
 
               </div>
+
             </div>
 
           </div>
@@ -545,36 +537,57 @@
         </div>
 
       </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 bg-brand-900 text-white relative overflow-hidden">
+
+      <div class="absolute inset-0 opacity-10">
+        <div class="bg-grid w-full h-full"></div>
+      </div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+
+        <span class="uppercase tracking-[0.3em] text-brand-300 text-sm font-bold">
+          Begin Your Healing Journey
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-6 leading-tight">
+          Compassionate Support Starts With A Conversation.
+        </h2>
+
+        <p class="text-brand-100 text-lg leading-relaxed mb-10">
+          Connect with our specialists and discover personalized
+          emotional wellness support designed for long-term healing and resilience.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+          <a href="contact.html"
+            class="magnetic-btn bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50">
+            Contact Our Team
+          </a>
+
+          <a href="about.html"
+            class="magnetic-btn border border-white/30 hover:bg-white hover:text-brand-900 px-8 py-4 rounded-xl font-bold">
+            Learn About SEMA
+          </a>
+
+        </div>
+
+      </div>
+
     </section>
 
   </main>
 
   <!-- FOOTER -->
-  <div id="footer-container"></div>
+  <div id="footer"></div>
 
-  <!-- =========================================================
-  PREMIUM ANIMATIONS SCRIPT
-  ========================================================= -->
+  <!-- SCRIPTS -->
   <script>
-
-    // LOAD HEADER / FOOTER
-    async function loadComponent(id, file) {
-      const el = document.getElementById(id);
-
-      if (!el) return;
-
-      const response = await fetch(file);
-      const html = await response.text();
-
-      el.innerHTML = html;
-    }
-
-    loadComponent('header-container', 'header.html');
-    loadComponent('footer-container', 'footer.html');
-
-    // ---------------------------------------------------
-    // REVEAL ON SCROLL
-    // ---------------------------------------------------
+    // REVEAL ANIMATION
     const revealItems = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
@@ -582,8 +595,10 @@
       entries.forEach(entry => {
 
         if (entry.isIntersecting) {
+
           entry.target.classList.add('active');
           observer.unobserve(entry.target);
+
         }
 
       });
@@ -595,9 +610,7 @@
 
     revealItems.forEach(item => observer.observe(item));
 
-    // ---------------------------------------------------
-    // COUNTER ANIMATION
-    // ---------------------------------------------------
+    // COUNTERS
     const counters = document.querySelectorAll('.counter');
 
     const counterObserver = new IntersectionObserver((entries) => {
@@ -610,7 +623,6 @@
         const target = +counter.dataset.target;
 
         let current = 0;
-
         const increment = target / 80;
 
         const updateCounter = () => {
@@ -618,10 +630,15 @@
           current += increment;
 
           if (current < target) {
+
             counter.innerText = Math.floor(current);
+
             requestAnimationFrame(updateCounter);
+
           } else {
+
             counter.innerText = target + (target > 100 ? '+' : '');
+
           }
 
         };
@@ -632,26 +649,13 @@
 
       });
 
-    }, { threshold: 0.5 });
+    }, {
+      threshold: 0.5
+    });
 
     counters.forEach(counter => counterObserver.observe(counter));
 
-    // ---------------------------------------------------
-    // PARALLAX EFFECT
-    // ---------------------------------------------------
-    window.addEventListener('scroll', () => {
-
-      const scrolled = window.pageYOffset;
-
-      document.querySelectorAll('.parallax').forEach(el => {
-        el.style.setProperty('--offset', `${scrolled * 0.08}px`);
-      });
-
-    });
-
-    // ---------------------------------------------------
     // MAGNETIC BUTTONS
-    // ---------------------------------------------------
     document.querySelectorAll('.magnetic-btn').forEach(button => {
 
       button.addEventListener('mousemove', (e) => {
@@ -672,9 +676,7 @@
 
     });
 
-    // ---------------------------------------------------
-    // PREMIUM CARD TILT
-    // ---------------------------------------------------
+    // CARD TILT
     document.querySelectorAll('.program-card').forEach(card => {
 
       card.addEventListener('mousemove', (e) => {
@@ -684,14 +686,14 @@
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const rotateY = ((x / rect.width) - 0.5) * 8;
-        const rotateX = ((y / rect.height) - 0.5) * -8;
+        const rotateY = ((x / rect.width) - 0.5) * 6;
+        const rotateX = ((y / rect.height) - 0.5) * -6;
 
         card.style.transform =
           `perspective(1000px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateY(-8px)`;
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+          translateY(-8px)`;
 
       });
 
@@ -701,9 +703,7 @@
 
     });
 
-    // ---------------------------------------------------
-    // PAGE FADE-IN
-    // ---------------------------------------------------
+    // PAGE FADE IN
     document.body.animate(
       [
         { opacity: 0, transform: 'translateY(10px)' },
