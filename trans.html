@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eGrade - Enterprise Transport Management</title>
+    <title>eGrade - Enterprise Transport Management Center</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,9 +184,9 @@
         .tab-content.active { display: flex; flex-direction: column; gap: 32px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        .toolbar { display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); padding: 8px; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); padding: 8px; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); overflow-x: auto;}
         .tabs { display: flex; gap: 4px; }
-        .tab { padding: 10px 20px; border-radius: var(--radius-lg); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: var(--transition-fast); }
+        .tab { padding: 10px 20px; border-radius: var(--radius-lg); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: var(--transition-fast); white-space: nowrap;}
         .tab.active { background: var(--bg-input); color: var(--text-main); box-shadow: var(--shadow-sm); }
         .tab:hover:not(.active) { color: var(--text-main); background: var(--bg-hover); }
 
@@ -249,11 +249,13 @@
         .avatar-sm { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: var(--bg-input); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); }
         .table-text-main { font-weight: 700; color: var(--text-main); display: block; }
         .table-text-sub { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; display: block; }
+        .amount { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--text-main); }
         
         .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
         .status-active { background: var(--success-bg); color: var(--success); }
         .status-warning { background: var(--warning-bg); color: var(--warning); }
         .status-danger { background: var(--danger-bg); color: var(--danger); }
+        .status-info { background: var(--info-bg); color: var(--info); }
 
         /* =========================================
            GPS TRACKING UI (Map Placeholder)
@@ -296,6 +298,7 @@
             .sidebar { position: fixed; left: calc(var(--sidebar-w) * -1); height: 100vh; }
             .sidebar.mobile-open { left: 0; }
             .dashboard-row { grid-template-columns: 1fr; }
+            .tabs { overflow-x: auto; padding-bottom: 8px; }
         }
     </style>
 </head>
@@ -317,16 +320,11 @@
             <li class="nav-item active"><a href="#" class="nav-link tab-trigger" data-target="tab-dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a></li>
             
             <div class="nav-label">Operations</div>
-            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-fleet"><i data-lucide="truck"></i><span>Vehicle Management</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-routes"><i data-lucide="map"></i><span>Routes & Stops</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-fleet"><i data-lucide="users"></i><span>Driver Management</span></a></li>
-            
-            <div class="nav-label">Student Transit</div>
-            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-routes"><i data-lucide="user-check"></i><span>Student Allocation</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-routes"><i data-lucide="clipboard-check"></i><span>Daily Attendance</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-fleet"><i data-lucide="truck"></i><span>Fleet & Drivers</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-routes"><i data-lucide="map"></i><span>Routes & Allocation</span></a></li>
             <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-gps"><i data-lucide="crosshair"></i><span>GPS Live Tracking</span></a></li>
 
-            <div class="nav-label">Maintenance & Admin</div>
+            <div class="nav-label">Finance & Maint</div>
             <li class="nav-item has-submenu">
                 <a href="#" class="nav-link"><i data-lucide="wrench"></i><span>Maintenance</span><i data-lucide="chevron-down" class="chevron"></i></a>
                 <div class="submenu">
@@ -337,9 +335,12 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="dollar-sign"></i><span>Transport Fees</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="bell"></i><span>Parent Notifications</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="bar-chart-2"></i><span>Reports & Analytics</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-fees"><i data-lucide="dollar-sign"></i><span>Transport Fees</span></a></li>
+
+            <div class="nav-label">Administration</div>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-scheduling"><i data-lucide="calendar"></i><span>Trip Scheduling</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-comms"><i data-lucide="bell"></i><span>Parent Notifications</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-reports"><i data-lucide="bar-chart-2"></i><span>Reports & Analytics</span></a></li>
         </nav>
 
         <div class="sidebar-footer">
@@ -368,8 +369,8 @@
             <div class="header-actions">
                 <button class="icon-btn" id="themeToggle"><i data-lucide="moon" id="themeIcon"></i></button>
                 <button class="icon-btn"><i data-lucide="bell"></i><span class="badge">3</span></button>
-                <button class="btn btn-secondary"><i data-lucide="calendar"></i> Today's Trips</button>
-                <button class="btn btn-primary" id="openActionBtn"><i data-lucide="plus"></i> Add Vehicle</button>
+                <button class="btn btn-secondary" onclick="openSlidePanel('slidePanelDriver')"><i data-lucide="user-plus"></i> Add Driver</button>
+                <button class="btn btn-primary" onclick="openSlidePanel('slidePanelVehicle')"><i data-lucide="plus"></i> Add Vehicle</button>
             </div>
         </header>
 
@@ -381,14 +382,11 @@
                     <button class="tab" data-target="tab-fleet">Fleet & Drivers</button>
                     <button class="tab" data-target="tab-routes">Routes & Allocation</button>
                     <button class="tab" data-target="tab-gps">GPS & Live Ops</button>
-                    <button class="tab" data-target="tab-maintenance">Maintenance & Fuel</button>
-                </div>
-                <div class="search-bar" style="width: auto; height: 40px; background: var(--bg-input);">
-                    <i data-lucide="filter" style="color: var(--text-tertiary); width: 16px; margin-right: 8px;"></i>
-                    <select style="border: none; background: transparent; outline: none; color: var(--text-main); font-weight: 600; font-size: 13px; cursor: pointer;">
-                        <option>Term 1, 2026</option>
-                        <option>Term 2, 2026</option>
-                    </select>
+                    <button class="tab" data-target="tab-maintenance">Maintenance</button>
+                    <button class="tab" data-target="tab-fees">Fees</button>
+                    <button class="tab" data-target="tab-scheduling">Scheduling</button>
+                    <button class="tab" data-target="tab-comms">Comms</button>
+                    <button class="tab" data-target="tab-reports">Reports</button>
                 </div>
             </div>
 
@@ -400,7 +398,7 @@
                             <div class="trend up"><i data-lucide="check" style="width: 14px;"></i> 24 Active</div>
                         </div>
                         <div class="kpi-value">28</div>
-                        <div class="kpi-label">Total Vehicles</div>
+                        <div class="kpi-label">Total Fleet Vehicles</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -413,10 +411,10 @@
                     <div class="kpi-card">
                         <div class="kpi-header">
                             <div class="kpi-icon green"><i data-lucide="users"></i></div>
-                            <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> +5.4%</div>
+                            <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> 94% Capacity</div>
                         </div>
                         <div class="kpi-value">1,245</div>
-                        <div class="kpi-label">Students Assigned</div>
+                        <div class="kpi-label">Students Transported</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -424,15 +422,14 @@
                             <div class="trend down"><i data-lucide="alert-circle" style="width: 14px;"></i> 2 Critical</div>
                         </div>
                         <div class="kpi-value">4</div>
-                        <div class="kpi-label">Under Maintenance</div>
+                        <div class="kpi-label">Vehicles in Maintenance</div>
                     </div>
                 </div>
 
                 <div class="dashboard-row">
                     <div class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">Transport Revenue vs Fuel Cost</h2>
-                            <button class="icon-btn" style="width: 36px; height: 36px;"><i data-lucide="more-horizontal"></i></button>
+                            <h2 class="panel-title">Monthly Transport Revenue vs Operations Cost</h2>
                         </div>
                         <div class="chart-container">
                             <div class="chart-bar-group"><div class="bar metric1" style="height: 60%;"></div><div class="bar metric2" style="height: 30%;"></div><span class="chart-label">Jan</span></div>
@@ -443,14 +440,14 @@
                             <div class="chart-bar-group"><div class="bar metric1" style="height: 40%;"></div><div class="bar metric2" style="height: 20%;"></div><span class="chart-label">Jun</span></div>
                         </div>
                         <div style="display: flex; justify-content: center; gap: 24px; margin-top: 32px;">
-                            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary);"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--primary);"></span> Fee Revenue</div>
-                            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary);"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--accent);"></span> Fuel & Maint Cost</div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary);"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--primary);"></span> Fee Revenue (KSh)</div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary);"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--accent);"></span> Fuel & Maintenance (KSh)</div>
                         </div>
                     </div>
 
                     <div class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">Live Incidents & Alerts</h2>
+                            <h2 class="panel-title">Live Alerts & Incidents</h2>
                         </div>
                         <div class="action-list">
                             <div class="action-item">
@@ -485,7 +482,7 @@
                         <h2 class="panel-title">Fleet Directory</h2>
                         <div class="search-bar" style="width: 240px; height: 36px; background: var(--bg-input);">
                             <i data-lucide="filter" style="color: var(--text-tertiary); width: 14px; margin-right: 8px;"></i>
-                            <input type="text" placeholder="Filter fleet..." style="font-size: 13px;">
+                            <input type="text" placeholder="Filter vehicles..." style="font-size: 13px;">
                         </div>
                     </div>
                     <div class="table-container">
@@ -514,23 +511,6 @@
                                     <td><span class="status-pill status-active"><i data-lucide="check-circle" style="width: 12px;"></i> Active</span></td>
                                     <td style="text-align: right;">
                                         <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="edit" style="width: 14px;"></i></button>
-                                        <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="td-flex">
-                                            <div class="avatar-sm"><i data-lucide="bus"></i></div>
-                                            <div><span class="table-text-main">Bus 04 - KCA 123Z</span><span class="table-text-sub">Mitsubishi Fuso (2019)</span></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="table-text-main">School Bus</span><span class="table-text-sub">51 Seater</span></td>
-                                    <td><span class="table-text-main">Peter Njoroge</span><span class="table-text-sub">ID: 22334455</span></td>
-                                    <td><span class="table-text-main">Oct 01, 2026</span><span class="table-text-sub">Valid</span></td>
-                                    <td><span class="status-pill status-warning"><i data-lucide="clock" style="width: 12px;"></i> Delayed</span></td>
-                                    <td style="text-align: right;">
-                                        <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="edit" style="width: 14px;"></i></button>
-                                        <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -546,8 +526,52 @@
                                     <td><span class="status-pill status-danger"><i data-lucide="wrench" style="width: 12px;"></i> Maintenance</span></td>
                                     <td style="text-align: right;">
                                         <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="edit" style="width: 14px;"></i></button>
-                                        <button class="icon-btn" style="display: inline-flex; width: 32px; height: 32px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
                                     </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Driver Directory</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Driver Name</th>
+                                    <th>Contact Info</th>
+                                    <th>License Class / Expiry</th>
+                                    <th>Assigned Vehicle</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="td-flex">
+                                            <img src="https://i.pravatar.cc/150?img=11" class="avatar-sm">
+                                            <div><span class="table-text-main">John Mutisya</span><span class="table-text-sub">ID: 11223344</span></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="table-text-main">0712 345 678</span><span class="table-text-sub">john@egrade.com</span></td>
+                                    <td><span class="table-text-main">Class BCE</span><span class="table-text-sub">Aug 2028</span></td>
+                                    <td>Bus 01 (KCB 456X)</td>
+                                    <td><span class="status-pill status-active">Excellent</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="td-flex">
+                                            <img src="https://i.pravatar.cc/150?img=14" class="avatar-sm">
+                                            <div><span class="table-text-main">Peter Njoroge</span><span class="table-text-sub">ID: 22334455</span></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="table-text-main">0722 987 654</span><span class="table-text-sub">peter@egrade.com</span></td>
+                                    <td><span class="table-text-main">Class BCE</span><span class="table-text-sub" style="color: var(--warning);">Exp: Sep 2026</span></td>
+                                    <td>Bus 04 (KCA 123Z)</td>
+                                    <td><span class="status-pill status-info">Good</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -559,28 +583,28 @@
                 <div class="dashboard-row">
                     <div class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">Active Routes</h2>
-                            <button class="btn btn-secondary" style="height: 36px; padding: 0 16px;"><i data-lucide="plus"></i> New Route</button>
+                            <h2 class="panel-title">Route Management</h2>
+                            <button class="btn btn-secondary" onclick="openSlidePanel('slidePanelRoute')"><i data-lucide="plus"></i> New Route</button>
                         </div>
                         <div class="action-list">
                             <div class="action-item" style="cursor: default; align-items: stretch;">
                                 <div class="action-icon" style="background: var(--purple-bg); color: var(--purple);"><i data-lucide="map-pin"></i></div>
                                 <div class="action-text" style="display: flex; flex-direction: column; justify-content: center;">
                                     <h4>Route A1: Westlands - CBD - School</h4>
-                                    <p>Distance: 15km • Est Time: 45m • Vehicle: Bus 01</p>
+                                    <p>Distance: 15km • Est Time: 45m • 12 Stops</p>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
-                                    <span class="status-pill status-active">62/67 Assigned</span>
+                                    <span class="status-pill status-active">Bus 01 Assigned</span>
                                 </div>
                             </div>
                             <div class="action-item" style="cursor: default; align-items: stretch;">
                                 <div class="action-icon" style="background: var(--purple-bg); color: var(--purple);"><i data-lucide="map-pin"></i></div>
                                 <div class="action-text" style="display: flex; flex-direction: column; justify-content: center;">
                                     <h4>Route B2: Langata - Karen - School</h4>
-                                    <p>Distance: 22km • Est Time: 60m • Vehicle: Bus 04</p>
+                                    <p>Distance: 22km • Est Time: 60m • 8 Stops</p>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
-                                    <span class="status-pill status-active">48/51 Assigned</span>
+                                    <span class="status-pill status-warning">Bus 04 Assigned</span>
                                 </div>
                             </div>
                         </div>
@@ -612,6 +636,42 @@
                                 <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">Scheduled to begin at 15:45 EAT</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Student Transport Allocation Master List</h2>
+                        <button class="btn btn-primary"><i data-lucide="clipboard-list"></i> Bulk Assign</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Details</th>
+                                    <th>Class</th>
+                                    <th>Route Assigned</th>
+                                    <th>Stop Location</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="table-text-main">Emily Chen</span><span class="table-text-sub">ADM-4921</span></td>
+                                    <td>Grade 10-A</td>
+                                    <td><span class="table-text-main">Route A1</span><span class="table-text-sub">Bus 01</span></td>
+                                    <td>Westlands Roundabout</td>
+                                    <td><span class="status-pill status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="table-text-main">Marcus Johnson</span><span class="table-text-sub">ADM-3102</span></td>
+                                    <td>Grade 12-B</td>
+                                    <td><span class="table-text-main">Route B2</span><span class="table-text-sub">Bus 04</span></td>
+                                    <td>Galleria Mall Gate</td>
+                                    <td><span class="status-pill status-active">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -656,45 +716,12 @@
                 <div class="dashboard-row">
                     <div class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">Recent Maintenance Logs</h2>
-                            <button class="btn btn-primary" style="height: 36px; padding: 0 16px;"><i data-lucide="wrench"></i> Log Service</button>
-                        </div>
-                        <div class="table-container">
-                            <table class="data-table" style="min-width: 600px;">
-                                <thead>
-                                    <tr>
-                                        <th>Vehicle</th>
-                                        <th>Service Type</th>
-                                        <th>Date</th>
-                                        <th style="text-align: right;">Cost</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><span class="table-text-main">Van 12 (KCD 889Y)</span></td>
-                                        <td><span class="status-pill" style="background: var(--bg-hover); color: var(--text-main);">Engine Repair</span></td>
-                                        <td>May 28, 2026</td>
-                                        <td style="text-align: right;" class="amount">KSh 45,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="table-text-main">Bus 02 (KCB 991X)</span></td>
-                                        <td><span class="status-pill" style="background: var(--bg-hover); color: var(--text-main);">Routine Oil Change</span></td>
-                                        <td>May 22, 2026</td>
-                                        <td style="text-align: right;" class="amount">KSh 12,500</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Fuel Consumption (May)</h2>
+                            <h2 class="panel-title">Fuel Consumption Log</h2>
                         </div>
                         <div style="display: flex; flex-direction: column; gap: 24px;">
                             <div style="text-align: center; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); background: var(--bg-input);">
-                                <h3 style="font-size: 32px; font-weight: 800; color: var(--primary);">4,250 L</h3>
-                                <p style="font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-top: 8px;">Total Diesel Consumed</p>
+                                <h3 style="font-size: 32px; font-weight: 800; color: var(--primary);">4,250 Liters</h3>
+                                <p style="font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-top: 8px;">Total Diesel Consumed (May)</p>
                             </div>
                             <div class="action-item" style="cursor: default;">
                                 <div class="action-icon" style="background: var(--success-bg); color: var(--success);"><i data-lucide="fuel"></i></div>
@@ -705,6 +732,195 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Maintenance Records</h2>
+                            <button class="btn btn-primary" style="height: 36px; padding: 0 16px;"><i data-lucide="wrench"></i> Log Service</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" style="min-width: 500px;">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle</th>
+                                        <th>Service Type</th>
+                                        <th>Date</th>
+                                        <th style="text-align: right;">Cost (KSh)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="table-text-main">Van 12 (KCD 889Y)</span></td>
+                                        <td><span class="status-pill status-info">Engine Repair</span></td>
+                                        <td>May 28, 2026</td>
+                                        <td style="text-align: right;" class="amount">45,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="table-text-main">Bus 02 (KCB 991X)</span></td>
+                                        <td><span class="status-pill status-info">Oil Change</span></td>
+                                        <td>May 22, 2026</td>
+                                        <td style="text-align: right;" class="amount">12,500</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Incident Reports Log</h2>
+                        <button class="btn btn-secondary"><i data-lucide="file-plus"></i> Report Incident</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Incident ID</th>
+                                    <th>Date</th>
+                                    <th>Vehicle & Driver</th>
+                                    <th>Description</th>
+                                    <th>Severity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 700;">INC-0091</span></td>
+                                    <td>May 31, 2026</td>
+                                    <td><span class="table-text-main">Bus 04 (KCA 123Z)</span><span class="table-text-sub">Peter Njoroge</span></td>
+                                    <td>Minor rear-end collision in traffic, no injuries.</td>
+                                    <td><span class="status-pill status-warning">Medium</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-fees" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Transport Fee Packages (Term 2)</h2>
+                        <button class="btn btn-primary"><i data-lucide="plus"></i> New Package</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Package Name</th>
+                                    <th>Routes Covered</th>
+                                    <th>Monthly Fee (KSh)</th>
+                                    <th>Termly Fee (KSh)</th>
+                                    <th>Students Enrolled</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="table-text-main">Zone A Premium</span></td>
+                                    <td>Route A1, Route A2</td>
+                                    <td class="amount">6,500.00</td>
+                                    <td class="amount">18,000.00</td>
+                                    <td>145</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="table-text-main">Zone B Standard</span></td>
+                                    <td>Route B1, Route B2</td>
+                                    <td class="amount">8,000.00</td>
+                                    <td class="amount">22,500.00</td>
+                                    <td>98</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-scheduling" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Special Trips & Field Trips</h2>
+                        <button class="btn btn-primary"><i data-lucide="calendar-plus"></i> Schedule Trip</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Trip Details</th>
+                                    <th>Date & Time</th>
+                                    <th>Vehicle Assigned</th>
+                                    <th>Driver</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="table-text-main">Grade 10 Geography Field Trip</span><span class="table-text-sub">Destination: Karura Forest</span></td>
+                                    <td><span class="table-text-main">Jun 04, 2026</span><span class="table-text-sub">08:00 AM - 14:00 PM</span></td>
+                                    <td>Bus 01</td>
+                                    <td>John Mutisya</td>
+                                    <td><span class="status-pill status-info">Scheduled</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-comms" class="tab-content">
+                <div class="dashboard-row">
+                    <div class="panel">
+                        <h2 class="panel-title" style="margin-bottom: 24px;">Send Broadcast Notification</h2>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <label style="font-size: 13px; font-weight: 700;">Select Target Audience</label>
+                                <select style="padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-strong); background: var(--bg-base); color: var(--text-main); font-family: inherit;">
+                                    <option>Parents of Route B2 Students</option>
+                                    <option>All Transport Parents</option>
+                                    <option>All Drivers</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <label style="font-size: 13px; font-weight: 700;">Message Body</label>
+                                <textarea rows="4" style="padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-strong); background: var(--bg-base); color: var(--text-main); font-family: inherit;"></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="align-self: flex-start;"><i data-lucide="send"></i> Send SMS Broadcast</button>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <h2 class="panel-title" style="margin-bottom: 24px;">Recent Broadcasts</h2>
+                        <div class="action-list">
+                            <div class="action-item" style="cursor: default;">
+                                <div class="action-icon" style="background: var(--info-bg); color: var(--info);"><i data-lucide="message-square"></i></div>
+                                <div class="action-text">
+                                    <h4>Route B2 Delay Notification</h4>
+                                    <p>Sent to 48 Parents • Delivered: 100%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-reports" class="tab-content">
+                <div class="kpi-grid">
+                    <div class="panel" style="align-items: center; text-align: center; gap: 16px;">
+                        <i data-lucide="bar-chart-2" style="width: 48px; height: 48px; color: var(--primary);"></i>
+                        <h3 style="font-size: 16px; font-weight: 700;">Vehicle Utilization Report</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Analyze fleet capacity, mileage, and trip frequency.</p>
+                        <button class="btn btn-secondary" style="width: 100%;"><i data-lucide="download"></i> Download PDF</button>
+                    </div>
+                    <div class="panel" style="align-items: center; text-align: center; gap: 16px;">
+                        <i data-lucide="fuel" style="width: 48px; height: 48px; color: var(--success);"></i>
+                        <h3 style="font-size: 16px; font-weight: 700;">Fuel Consumption Analysis</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Monthly fuel usage per vehicle and cost analysis.</p>
+                        <button class="btn btn-secondary" style="width: 100%;"><i data-lucide="download"></i> Download Excel</button>
+                    </div>
+                    <div class="panel" style="align-items: center; text-align: center; gap: 16px;">
+                        <i data-lucide="dollar-sign" style="width: 48px; height: 48px; color: var(--warning);"></i>
+                        <h3 style="font-size: 16px; font-weight: 700;">Revenue & Billing Report</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Transport fee collection status and arrears.</p>
+                        <button class="btn btn-secondary" style="width: 100%;"><i data-lucide="download"></i> Download PDF</button>
+                    </div>
                 </div>
             </div>
 
@@ -712,36 +928,29 @@
     </main>
 
     <div class="overlay" id="slideOverlay"></div>
-    <div class="slide-panel" id="slidePanel">
+    <div class="slide-panel" id="slidePanelVehicle">
         <div class="slide-header">
             <div>
                 <h3 style="font-size: 20px; font-weight: 800;">Register New Vehicle</h3>
                 <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 4px;">Enter fleet details for ERP tracking.</p>
             </div>
-            <button class="close-btn" id="closeSlideBtn"><i data-lucide="x"></i></button>
+            <button class="close-btn" onclick="closeSlidePanel()"><i data-lucide="x"></i></button>
         </div>
         <div class="slide-body">
             <div class="form-group">
                 <label class="form-label">Registration Number <span style="color: var(--danger);">*</span></label>
                 <input type="text" class="form-control" placeholder="e.g. KCE 123A">
             </div>
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div class="form-group">
                     <label class="form-label">Vehicle Type</label>
-                    <select class="form-control">
-                        <option>School Bus</option>
-                        <option>Mini Bus</option>
-                        <option>Van</option>
-                        <option>Staff Vehicle</option>
-                    </select>
+                    <select class="form-control"><option>School Bus</option><option>Mini Bus</option><option>Van</option><option>Staff Vehicle</option></select>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Seating Capacity</label>
                     <input type="number" class="form-control" placeholder="67">
                 </div>
             </div>
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div class="form-group">
                     <label class="form-label">Make</label>
@@ -752,47 +961,119 @@
                     <input type="text" class="form-control" placeholder="e.g. 2023">
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="form-label">Chassis Number</label>
                 <input type="text" class="form-control" placeholder="Enter VIN/Chassis Number">
             </div>
-            
             <div style="height: 1px; background: var(--border-subtle); margin: 8px 0;"></div>
-            
             <h4 style="font-size: 14px; font-weight: 700; color: var(--text-main);">Compliance Details</h4>
-
             <div class="form-group">
                 <label class="form-label">Insurance Expiry Date</label>
                 <input type="date" class="form-control">
             </div>
-            
             <div class="form-group">
                 <label class="form-label">Inspection Valid Until</label>
                 <input type="date" class="form-control">
             </div>
-
             <div class="form-group">
                 <label class="form-label">Status</label>
-                <select class="form-control">
-                    <option>Active / Ready</option>
-                    <option>Maintenance</option>
-                </select>
+                <select class="form-control"><option>Active / Ready</option><option>Maintenance</option></select>
             </div>
         </div>
         <div class="slide-footer">
-            <button class="btn btn-secondary" id="cancelSlideBtn">Cancel</button>
+            <button class="btn btn-secondary" onclick="closeSlidePanel()">Cancel</button>
             <button class="btn btn-primary"><i data-lucide="save"></i> Save Vehicle</button>
         </div>
     </div>
 
+    <div class="slide-panel" id="slidePanelDriver">
+        <div class="slide-header">
+            <div>
+                <h3 style="font-size: 20px; font-weight: 800;">Register Driver</h3>
+                <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 4px;">Add a new driver to the fleet.</p>
+            </div>
+            <button class="close-btn" onclick="closeSlidePanel()"><i data-lucide="x"></i></button>
+        </div>
+        <div class="slide-body">
+            <div class="form-group">
+                <label class="form-label">Full Name <span style="color: var(--danger);">*</span></label>
+                <input type="text" class="form-control" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">National ID Number <span style="color: var(--danger);">*</span></label>
+                <input type="text" class="form-control" placeholder="12345678">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label class="form-label">License Number</label>
+                    <input type="text" class="form-control" placeholder="DL-XXX">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">License Expiry</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Assign Vehicle (Optional)</label>
+                <select class="form-control"><option>Select Vehicle</option><option>Bus 01 (KCB 456X)</option></select>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <button class="btn btn-secondary" onclick="closeSlidePanel()">Cancel</button>
+            <button class="btn btn-primary"><i data-lucide="save"></i> Save Driver</button>
+        </div>
+    </div>
+
+    <div class="slide-panel" id="slidePanelRoute">
+        <div class="slide-header">
+            <div>
+                <h3 style="font-size: 20px; font-weight: 800;">Create Route</h3>
+                <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 4px;">Define a new transit route.</p>
+            </div>
+            <button class="close-btn" onclick="closeSlidePanel()"><i data-lucide="x"></i></button>
+        </div>
+        <div class="slide-body">
+            <div class="form-group">
+                <label class="form-label">Route Name <span style="color: var(--danger);">*</span></label>
+                <input type="text" class="form-control" placeholder="e.g. Route A1: Westlands">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label class="form-label">Starting Point</label>
+                    <input type="text" class="form-control" placeholder="Westlands Roundabout">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Destination</label>
+                    <input type="text" class="form-control" placeholder="School Campus" disabled>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label class="form-label">Est Distance (km)</label>
+                    <input type="number" class="form-control" placeholder="15">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Est Time (mins)</label>
+                    <input type="number" class="form-control" placeholder="45">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Assign Primary Vehicle</label>
+                <select class="form-control"><option>Select Vehicle</option><option>Bus 01 (KCB 456X)</option></select>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <button class="btn btn-secondary" onclick="closeSlidePanel()">Cancel</button>
+            <button class="btn btn-primary"><i data-lucide="save"></i> Save Route</button>
+        </div>
+    </div>
+
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Sidebar Toggle Logic
+            // Sidebar Toggle
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('sidebarToggle');
             const toggleIcon = document.getElementById('toggleIcon');
@@ -854,21 +1135,6 @@
                 lucide.createIcons();
             });
 
-            // Slide Panel Logic (Add Vehicle)
-            const openBtn = document.getElementById('openActionBtn');
-            const slidePanel = document.getElementById('slidePanel');
-            const slideOverlay = document.getElementById('slideOverlay');
-            const closeSlideBtn = document.getElementById('closeSlideBtn');
-            const cancelSlideBtn = document.getElementById('cancelSlideBtn');
-
-            function openPanel() { slideOverlay.classList.add('active'); slidePanel.classList.add('active'); }
-            function closePanel() { slideOverlay.classList.remove('active'); slidePanel.classList.remove('active'); }
-
-            openBtn.addEventListener('click', openPanel);
-            closeSlideBtn.addEventListener('click', closePanel);
-            cancelSlideBtn.addEventListener('click', closePanel);
-            slideOverlay.addEventListener('click', closePanel);
-
             // ==========================================
             // SPA TAB SWITCHING LOGIC
             // ==========================================
@@ -877,16 +1143,13 @@
             const sidebarTriggers = document.querySelectorAll('.tab-trigger');
 
             function switchTab(targetId) {
-                // Update top horizontal tabs
                 tabs.forEach(t => t.classList.remove('active'));
                 const activeTab = document.querySelector(`.tab[data-target="${targetId}"]`);
                 if(activeTab) activeTab.classList.add('active');
 
-                // Update content visibility
                 tabContents.forEach(c => c.classList.remove('active'));
                 document.getElementById(targetId).classList.add('active');
 
-                // Update sidebar active states
                 document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                 document.querySelectorAll('.submenu-link').forEach(i => i.classList.remove('active'));
                 
@@ -901,12 +1164,7 @@
                 });
             }
 
-            // Top Tab Listeners
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => switchTab(tab.dataset.target));
-            });
-
-            // Sidebar Tab Listeners
+            tabs.forEach(tab => { tab.addEventListener('click', () => switchTab(tab.dataset.target)); });
             sidebarTriggers.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     if(!trigger.parentElement.classList.contains('has-submenu')) {
@@ -915,8 +1173,20 @@
                     }
                 });
             });
-
         });
+
+        // Slide Panel Logic (Global functions)
+        const slideOverlay = document.getElementById('slideOverlay');
+        function openSlidePanel(panelId) {
+            closeSlidePanel(); // Close any currently open panels
+            slideOverlay.classList.add('active');
+            document.getElementById(panelId).classList.add('active');
+        }
+        function closeSlidePanel() {
+            slideOverlay.classList.remove('active');
+            document.querySelectorAll('.slide-panel').forEach(panel => panel.classList.remove('active'));
+        }
+        slideOverlay.addEventListener('click', closeSlidePanel);
     </script>
 </body>
 </html>
