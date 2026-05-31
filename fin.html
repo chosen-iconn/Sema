@@ -16,13 +16,11 @@
            ENTERPRISE DESIGN SYSTEM & VARIABLES
            ========================================= */
         :root {
-            /* Core Brand Colors */
             --primary: #004000; 
             --primary-dark: #002B00;
             --accent: #FF6600; 
             --accent-hover: #E65C00;
             
-            /* Status Colors */
             --success: #10B981;
             --success-bg: rgba(16, 185, 129, 0.1);
             --danger: #EF4444;
@@ -32,10 +30,8 @@
             --info: #3B82F6;
             --info-bg: rgba(59, 130, 246, 0.1);
             
-            /* Light Theme */
             --bg-base: #F4F6F4; 
             --bg-surface: #FFFFFF;
-            --bg-elevated: #FFFFFF;
             --bg-hover: rgba(0, 64, 0, 0.04);
             --bg-input: #F8FAFC;
             
@@ -46,32 +42,25 @@
             
             --border-subtle: rgba(0, 64, 0, 0.06);
             --border-strong: rgba(0, 64, 0, 0.15);
-            --border-focus: var(--accent);
             
-            /* Elevation & Shadows */
             --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
             --shadow-sm: 0 4px 6px -1px rgba(0, 64, 0, 0.03), 0 2px 4px -2px rgba(0, 64, 0, 0.03);
             --shadow-md: 0 12px 24px -4px rgba(0, 64, 0, 0.05), 0 4px 8px -4px rgba(0, 64, 0, 0.03);
             --shadow-lg: 0 24px 48px -12px rgba(0, 64, 0, 0.1);
-            --shadow-glow: 0 0 16px rgba(255, 102, 0, 0.2);
             
-            /* Architecture */
             --sidebar-w: 260px;
             --sidebar-collapsed-w: 72px;
-            --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
             --radius-xl: 24px;
             
-            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-fast: 0.2s var(--ease-out);
-            --transition-normal: 0.4s var(--ease-out);
+            --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body.dark-theme {
             --bg-base: #080A08;
             --bg-surface: #121412;
-            --bg-elevated: #1A1D1A;
             --bg-hover: rgba(255, 255, 255, 0.05);
             --bg-input: #0F110F;
             
@@ -85,34 +74,28 @@
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
             --shadow-md: 0 12px 24px -4px rgba(0, 0, 0, 0.8);
             --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.9);
-            --shadow-glow: 0 0 20px rgba(255, 102, 0, 0.15);
         }
 
-        /* =========================================
-           RESETS & BASE
-           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-base); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; font-size: 14px; -webkit-font-smoothing: antialiased; transition: background-color var(--transition-normal); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-base); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; font-size: 14px; transition: background-color var(--transition-normal); }
         button { background: none; border: none; cursor: pointer; font-family: inherit; color: inherit; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         input, select, textarea { font-family: inherit; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
 
         /* =========================================
            SIDEBAR COMPONENT
            ========================================= */
-        .sidebar { width: var(--sidebar-w); background: var(--bg-surface); border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; transition: width var(--transition-normal); z-index: 50; flex-shrink: 0; position: relative; box-shadow: var(--shadow-sm); }
+        .sidebar { width: var(--sidebar-w); background: var(--bg-surface); border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; transition: width var(--transition-normal); z-index: 50; flex-shrink: 0; box-shadow: var(--shadow-sm); }
         .sidebar.collapsed { width: var(--sidebar-collapsed-w); }
         
         .sidebar-header { height: 72px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); overflow: hidden; white-space: nowrap; }
         .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-logo { width: 32px; height: 32px; border-radius: 8px; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; box-shadow: var(--shadow-xs); }
+        .brand-logo { width: 32px; height: 32px; border-radius: 8px; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; }
         .brand-text { display: flex; flex-direction: column; transition: opacity var(--transition-fast); }
         .brand-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
         .brand-badge { color: var(--accent); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
@@ -121,144 +104,136 @@
         .toggle-btn:hover { background: var(--bg-hover); color: var(--text-main); }
         
         .sidebar-nav { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
-        .nav-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin: 16px 0 8px 12px; white-space: nowrap; transition: opacity var(--transition-fast); }
+        .nav-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin: 16px 0 8px 12px; white-space: nowrap; }
         
         .nav-item { position: relative; }
         .nav-link { display: flex; align-items: center; padding: 10px 12px; border-radius: var(--radius-md); color: var(--text-secondary); font-weight: 600; font-size: 13px; transition: var(--transition-fast); cursor: pointer; white-space: nowrap; }
-        .nav-link i { width: 18px; height: 18px; margin-right: 12px; flex-shrink: 0; transition: var(--transition-fast); }
-        .nav-link .chevron { margin-left: auto; margin-right: 0; width: 14px; height: 14px; opacity: 0.5; transition: transform var(--transition-fast); }
+        .nav-link i { width: 18px; height: 18px; margin-right: 12px; flex-shrink: 0; }
+        .nav-link .chevron { margin-left: auto; width: 14px; height: 14px; opacity: 0.5; transition: transform var(--transition-fast); }
         
         .nav-link:hover { background: var(--bg-hover); color: var(--text-main); }
         .nav-item.active > .nav-link { background: var(--primary); color: white; box-shadow: var(--shadow-md); }
         .nav-item.active > .nav-link i { color: white; }
-        .nav-item.active > .nav-link::before { content: ''; position: absolute; left: -12px; top: 15%; height: 70%; width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; box-shadow: var(--shadow-glow); }
+        .nav-item.active > .nav-link::before { content: ''; position: absolute; left: -12px; top: 15%; height: 70%; width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; }
         
-        .submenu { height: 0; overflow: hidden; transition: height 0.3s var(--ease-out); }
+        .submenu { height: 0; overflow: hidden; transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .submenu-inner { padding: 4px 0 4px 34px; display: flex; flex-direction: column; gap: 2px; position: relative; }
         .submenu-inner::before { content: ''; position: absolute; left: 19px; top: 0; bottom: 8px; width: 1px; background: var(--border-subtle); }
-        .submenu-link { display: block; padding: 8px 12px; border-radius: var(--radius-sm); color: var(--text-secondary); font-size: 12px; font-weight: 500; transition: var(--transition-fast); }
+        .submenu-link { display: block; padding: 8px 12px; border-radius: 6px; color: var(--text-secondary); font-size: 12px; font-weight: 500; transition: var(--transition-fast); }
         .submenu-link:hover, .submenu-link.active { color: var(--primary); background: var(--bg-hover); font-weight: 600; }
         .dark-theme .submenu-link:hover, .dark-theme .submenu-link.active { color: var(--accent); }
         
         .nav-item.open > .nav-link .chevron { transform: rotate(180deg); }
         
-        .sidebar.collapsed .brand-text, .sidebar.collapsed .nav-label, .sidebar.collapsed .nav-link span, .sidebar.collapsed .chevron { opacity: 0; width: 0; display: none; }
-        .sidebar.collapsed .nav-link { padding: 12px; justify-content: center; }
+        .sidebar.collapsed .brand-text, .sidebar.collapsed .nav-label, .sidebar.collapsed .nav-link span, .sidebar.collapsed .chevron { display: none; }
+        .sidebar.collapsed .nav-link { justify-content: center; padding: 12px; }
         .sidebar.collapsed .nav-link i { margin-right: 0; }
         .sidebar.collapsed .submenu { display: none !important; }
 
-        /* User Profile */
         .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--border-subtle); }
-        .user-profile { display: flex; align-items: center; padding: 8px; border-radius: var(--radius-md); transition: var(--transition-fast); cursor: pointer; border: 1px solid transparent; }
-        .user-profile:hover { background: var(--bg-hover); border-color: var(--border-subtle); }
-        .user-avatar { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
-        .user-info { margin-left: 12px; overflow: hidden; white-space: nowrap; transition: opacity var(--transition-fast); flex: 1; }
-        .user-name { font-size: 13px; font-weight: 600; color: var(--text-main); display: block; }
+        .user-profile { display: flex; align-items: center; padding: 8px; border-radius: var(--radius-md); cursor: pointer; }
+        .user-profile:hover { background: var(--bg-hover); }
+        .user-avatar { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; }
+        .user-info { margin-left: 12px; flex: 1; overflow: hidden; }
+        .user-name { font-size: 13px; font-weight: 600; display: block; }
         .user-role { font-size: 11px; color: var(--text-tertiary); display: block; }
         .sidebar.collapsed .user-info, .sidebar.collapsed .user-more { display: none; }
-        .sidebar.collapsed .user-profile { justify-content: center; padding: 8px; }
 
         /* =========================================
-           MAIN LAYOUT & HEADER
+           MAIN CONTENT & HEADER
            ========================================= */
         .main-content { flex: 1; display: flex; flex-direction: column; min-width: 0; }
         
-        .header { height: 72px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; background: rgba(var(--bg-base), 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); position: sticky; top: 0; z-index: 40; }
-        
-        .header-left { display: flex; align-items: center; gap: 24px; }
+        .header { height: 72px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; background: rgba(var(--bg-base), 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); position: sticky; top: 0; z-index: 40; }
         .page-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
         
-        .search-bar { display: flex; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0 16px; height: 40px; width: 320px; transition: var(--transition-fast); box-shadow: var(--shadow-xs); }
-        .search-bar:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1); }
+        .search-bar { display: flex; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0 16px; height: 40px; width: 320px; transition: var(--transition-fast); }
+        .search-bar:focus-within { border-color: var(--accent); }
         .search-bar input { border: none; background: transparent; outline: none; padding-left: 10px; width: 100%; color: var(--text-main); font-size: 14px; }
         .search-shortcut { font-size: 10px; font-weight: 700; color: var(--text-tertiary); background: var(--bg-base); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-subtle); }
 
         .header-actions { display: flex; align-items: center; gap: 16px; }
-        .icon-btn { position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); border-radius: 50%; transition: var(--transition-fast); background: var(--bg-surface); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-xs); }
-        .icon-btn:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
-        .badge { position: absolute; top: -2px; right: -2px; background: var(--accent); color: white; font-size: 10px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-surface); }
+        .icon-btn { position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--border-subtle); transition: var(--transition-fast); }
+        .icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+        .badge { position: absolute; top: -2px; right: -2px; background: var(--accent); color: white; font-size: 10px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; height: 40px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; transition: var(--transition-fast); cursor: pointer; white-space: nowrap; }
-        .btn-primary { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
-        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-        .dark-theme .btn-primary { background: var(--accent); color: white; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; height: 40px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; transition: var(--transition-fast); white-space: nowrap; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .dark-theme .btn-primary { background: var(--accent); }
         .dark-theme .btn-primary:hover { background: var(--accent-hover); }
-        .btn-secondary { background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-xs); }
-        .btn-secondary:hover { border-color: var(--border-strong); background: var(--bg-hover); }
+        .btn-secondary { background: var(--bg-surface); border: 1px solid var(--border-subtle); }
+        .btn-secondary:hover { background: var(--bg-hover); border-color: var(--border-strong); }
 
         /* =========================================
-           DASHBOARD CONTENT
+           SPA TABS & CONTENT AREA
            ========================================= */
         .content-area { padding: 32px; overflow-y: auto; height: calc(100vh - 72px); display: flex; flex-direction: column; gap: 32px; }
-
-        /* Date Range & Filters */
-        .toolbar { display: flex; justify-content: space-between; align-items: center; }
-        .tabs { display: flex; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 4px; box-shadow: var(--shadow-xs); }
-        .tab { padding: 8px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: var(--transition-fast); }
-        .tab.active { background: var(--bg-base); color: var(--text-main); box-shadow: var(--shadow-xs); }
-        .tab:hover:not(.active) { color: var(--text-main); }
-
-        /* KPI Cards */
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition-normal); position: relative; overflow: hidden; }
-        .kpi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--border-strong); }
         
+        .tab-content { display: none; animation: fadeIn var(--transition-normal); }
+        .tab-content.active { display: flex; flex-direction: column; gap: 32px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .toolbar { display: flex; justify-content: space-between; align-items: center; }
+        .tabs { display: flex; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 4px; }
+        .tab { padding: 8px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: var(--transition-fast); }
+        .tab.active { background: var(--bg-base); color: var(--text-main); }
+        
+        /* Dashboard KPI Cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition-normal); }
+        .kpi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
         .kpi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
         .kpi-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
         .kpi-icon.green { background: var(--success-bg); color: var(--success); }
         .kpi-icon.orange { background: var(--warning-bg); color: var(--warning); }
         .kpi-icon.red { background: var(--danger-bg); color: var(--danger); }
         .kpi-icon.blue { background: var(--info-bg); color: var(--info); }
-        
         .trend { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 99px; }
         .trend.up { background: var(--success-bg); color: var(--success); }
         .trend.down { background: var(--danger-bg); color: var(--danger); }
-        
-        .kpi-value { font-size: 32px; font-weight: 800; color: var(--text-main); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 4px; }
+        .kpi-value { font-size: 30px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
         .kpi-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
 
-        /* Main Dashboard Sections */
+        /* Panels & Charts */
         .dashboard-row { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-        
-        .panel { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+        .panel { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); }
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         .panel-title { font-size: 16px; font-weight: 700; color: var(--text-main); }
         
-        /* CSS Rendered Chart (Visual Placeholder for Analytics) */
-        .chart-container { flex: 1; display: flex; align-items: flex-end; gap: 12px; height: 200px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-strong); position: relative; }
-        .chart-bar-group { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 100%; position: relative; group: hover; }
-        .bar { width: 100%; max-width: 32px; border-radius: 4px 4px 0 0; transition: var(--transition-normal); position: relative; }
+        /* CSS Chart */
+        .chart-container { display: flex; align-items: flex-end; gap: 12px; height: 200px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-strong); position: relative; }
+        .chart-bar-group { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 100%; position: relative; }
+        .bar { width: 100%; max-width: 32px; border-radius: 4px 4px 0 0; transition: var(--transition-normal); }
         .bar.income { background: var(--primary); }
         .dark-theme .bar.income { background: var(--success); }
         .bar.expense { background: var(--accent); opacity: 0.8; }
         .chart-label { position: absolute; bottom: -24px; font-size: 11px; font-weight: 600; color: var(--text-tertiary); width: 100%; text-align: center; }
         .chart-bar-group:hover .bar { opacity: 1; transform: scaleY(1.05); }
 
-        /* Quick Transfer / Action Widget */
+        /* Lists */
         .action-list { display: flex; flex-direction: column; gap: 12px; }
         .action-item { display: flex; align-items: center; gap: 16px; padding: 12px; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); transition: var(--transition-fast); cursor: pointer; }
         .action-item:hover { border-color: var(--accent); background: var(--bg-hover); transform: translateX(4px); }
-        .action-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-base); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+        .action-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-base); display: flex; align-items: center; justify-content: center; }
         .action-text h4 { font-size: 13px; font-weight: 700; color: var(--text-main); }
         .action-text p { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
 
-        /* =========================================
-           ENTERPRISE DATA TABLE
-           ========================================= */
+        /* Data Tables */
         .table-container { overflow-x: auto; margin: 0 -24px; padding: 0 24px; }
         .data-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 800px; }
-        .data-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); text-align: left; padding: 16px; border-bottom: 1px solid var(--border-subtle); background: var(--bg-surface); position: sticky; top: 0; z-index: 10; }
-        .data-table td { padding: 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); transition: background var(--transition-fast); }
+        .data-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); text-align: left; padding: 16px; border-bottom: 1px solid var(--border-subtle); background: var(--bg-surface); }
+        .data-table td { padding: 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); }
         .data-table tr:hover td { background: var(--bg-input); color: var(--text-main); }
         .data-table tr:last-child td { border-bottom: none; }
         
         .td-flex { display: flex; align-items: center; gap: 12px; }
-        .avatar-sm { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; background: var(--bg-base); }
+        .avatar-sm { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; background: var(--bg-base); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
         .table-text-main { font-weight: 600; color: var(--text-main); display: block; }
         .table-text-sub { font-size: 11px; color: var(--text-tertiary); }
         .amount { font-weight: 700; color: var(--text-main); font-variant-numeric: tabular-nums; }
         
-        .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-paid { background: var(--success-bg); color: var(--success); }
         .status-pending { background: var(--warning-bg); color: var(--warning); }
         .status-overdue { background: var(--danger-bg); color: var(--danger); }
@@ -268,24 +243,21 @@
            ========================================= */
         .overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); z-index: 100; opacity: 0; pointer-events: none; transition: opacity var(--transition-normal); }
         .overlay.active { opacity: 1; pointer-events: auto; }
-        
         .slide-panel { position: fixed; top: 0; right: -480px; width: 100%; max-width: 480px; height: 100vh; background: var(--bg-surface); box-shadow: var(--shadow-lg); z-index: 101; transition: right var(--transition-normal); display: flex; flex-direction: column; border-left: 1px solid var(--border-subtle); }
         .slide-panel.active { right: 0; }
-        
         .slide-header { padding: 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--bg-input); }
-        .slide-title { font-size: 18px; font-weight: 700; }
-        .close-btn { width: 32px; height: 32px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: var(--transition-fast); }
+        .close-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); }
         .close-btn:hover { color: var(--danger); border-color: var(--danger); transform: rotate(90deg); }
         
         .slide-body { padding: 24px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
-        .form-control { width: 100%; padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-strong); background: var(--bg-base); color: var(--text-main); font-size: 14px; transition: var(--transition-fast); outline: none; }
-        .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1); background: var(--bg-surface); }
+        .form-control { width: 100%; padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-strong); background: var(--bg-base); color: var(--text-main); font-size: 14px; outline: none; }
+        .form-control:focus { border-color: var(--accent); background: var(--bg-surface); }
         
         .amount-input-wrapper { position: relative; }
-        .amount-input-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); }
-        .amount-input-wrapper input { padding-left: 40px; font-size: 18px; font-weight: 700; }
+        .amount-input-wrapper span { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); font-weight: 700; }
+        .amount-input-wrapper input { padding-left: 54px; font-size: 18px; font-weight: 700; height: 56px; }
         
         .slide-footer { padding: 24px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 12px; background: var(--bg-input); }
 
@@ -311,41 +283,41 @@
         </div>
 
         <nav class="sidebar-nav">
-            <li class="nav-item active"><a href="#" class="nav-link"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a></li>
+            <li class="nav-item active"><a href="#" class="nav-link tab-trigger" data-target="tab-overview"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a></li>
             
             <div class="nav-label">Receivables</div>
             <li class="nav-item has-submenu">
                 <a href="#" class="nav-link"><i data-lucide="file-text"></i><span>Fee Management</span><i data-lucide="chevron-down" class="chevron"></i></a>
                 <div class="submenu">
                     <div class="submenu-inner">
-                        <a href="#" class="submenu-link">Fee Structures</a>
-                        <a href="#" class="submenu-link">Student Billing</a>
-                        <a href="#" class="submenu-link">Scholarships</a>
-                        <a href="#" class="submenu-link">Discounts</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-income">Fee Structures</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-income">Student Billing</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-income">Scholarships</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-income">Discounts</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="receipt"></i><span>Invoices</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="credit-card"></i><span>Payments</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-income"><i data-lucide="receipt"></i><span>Invoices</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-income"><i data-lucide="credit-card"></i><span>Payments</span></a></li>
 
             <div class="nav-label">Payables & Ops</div>
             <li class="nav-item has-submenu">
                 <a href="#" class="nav-link"><i data-lucide="trending-down"></i><span>Expenses</span><i data-lucide="chevron-down" class="chevron"></i></a>
                 <div class="submenu">
                     <div class="submenu-inner">
-                        <a href="#" class="submenu-link">Record Expense</a>
-                        <a href="#" class="submenu-link">Purchase Orders</a>
-                        <a href="#" class="submenu-link">Vendor Management</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-expenses">Record Expense</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-expenses">Purchase Orders</a>
+                        <a href="#" class="submenu-link tab-trigger" data-target="tab-expenses">Vendor Management</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="users"></i><span>Payroll</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="wallet"></i><span>Petty Cash</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-expenses"><i data-lucide="users"></i><span>Payroll</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-expenses"><i data-lucide="wallet"></i><span>Petty Cash</span></a></li>
 
             <div class="nav-label">Accounting</div>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="pie-chart"></i><span>Budgeting</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="landmark"></i><span>Banking & Recon</span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="box"></i><span>Assets</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-budgets"><i data-lucide="pie-chart"></i><span>Budgeting</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-budgets"><i data-lucide="landmark"></i><span>Banking & Recon</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link tab-trigger" data-target="tab-budgets"><i data-lucide="box"></i><span>Assets</span></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><i data-lucide="bar-chart-3"></i><span>Financial Reports</span></a></li>
         </nav>
 
@@ -384,10 +356,10 @@
             
             <div class="toolbar">
                 <div class="tabs">
-                    <button class="tab active">Overview</button>
-                    <button class="tab">Income</button>
-                    <button class="tab">Expenses</button>
-                    <button class="tab">Budgets</button>
+                    <button class="tab active" data-target="tab-overview">Overview</button>
+                    <button class="tab" data-target="tab-income">Income</button>
+                    <button class="tab" data-target="tab-expenses">Expenses</button>
+                    <button class="tab" data-target="tab-budgets">Budgets & Assets</button>
                 </div>
                 <div class="search-bar" style="width: auto; height: 36px;">
                     <i data-lucide="calendar" style="color: var(--text-tertiary); width: 16px; margin-right: 8px;"></i>
@@ -399,205 +371,347 @@
                 </div>
             </div>
 
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon green"><i data-lucide="dollar-sign"></i></div>
-                        <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> +12.5%</div>
+            <div id="tab-overview" class="tab-content active">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon green"><i data-lucide="banknote"></i></div>
+                            <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> +12.5%</div>
+                        </div>
+                        <div class="kpi-value">KSh 2,845,000</div>
+                        <div class="kpi-label">Total Collections</div>
                     </div>
-                    <div class="kpi-value">$2,845,000</div>
-                    <div class="kpi-label">Total Collections</div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon orange"><i data-lucide="clock"></i></div>
+                            <div class="trend down"><i data-lucide="trending-down" style="width: 14px;"></i> -3.2%</div>
+                        </div>
+                        <div class="kpi-value">KSh 412,500</div>
+                        <div class="kpi-label">Outstanding Fees</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon red"><i data-lucide="trending-down"></i></div>
+                            <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> +4.1%</div>
+                        </div>
+                        <div class="kpi-value">KSh 854,200</div>
+                        <div class="kpi-label">Total Expenses</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon blue"><i data-lucide="award"></i></div>
+                            <div class="trend up"><i data-lucide="minus" style="width: 14px;"></i> 0.0%</div>
+                        </div>
+                        <div class="kpi-value">KSh 125,000</div>
+                        <div class="kpi-label">Scholarships Disbursed</div>
+                    </div>
                 </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon orange"><i data-lucide="clock"></i></div>
-                        <div class="trend down"><i data-lucide="trending-down" style="width: 14px;"></i> -3.2%</div>
+
+                <div class="dashboard-row">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Cash Flow Overview</h2>
+                            <button class="icon-btn" style="width: 32px; height: 32px;"><i data-lucide="more-horizontal"></i></button>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-bar-group"><div class="bar income" style="height: 60%;"></div><div class="bar expense" style="height: 40%;"></div><span class="chart-label">Jan</span></div>
+                            <div class="chart-bar-group"><div class="bar income" style="height: 75%;"></div><div class="bar expense" style="height: 35%;"></div><span class="chart-label">Feb</span></div>
+                            <div class="chart-bar-group"><div class="bar income" style="height: 90%;"></div><div class="bar expense" style="height: 45%;"></div><span class="chart-label">Mar</span></div>
+                            <div class="chart-bar-group"><div class="bar income" style="height: 65%;"></div><div class="bar expense" style="height: 50%;"></div><span class="chart-label">Apr</span></div>
+                            <div class="chart-bar-group"><div class="bar income" style="height: 85%;"></div><div class="bar expense" style="height: 60%;"></div><span class="chart-label">May</span></div>
+                            <div class="chart-bar-group"><div class="bar income" style="height: 40%;"></div><div class="bar expense" style="height: 80%;"></div><span class="chart-label">Jun</span></div>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 24px;">
+                            <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary);"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--primary);"></span> Income</div>
+                            <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary);"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--accent);"></span> Expenses</div>
+                        </div>
                     </div>
-                    <div class="kpi-value">$412,500</div>
-                    <div class="kpi-label">Outstanding Fees</div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Pending Approvals</h2>
+                        </div>
+                        <div class="action-list">
+                            <div class="action-item">
+                                <div class="action-icon"><i data-lucide="file-text"></i></div>
+                                <div class="action-text">
+                                    <h4>Purchase Order #PO-842</h4>
+                                    <p>Science Lab Equipment • KSh 12,450</p>
+                                </div>
+                                <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon" style="color: var(--danger);"><i data-lucide="receipt"></i></div>
+                                <div class="action-text">
+                                    <h4>Expense Claim #EX-112</h4>
+                                    <p>Staff Travel (J. Doe) • KSh 450</p>
+                                </div>
+                                <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon" style="color: var(--warning);"><i data-lucide="users"></i></div>
+                                <div class="action-text">
+                                    <h4>May 2026 Payroll Run</h4>
+                                    <p>Pending Final Review • KSh 245,000</p>
+                                </div>
+                                <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon red"><i data-lucide="trending-down"></i></div>
-                        <div class="trend up"><i data-lucide="trending-up" style="width: 14px;"></i> +4.1%</div>
+
+                <div class="panel">
+                    <div class="panel-header" style="margin-bottom: 0;">
+                        <h2 class="panel-title">Recent Transactions & Invoices</h2>
                     </div>
-                    <div class="kpi-value">$854,200</div>
-                    <div class="kpi-label">Total Expenses</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon blue"><i data-lucide="award"></i></div>
-                        <div class="trend up"><i data-lucide="minus" style="width: 14px;"></i> 0.0%</div>
+                    <div class="table-container" style="margin-top: 16px;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Student / Entity</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th style="text-align: right;">Amount (KSh)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 600; color: var(--text-secondary);">INV-2026-0891</span></td>
+                                    <td><div class="td-flex"><img src="https://i.pravatar.cc/150?img=32" class="avatar-sm"><div><span class="table-text-main">Emily Chen</span><span class="table-text-sub">Grade 10-A • ADM-4921</span></div></div></td>
+                                    <td>Term 1 Tuition Fee</td>
+                                    <td><span class="table-text-main">May 28, 2026</span></td>
+                                    <td><span class="status-pill status-paid"><i data-lucide="check-circle" style="width: 12px;"></i> Paid</span></td>
+                                    <td style="text-align: right;" class="amount">2,450.00</td>
+                                </tr>
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 600; color: var(--text-secondary);">INV-2026-0892</span></td>
+                                    <td><div class="td-flex"><img src="https://i.pravatar.cc/150?img=12" class="avatar-sm"><div><span class="table-text-main">Marcus Johnson</span><span class="table-text-sub">Grade 12-B • ADM-3102</span></div></div></td>
+                                    <td>Annual Boarding Fee</td>
+                                    <td><span class="table-text-main">May 25, 2026</span></td>
+                                    <td><span class="status-pill status-pending"><i data-lucide="clock" style="width: 12px;"></i> Pending</span></td>
+                                    <td style="text-align: right;" class="amount">4,200.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="kpi-value">$125,000</div>
-                    <div class="kpi-label">Scholarships Disbursed</div>
                 </div>
             </div>
 
-            <div class="dashboard-row">
+            <div id="tab-income" class="tab-content">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2 class="panel-title">Cash Flow Overview</h2>
-                        <button class="icon-btn" style="width: 32px; height: 32px;"><i data-lucide="more-horizontal"></i></button>
+                        <h2 class="panel-title">Active Fee Structures (2026)</h2>
+                        <button class="btn btn-primary"><i data-lucide="plus"></i> Create Fee Category</button>
                     </div>
-                    <div class="chart-container">
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 60%;"></div>
-                            <div class="bar expense" style="height: 40%;"></div>
-                            <span class="chart-label">Jan</span>
-                        </div>
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 75%;"></div>
-                            <div class="bar expense" style="height: 35%;"></div>
-                            <span class="chart-label">Feb</span>
-                        </div>
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 90%;"></div>
-                            <div class="bar expense" style="height: 45%;"></div>
-                            <span class="chart-label">Mar</span>
-                        </div>
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 65%;"></div>
-                            <div class="bar expense" style="height: 50%;"></div>
-                            <span class="chart-label">Apr</span>
-                        </div>
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 85%;"></div>
-                            <div class="bar expense" style="height: 60%;"></div>
-                            <span class="chart-label">May</span>
-                        </div>
-                        <div class="chart-bar-group">
-                            <div class="bar income" style="height: 40%;"></div>
-                            <div class="bar expense" style="height: 80%;"></div>
-                            <span class="chart-label">Jun</span>
-                        </div>
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: 16px; margin-top: 24px;">
-                        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary);"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--primary);"></span> Income</div>
-                        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary);"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--accent);"></span> Expenses</div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Program / Class</th>
+                                    <th>Fee Category</th>
+                                    <th>Tuition (KSh)</th>
+                                    <th>Transport (KSh)</th>
+                                    <th>Meals (KSh)</th>
+                                    <th style="text-align: right;">Total Baseline (KSh)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="table-text-main">Grade 10 (Day Scholar)</span></td>
+                                    <td>Standard Admission</td>
+                                    <td class="amount">45,000.00</td>
+                                    <td class="amount">12,000.00</td>
+                                    <td class="amount">8,500.00</td>
+                                    <td style="text-align: right;" class="amount">65,500.00</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="table-text-main">Grade 12 (Boarding)</span></td>
+                                    <td>Premium Track</td>
+                                    <td class="amount">55,000.00</td>
+                                    <td class="amount">0.00</td>
+                                    <td class="amount">35,000.00</td>
+                                    <td style="text-align: right;" class="amount">90,000.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="panel">
                     <div class="panel-header">
-                        <h2 class="panel-title">Pending Approvals</h2>
+                        <h2 class="panel-title">Scholarships & Discounts</h2>
                     </div>
-                    <div class="action-list">
-                        <div class="action-item">
-                            <div class="action-icon"><i data-lucide="file-text"></i></div>
-                            <div class="action-text">
-                                <h4>Purchase Order #PO-842</h4>
-                                <p>Science Lab Equipment • $12,450</p>
-                            </div>
-                            <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
-                        </div>
-                        <div class="action-item">
-                            <div class="action-icon" style="color: var(--danger);"><i data-lucide="receipt"></i></div>
-                            <div class="action-text">
-                                <h4>Expense Claim #EX-112</h4>
-                                <p>Staff Travel (J. Doe) • $450</p>
-                            </div>
-                            <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
-                        </div>
-                        <div class="action-item">
-                            <div class="action-icon" style="color: var(--warning);"><i data-lucide="users"></i></div>
-                            <div class="action-text">
-                                <h4>May 2026 Payroll Run</h4>
-                                <p>Pending Final Review • $245k</p>
-                            </div>
-                            <i data-lucide="chevron-right" style="margin-left: auto; color: var(--text-tertiary); width: 16px;"></i>
-                        </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Sponsor / Discount Type</th>
+                                    <th>Coverage %</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="table-text-main">David Ochieng</span><span class="table-text-sub">ADM-4011</span></td>
+                                    <td>Equity Wings to Fly</td>
+                                    <td><span class="table-text-main">100%</span></td>
+                                    <td>Dec 2026</td>
+                                    <td><span class="status-pill status-paid">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="table-text-main">Grace Wanjiku</span><span class="table-text-sub">ADM-5120</span></td>
+                                    <td>Sibling Discount</td>
+                                    <td><span class="table-text-main">15%</span></td>
+                                    <td>Perpetual</td>
+                                    <td><span class="status-pill status-paid">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <div class="panel">
-                <div class="panel-header" style="margin-bottom: 0;">
-                    <h2 class="panel-title">Recent Transactions & Invoices</h2>
-                    <div style="display: flex; gap: 12px;">
-                        <div class="search-bar" style="width: 200px; height: 32px;">
-                            <i data-lucide="filter" style="color: var(--text-tertiary); width: 14px; margin-right: 8px;"></i>
-                            <input type="text" placeholder="Filter..." style="font-size: 12px;">
-                        </div>
+            <div id="tab-expenses" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Staff Payroll System</h2>
+                        <button class="btn btn-secondary"><i data-lucide="printer"></i> Export Payslips</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Role / Dept</th>
+                                    <th>Basic Salary (KSh)</th>
+                                    <th>Allowances (KSh)</th>
+                                    <th>Deductions (KSh)</th>
+                                    <th style="text-align: right;">Net Pay (KSh)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div class="td-flex"><div class="avatar-sm" style="background: var(--info);">JW</div><div><span class="table-text-main">James Walker</span><span class="table-text-sub">EMP-102</span></div></div></td>
+                                    <td>Senior Teacher (Science)</td>
+                                    <td class="amount">85,000.00</td>
+                                    <td class="amount">15,000.00</td>
+                                    <td class="amount">18,500.00</td>
+                                    <td style="text-align: right;" class="amount">81,500.00</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="td-flex"><div class="avatar-sm" style="background: var(--warning);">LM</div><div><span class="table-text-main">Lydia Mutua</span><span class="table-text-sub">EMP-214</span></div></div></td>
+                                    <td>Admin Assistant</td>
+                                    <td class="amount">45,000.00</td>
+                                    <td class="amount">5,000.00</td>
+                                    <td class="amount">6,200.00</td>
+                                    <td style="text-align: right;" class="amount">43,800.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                
-                <div class="table-container" style="margin-top: 16px;">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Invoice ID</th>
-                                <th>Student / Entity</th>
-                                <th>Description</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th style="text-align: right;">Amount</th>
-                                <th style="text-align: right;">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span style="font-family: monospace; font-weight: 600; color: var(--text-secondary);">INV-2026-0891</span></td>
-                                <td>
-                                    <div class="td-flex">
-                                        <img src="https://i.pravatar.cc/150?img=32" class="avatar-sm">
-                                        <div>
-                                            <span class="table-text-main">Emily Chen</span>
-                                            <span class="table-text-sub">Grade 10-A • ADM-4921</span>
-                                        </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Recent Vendor Expenses & POs</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Expense ID</th>
+                                    <th>Category</th>
+                                    <th>Vendor</th>
+                                    <th>Date</th>
+                                    <th style="text-align: right;">Amount (KSh)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 600;">EX-9912</span></td>
+                                    <td>Utilities (Electricity)</td>
+                                    <td>Kenya Power</td>
+                                    <td>May 20, 2026</td>
+                                    <td style="text-align: right;" class="amount">14,250.00</td>
+                                </tr>
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 600;">PO-8834</span></td>
+                                    <td>Academic Resources</td>
+                                    <td>Text Book Centre Ltd</td>
+                                    <td>May 18, 2026</td>
+                                    <td style="text-align: right;" class="amount">125,000.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-budgets" class="tab-content">
+                <div class="dashboard-row">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Department Budget Allocation (2026)</h2>
+                        </div>
+                        <div class="action-list">
+                            <div class="action-item" style="cursor: default;">
+                                <div class="action-text" style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <h4>Science Department</h4>
+                                        <span class="amount">KSh 450,000 / KSh 600,000</span>
                                     </div>
-                                </td>
-                                <td>Term 1 Tuition Fee</td>
-                                <td><span class="table-text-main">May 28, 2026</span><span class="table-text-sub">Due: Jun 15</span></td>
-                                <td><span class="status-pill status-paid"><i data-lucide="check-circle" style="width: 12px;"></i> Paid</span></td>
-                                <td style="text-align: right;" class="amount">$2,450.00</td>
-                                <td style="text-align: right;">
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="printer" style="width: 14px;"></i></button>
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span style="font-family: monospace; font-weight: 600; color: var(--text-secondary);">INV-2026-0892</span></td>
-                                <td>
-                                    <div class="td-flex">
-                                        <img src="https://i.pravatar.cc/150?img=12" class="avatar-sm">
-                                        <div>
-                                            <span class="table-text-main">Marcus Johnson</span>
-                                            <span class="table-text-sub">Grade 12-B • ADM-3102</span>
-                                        </div>
+                                    <div style="width: 100%; height: 6px; background: var(--bg-hover); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 75%; height: 100%; background: var(--warning);"></div>
                                     </div>
-                                </td>
-                                <td>Annual Boarding Fee</td>
-                                <td><span class="table-text-main">May 25, 2026</span><span class="table-text-sub">Due: Jun 10</span></td>
-                                <td><span class="status-pill status-pending"><i data-lucide="clock" style="width: 12px;"></i> Pending</span></td>
-                                <td style="text-align: right;" class="amount">$4,200.00</td>
-                                <td style="text-align: right;">
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="send" style="width: 14px;"></i></button>
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span style="font-family: monospace; font-weight: 600; color: var(--text-secondary);">INV-2026-0845</span></td>
-                                <td>
-                                    <div class="td-flex">
-                                        <div class="avatar-sm" style="display: flex; align-items: center; justify-content: center; background: var(--primary); color: white; font-weight: 700;">SA</div>
-                                        <div>
-                                            <span class="table-text-main">Sarah Anderson</span>
-                                            <span class="table-text-sub">Grade 8-C • ADM-5022</span>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="action-item" style="cursor: default;">
+                                <div class="action-text" style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <h4>Sports & Extra-Curricular</h4>
+                                        <span class="amount">KSh 120,000 / KSh 300,000</span>
                                     </div>
-                                </td>
-                                <td>Transport Fee (Zone A)</td>
-                                <td><span class="table-text-main">May 01, 2026</span><span class="table-text-sub" style="color: var(--danger);">Due: May 15</span></td>
-                                <td><span class="status-pill status-overdue"><i data-lucide="alert-circle" style="width: 12px;"></i> Overdue</span></td>
-                                <td style="text-align: right;" class="amount">$350.00</td>
-                                <td style="text-align: right;">
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="bell" style="width: 14px;"></i></button>
-                                    <button class="icon-btn" style="display: inline-flex; width: 28px; height: 28px;"><i data-lucide="more-vertical" style="width: 14px;"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <div style="width: 100%; height: 6px; background: var(--bg-hover); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 40%; height: 100%; background: var(--success);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Asset Register Summary</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Asset Category</th>
+                                        <th style="text-align: right;">Current Value (KSh)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>School Vehicles (Buses)</td>
+                                        <td style="text-align: right;" class="amount">12,500,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ICT Equipment (Computers)</td>
+                                        <td style="text-align: right;" class="amount">3,200,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Furniture & Fittings</td>
+                                        <td style="text-align: right;" class="amount">1,850,000.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -614,7 +728,7 @@
             <div class="form-group">
                 <label class="form-label">Transaction Type</label>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <button class="btn btn-primary" style="background: var(--success-bg); color: var(--success); border: 1px solid var(--success); box-shadow: none;">Receive Payment</button>
+                    <button class="btn btn-primary" style="background: var(--success-bg); color: var(--success); border: 1px solid var(--success);">Receive Payment</button>
                     <button class="btn btn-secondary">Record Expense</button>
                 </div>
             </div>
@@ -631,16 +745,16 @@
                 <label class="form-label">Select Invoice (Optional)</label>
                 <select class="form-control">
                     <option value="">Select an outstanding invoice...</option>
-                    <option>INV-2026-0892 - Marcus Johnson ($4,200.00)</option>
-                    <option>INV-2026-0845 - Sarah Anderson ($350.00)</option>
+                    <option>INV-2026-0892 - Marcus Johnson (KSh 4,200.00)</option>
+                    <option>INV-2026-0845 - Sarah Anderson (KSh 350.00)</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Payment Amount</label>
                 <div class="amount-input-wrapper">
-                    <i data-lucide="dollar-sign"></i>
-                    <input type="number" class="form-control" placeholder="0.00" style="height: 56px;">
+                    <span>KSh</span>
+                    <input type="number" class="form-control" placeholder="0.00">
                 </div>
             </div>
 
@@ -648,9 +762,9 @@
                 <div class="form-group">
                     <label class="form-label">Payment Method</label>
                     <select class="form-control">
+                        <option>Mobile Money (M-Pesa)</option>
                         <option>Bank Transfer</option>
                         <option>Credit Card (Stripe)</option>
-                        <option>Mobile Money (M-Pesa)</option>
                         <option>Cash</option>
                     </select>
                 </div>
@@ -664,11 +778,6 @@
                 <label class="form-label">Reference Number / Txn ID</label>
                 <input type="text" class="form-control" placeholder="e.g. TR-99842100">
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Notes</label>
-                <textarea class="form-control" rows="3" placeholder="Add any internal notes..."></textarea>
-            </div>
         </div>
         <div class="slide-footer">
             <button class="btn btn-secondary" id="cancelSlideBtn">Cancel</button>
@@ -677,7 +786,6 @@
     </div>
 
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -692,7 +800,6 @@
                 toggleIcon.setAttribute('data-lucide', sidebar.classList.contains('collapsed') ? 'panel-left-open' : 'panel-left-close');
                 lucide.createIcons();
                 
-                // Close submenus when collapsing
                 if (sidebar.classList.contains('collapsed')) {
                     document.querySelectorAll('.nav-item.open').forEach(item => {
                         item.classList.remove('open');
@@ -702,7 +809,7 @@
                 }
             });
 
-            // Accordion Logic for Submenus
+            // Accordion Logic
             const navLinks = document.querySelectorAll('.has-submenu > .nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -717,7 +824,6 @@
                     const submenu = parentItem.querySelector('.submenu');
                     const isOpen = parentItem.classList.contains('open');
 
-                    // Close others
                     document.querySelectorAll('.nav-item.open').forEach(item => {
                         if (item !== parentItem) {
                             item.classList.remove('open');
@@ -726,7 +832,6 @@
                         }
                     });
 
-                    // Toggle current
                     if (isOpen) {
                         submenu.style.height = '0px';
                         parentItem.classList.remove('open');
@@ -737,25 +842,7 @@
                 });
             });
 
-            // Active State Logic
-            const allLinks = document.querySelectorAll('.nav-link, .submenu-link');
-            allLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if(this.parentElement.classList.contains('has-submenu') && this.classList.contains('nav-link')) return;
-                    
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    document.querySelectorAll('.submenu-link').forEach(i => i.classList.remove('active'));
-
-                    if(this.classList.contains('submenu-link')) {
-                        this.classList.add('active');
-                        this.closest('.nav-item').classList.add('active');
-                    } else {
-                        this.parentElement.classList.add('active');
-                    }
-                });
-            });
-
-            // Theme Toggle Logic
+            // Theme Toggle
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = document.getElementById('themeIcon');
             themeToggle.addEventListener('click', () => {
@@ -765,27 +852,67 @@
                 lucide.createIcons();
             });
 
-            // Slide Panel Logic (Record Transaction)
+            // Slide Panel Logic
             const openBtn = document.getElementById('openTransactionBtn');
             const slidePanel = document.getElementById('slidePanel');
             const slideOverlay = document.getElementById('slideOverlay');
             const closeSlideBtn = document.getElementById('closeSlideBtn');
             const cancelSlideBtn = document.getElementById('cancelSlideBtn');
 
-            function openPanel() {
-                slideOverlay.classList.add('active');
-                slidePanel.classList.add('active');
-            }
-
-            function closePanel() {
-                slideOverlay.classList.remove('active');
-                slidePanel.classList.remove('active');
-            }
+            function openPanel() { slideOverlay.classList.add('active'); slidePanel.classList.add('active'); }
+            function closePanel() { slideOverlay.classList.remove('active'); slidePanel.classList.remove('active'); }
 
             openBtn.addEventListener('click', openPanel);
             closeSlideBtn.addEventListener('click', closePanel);
             cancelSlideBtn.addEventListener('click', closePanel);
             slideOverlay.addEventListener('click', closePanel);
+
+            // ==========================================
+            // SPA TAB SWITCHING LOGIC
+            // ==========================================
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const sidebarTriggers = document.querySelectorAll('.tab-trigger');
+
+            function switchTab(targetId) {
+                // Update top horizontal tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                const activeTab = document.querySelector(`.tab[data-target="${targetId}"]`);
+                if(activeTab) activeTab.classList.add('active');
+
+                // Update content visibility
+                tabContents.forEach(c => c.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+
+                // Update sidebar active states
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.submenu-link').forEach(i => i.classList.remove('active'));
+                
+                const activeSidebarLinks = document.querySelectorAll(`.tab-trigger[data-target="${targetId}"]`);
+                activeSidebarLinks.forEach(link => {
+                    if(link.classList.contains('submenu-link')) {
+                        link.classList.add('active');
+                        link.closest('.nav-item').classList.add('active');
+                    } else {
+                        link.parentElement.classList.add('active');
+                    }
+                });
+            }
+
+            // Top Tab Listeners
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.target));
+            });
+
+            // Sidebar Tab Listeners
+            sidebarTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    if(!trigger.parentElement.classList.contains('has-submenu')) {
+                        e.preventDefault();
+                        switchTab(trigger.dataset.target);
+                    }
+                });
+            });
 
         });
     </script>
