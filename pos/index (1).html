@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shepherd Stores — Intelligent POS for Modern Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========== DESIGN TOKENS ========== */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f8f9fb;
+  --bg-muted: #f1f3f7;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --border: #e4e7ed;
+  --border-strong: #d0d5df;
+  --ink: #0d1117;
+  --ink-2: #3a4050;
+  --ink-3: #6b7385;
+  --ink-4: #9aa0b0;
+  --accent: #0066ff;
+  --accent-hover: #0052d4;
+  --accent-bg: rgba(0,102,255,0.06);
+  --accent-border: rgba(0,102,255,0.2);
+  --green: #10b759;
+  --green-bg: rgba(16,183,89,0.08);
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-xl: 0 32px 80px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.05s; }
+.d2 { transition-delay: 0.1s; }
+.d3 { transition-delay: 0.15s; }
+.d4 { transition-delay: 0.2s; }
+.d5 { transition-delay: 0.25s; }
+.d6 { transition-delay: 0.3s; }
+
+/* ========== LAYOUT ========== */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+.section { padding: 96px 0; }
+.section-sm { padding: 72px 0; }
+
+/* ========== NAVIGATION ========== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+  height: 60px;
+  display: flex; align-items: center;
+  transition: box-shadow 0.3s;
+}
+nav.elevated { box-shadow: var(--shadow-sm); }
+
+.nav-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 17px; color: var(--ink); letter-spacing: -0.02em;
+}
+
+.nav-logo-mark {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-img { height: 28px; width: auto; }
+
+.nav-links {
+  list-style: none;
+  display: flex; gap: 4px; align-items: center;
+}
+.nav-links a {
+  display: block; padding: 6px 14px;
+  font-size: 14px; font-weight: 500; color: var(--ink-2);
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--bg-muted); }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+
+.btn-ghost {
+  height: 36px; padding: 0 16px;
+  font-size: 14px; font-weight: 500; color: var(--ink-2);
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  display: inline-flex; align-items: center;
+}
+.btn-ghost:hover { color: var(--ink); background: var(--bg-muted); }
+
+.btn-primary {
+  height: 36px; padding: 0 18px;
+  background: var(--accent); color: white;
+  font-size: 14px; font-weight: 600; border-radius: 7px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(0,102,255,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,102,255,0.35); }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  padding: 4px; border-radius: 6px; color: var(--ink);
+  transition: background 0.2s;
+}
+.hamburger:hover { background: var(--bg-muted); }
+.hamburger span { display: block; width: 20px; height: 1.5px; background: currentColor; }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: white; flex-direction: column; padding: 80px 24px 40px;
+  transform: translateX(100%); transition: transform 0.35s var(--ease);
+}
+.mobile-menu.open { transform: none; }
+.mobile-menu-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
+}
+.mobile-nav-links { list-style: none; margin-bottom: 32px; }
+.mobile-nav-links li a {
+  display: block; padding: 14px 0; font-size: 20px; font-weight: 600;
+  color: var(--ink-2); border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.mobile-nav-links li a:hover { color: var(--accent); }
+.mobile-actions { display: flex; flex-direction: column; gap: 10px; }
+.btn-outline-full {
+  height: 48px; border: 1.5px solid var(--border-strong);
+  border-radius: 8px; font-size: 15px; font-weight: 600; color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-primary-full {
+  height: 48px; background: var(--accent); color: white;
+  border-radius: 8px; font-size: 15px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,102,255,0.3);
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 120px 0 80px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+
+.hero-grid-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.45;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
+}
+
+.hero-glow {
+  position: absolute; width: 700px; height: 400px;
+  border-radius: 50%; filter: blur(100px); opacity: 0.12;
+  background: radial-gradient(circle, #0066ff 0%, transparent 70%);
+  top: -100px; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: 80px; align-items: center;
+}
+
+.hero-content {}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px; border-radius: 100px;
+  background: var(--accent-bg); border: 1px solid var(--accent-border);
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s var(--ease) 0.1s both;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+.hero-headline {
+  font-size: clamp(36px, 4.2vw, 56px);
+  font-weight: 800; line-height: 1.08;
+  letter-spacing: -0.03em; color: var(--ink);
+  margin-bottom: 20px;
+  animation: fadeUp 0.7s var(--ease) 0.15s both;
+}
+.hero-headline .accent-word { color: var(--accent); }
+
+.hero-sub {
+  font-size: 17px; font-weight: 400; line-height: 1.7;
+  color: var(--ink-3); max-width: 480px;
+  margin-bottom: 36px;
+  animation: fadeUp 0.7s var(--ease) 0.25s both;
+}
+
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.7s var(--ease) 0.35s both;
+}
+
+.btn-hero-primary {
+  height: 48px; padding: 0 28px;
+  background: var(--accent); color: white;
+  font-size: 15px; font-weight: 700; border-radius: 9px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,102,255,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  letter-spacing: -0.01em;
+}
+.btn-hero-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,102,255,0.4); }
+
+.btn-hero-secondary {
+  height: 48px; padding: 0 24px;
+  border: 1.5px solid var(--border-strong); color: var(--ink-2);
+  font-size: 15px; font-weight: 600; border-radius: 9px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  letter-spacing: -0.01em;
+}
+.btn-hero-secondary:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+.hero-social-proof {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 40px;
+  animation: fadeUp 0.7s var(--ease) 0.45s both;
+}
+
+.proof-avatars { display: flex; }
+.proof-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid white; margin-left: -8px; first-child{margin:0};
+  font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.proof-avatars .proof-avatar:first-child { margin-left: 0; }
+.pa1{background:#3b82f6} .pa2{background:#10b981} .pa3{background:#f59e0b} .pa4{background:#6366f1}
+
+.proof-text { font-size: 13px; color: var(--ink-3); }
+.proof-text strong { color: var(--ink); font-weight: 600; }
+
+/* Hero Dashboard */
+.hero-visual {
+  animation: fadeLeft 0.9s var(--ease) 0.2s both;
+  position: relative;
+}
+@keyframes fadeLeft { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:none} }
+
+.dashboard-mockup {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dashboard header */
+.db-header {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.db-dots { display: flex; gap: 6px; }
+.db-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dd1{background:#ff5f57} .dd2{background:#ffc12f} .dd3{background:#27c840}
+.db-title { font-size: 12px; font-weight: 600; color: var(--ink-3); flex: 1; text-align: center; letter-spacing: 0.02em; }
+.db-actions { display: flex; gap: 6px; }
+.db-action { width: 22px; height: 22px; border-radius: 4px; background: var(--bg-muted); border: 1px solid var(--border); }
+
+/* Sidebar */
+.db-layout { display: flex; height: 420px; }
+.db-sidebar {
+  width: 56px; background: var(--ink);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 14px 0; gap: 6px;
+}
+.db-sidebar-logo {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--accent); margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.db-nav-item {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4);
+  transition: background 0.2s, color 0.2s;
+}
+.db-nav-item.active { background: rgba(0,102,255,0.25); color: #60a5fa; }
+.db-nav-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); }
+
+/* Main dashboard area */
+.db-main { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.db-topbar {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: white;
+}
+.db-page-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+.db-topbar-right { display: flex; gap: 8px; align-items: center; }
+.db-search {
+  height: 26px; padding: 0 10px;
+  background: var(--bg-muted); border: 1px solid var(--border);
+  border-radius: 6px; display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--ink-4);
+}
+.db-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: white; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+.db-content { flex: 1; padding: 12px 14px; overflow: hidden; }
+
+/* KPI Cards row */
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 12px; }
+.kpi-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px;
+}
+.kpi-label { font-size: 9.5px; font-weight: 600; color: var(--ink-4); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+.kpi-value { font-family: var(--font-mono); font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 3px; }
+.kpi-delta { font-size: 9px; font-weight: 600; display: flex; align-items: center; gap: 2px; }
+.kpi-up { color: var(--green); }
+.kpi-down { color: var(--red); }
+
+/* Chart + table row */
+.db-row-2 { display: grid; grid-template-columns: 3fr 2fr; gap: 8px; margin-bottom: 10px; }
+.db-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px; overflow: hidden;
+}
+.db-card-title { font-size: 10px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.01em; }
+
+/* Mini chart */
+.mini-chart { display: flex; align-items: flex-end; gap: 3px; height: 64px; }
+.bar {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: var(--accent); opacity: 0.15;
+  transition: opacity 0.2s;
+}
+.bar.active { opacity: 1; }
+.bar.highlight { opacity: 0.6; }
+
+/* Line chart SVG container */
+.line-chart-wrap { position: relative; height: 72px; }
+
+/* Inventory table mini */
+.mini-table { width: 100%; border-collapse: collapse; }
+.mini-table th { font-size: 8.5px; font-weight: 600; color: var(--ink-4); text-align: left; padding: 0 6px 5px 0; letter-spacing: 0.04em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.mini-table td { font-size: 9.5px; color: var(--ink-2); padding: 4px 6px 4px 0; border-bottom: 1px solid var(--bg-subtle); }
+.mini-table td:last-child { text-align: right; }
+.stock-badge {
+  display: inline-block; padding: 2px 6px; border-radius: 4px;
+  font-size: 8px; font-weight: 700;
+}
+.stock-ok { background: var(--green-bg); color: var(--green); }
+.stock-low { background: rgba(245,158,11,0.1); color: var(--orange); }
+.stock-out { background: rgba(239,68,68,0.1); color: var(--red); }
+
+/* Recent txns */
+.db-row-3 { display: grid; grid-template-columns: 5fr 3fr; gap: 8px; }
+.txn-item { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--bg-subtle); }
+.txn-info { display: flex; align-items: center; gap: 7px; }
+.txn-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 9px; }
+.txn-name { font-size: 9.5px; font-weight: 600; color: var(--ink); }
+.txn-time { font-size: 8.5px; color: var(--ink-4); }
+.txn-amount { font-family: var(--font-mono); font-size: 10px; font-weight: 500; color: var(--ink); }
+
+/* Branch mini list */
+.branch-item { display: flex; align-items: center; gap: 7px; padding: 4px 0; border-bottom: 1px solid var(--bg-subtle); }
+.branch-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.branch-name { font-size: 9.5px; font-weight: 600; color: var(--ink); flex: 1; }
+.branch-bar-wrap { width: 60px; background: var(--bg-muted); border-radius: 3px; height: 4px; }
+.branch-bar-fill { height: 4px; border-radius: 3px; background: var(--accent); }
+.branch-pct { font-size: 8.5px; color: var(--ink-4); font-family: var(--font-mono); min-width: 28px; text-align: right; }
+
+/* ========== TRUST STRIP ========== */
+.trust-strip {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.trust-inner {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  max-width: 1160px; margin: 0 auto; padding: 0 40px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px 28px; border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.trust-item:last-child { border-right: none; }
+.trust-item:hover { background: white; }
+.trust-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--accent-bg); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); flex-shrink: 0;
+}
+.trust-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+.trust-desc { font-size: 11.5px; color: var(--ink-4); }
+
+/* ========== SECTION LABELS ========== */
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.07em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-eyebrow::before {
+  content: ''; display: block; width: 16px; height: 2px;
+  background: var(--accent); border-radius: 2px;
+}
+
+.section-headline {
+  font-size: clamp(28px, 3vw, 40px); font-weight: 800;
+  letter-spacing: -0.025em; color: var(--ink);
+  line-height: 1.15; margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 16px; color: var(--ink-3); line-height: 1.65;
+  max-width: 520px;
+}
+
+/* ========== FEATURES ========== */
+.features { background: var(--bg); }
+.features-header { text-align: center; margin-bottom: 64px; }
+.features-header .section-sub { margin: 0 auto; }
+.features-header .section-eyebrow { justify-content: center; }
+.features-header .section-eyebrow::before { display: none; }
+
+.features-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+}
+
+.feature-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px;
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s, transform 0.3s var(--ease);
+  position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s var(--ease);
+  border-radius: 2px 2px 0 0;
+}
+.feature-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent-border); transform: translateY(-3px); }
+.feature-card:hover::before { transform: scaleX(1); }
+
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--accent-bg); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); margin-bottom: 18px;
+}
+
+.feature-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.feature-desc { font-size: 14px; color: var(--ink-3); line-height: 1.65; }
+.feature-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.feature-tag {
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; color: var(--ink-3);
+  background: var(--bg-muted); border: 1px solid var(--border);
+}
+
+/* ========== PRODUCT SHOWCASE ========== */
+.showcase { background: var(--bg-subtle); }
+.showcase-header { margin-bottom: 56px; }
+
+.showcase-tabs {
+  display: flex; gap: 4px;
+  background: var(--bg-muted); border: 1px solid var(--border);
+  border-radius: 10px; padding: 4px;
+  width: fit-content; margin-bottom: 40px;
+}
+.showcase-tab {
+  padding: 8px 18px; border-radius: 7px;
+  font-size: 13px; font-weight: 600; color: var(--ink-3);
+  transition: all 0.2s;
+}
+.showcase-tab:hover { color: var(--ink); }
+.showcase-tab.active {
+  background: white; color: var(--ink);
+  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+}
+
+.showcase-content { display: none; }
+.showcase-content.active { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: center; }
+
+.showcase-desc {}
+.showcase-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.showcase-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--ink-2); line-height: 1.5;
+}
+.check-icon {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green-bg); color: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* Checkout UI mockup */
+.checkout-mockup {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.checkout-header {
+  background: var(--ink); padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.checkout-title { font-size: 13px; font-weight: 700; color: white; }
+.checkout-branch { font-size: 10px; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 4px; }
+.checkout-body { display: grid; grid-template-columns: 3fr 2fr; }
+.checkout-items { padding: 14px; border-right: 1px solid var(--border); }
+.checkout-items-title { font-size: 10px; font-weight: 700; color: var(--ink-4); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
+.checkout-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 0; border-bottom: 1px solid var(--bg-subtle);
+}
+.item-img { width: 30px; height: 30px; border-radius: 6px; background: var(--bg-muted); border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.item-name { font-size: 11px; font-weight: 600; color: var(--ink); flex: 1; }
+.item-qty { font-size: 10px; color: var(--ink-4); }
+.item-price { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--ink); }
+.checkout-summary { padding: 14px; background: var(--bg-subtle); }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.summary-label { font-size: 10px; color: var(--ink-3); }
+.summary-value { font-size: 10px; font-weight: 600; color: var(--ink); font-family: var(--font-mono); }
+.summary-total { border-top: 1.5px solid var(--border); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
+.summary-total .summary-label { font-size: 11px; font-weight: 700; color: var(--ink); }
+.summary-total .summary-value { font-size: 13px; color: var(--accent); }
+.pay-btn {
+  width: 100%; height: 36px; background: var(--accent); color: white;
+  border-radius: 7px; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-bottom: 6px;
+}
+.pay-method { display: flex; gap: 4px; }
+.pm { flex: 1; height: 28px; background: white; border: 1px solid var(--border); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 600; color: var(--ink-3); }
+
+/* Analytics mockup */
+.analytics-mockup {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  padding: 20px;
+}
+.am-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.am-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.am-period { font-size: 11px; font-weight: 600; color: var(--ink-4); background: var(--bg-muted); border: 1px solid var(--border); padding: 3px 10px; border-radius: 5px; }
+.am-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+.am-kpi { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+.am-kpi-label { font-size: 9px; font-weight: 700; color: var(--ink-4); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+.am-kpi-value { font-family: var(--font-mono); font-size: 17px; font-weight: 500; color: var(--ink); }
+.am-kpi-delta { font-size: 9px; font-weight: 700; }
+.am-chart { height: 100px; position: relative; overflow: hidden; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border); }
+
+/* Inventory mockup */
+.inventory-mockup {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.inv-header {
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-subtle);
+}
+.inv-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.inv-actions { display: flex; gap: 6px; }
+.inv-btn { height: 28px; padding: 0 12px; border-radius: 6px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); color: var(--ink-2); background: white; }
+.inv-btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
+.inv-table { width: 100%; border-collapse: collapse; }
+.inv-th { font-size: 10px; font-weight: 700; color: var(--ink-4); text-align: left; padding: 8px 16px; border-bottom: 1px solid var(--border); background: var(--bg-subtle); letter-spacing: 0.04em; text-transform: uppercase; }
+.inv-td { font-size: 12px; color: var(--ink-2); padding: 10px 16px; border-bottom: 1px solid var(--bg-subtle); }
+.inv-td:first-child { font-weight: 600; color: var(--ink); }
+.inv-row:hover td { background: var(--bg-subtle); }
+.inv-sku { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); }
+
+/* ========== HOW IT WORKS ========== */
+.how-it-works { background: var(--bg); }
+.how-header { text-align: center; margin-bottom: 64px; }
+.how-header .section-sub { margin: 0 auto; }
+
+.steps-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; position: relative;
+}
+.steps-row::before {
+  content: ''; position: absolute;
+  top: 24px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+  height: 1px; background: var(--border);
+  border-top: 1px dashed var(--border-strong);
+}
+
+.step {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 0 20px; position: relative;
+}
+.step-number {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: white; border: 2px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: var(--accent);
+  margin-bottom: 24px; position: relative; z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+.step:hover .step-number { background: var(--accent); color: white; border-color: var(--accent); }
+.step-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.step-desc { font-size: 13.5px; color: var(--ink-3); line-height: 1.6; }
+.step-icon { color: var(--accent); margin-bottom: 8px; }
+
+/* ========== MULTI-TENANT ========== */
+.multitenant {
+  background: var(--ink);
+  color: white;
+  position: relative; overflow: hidden;
+}
+
+.mt-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.mt-glow {
+  position: absolute; width: 600px; height: 300px;
+  border-radius: 50%; filter: blur(80px); opacity: 0.15;
+  background: radial-gradient(circle, #0066ff 0%, transparent 70%);
+  top: -100px; right: -100px; pointer-events: none;
+}
+
+.mt-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+
+.mt-content {}
+.mt-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; color: #60a5fa;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.mt-eyebrow::before { content: ''; width: 16px; height: 2px; background: #60a5fa; border-radius: 2px; }
+
+.mt-headline {
+  font-size: clamp(28px, 3vw, 42px); font-weight: 800;
+  letter-spacing: -0.025em; color: white;
+  line-height: 1.12; margin-bottom: 16px;
+}
+.mt-sub { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 460px; margin-bottom: 36px; }
+
+.mt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mt-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 18px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.mt-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,102,255,0.4); }
+.mt-card-icon { color: #60a5fa; margin-bottom: 10px; }
+.mt-card-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 5px; }
+.mt-card-desc { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+/* Tenant diagram */
+.tenant-diagram {
+  position: relative;
+}
+.tenant-platform {
+  background: rgba(0,102,255,0.15); border: 1px solid rgba(0,102,255,0.3);
+  border-radius: 14px; padding: 16px 20px; text-align: center;
+  margin-bottom: 20px;
+}
+.tp-label { font-size: 11px; font-weight: 700; color: #60a5fa; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+.tp-name { font-size: 18px; font-weight: 800; color: white; letter-spacing: -0.01em; }
+.tp-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+.tenant-connectors { display: flex; justify-content: center; gap: 4px; margin-bottom: 12px; }
+.tc-line { width: 1px; height: 20px; background: rgba(255,255,255,0.15); }
+
+.tenant-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.tenant-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 12px 10px; text-align: center;
+}
+.tc-indicator { width: 8px; height: 8px; border-radius: 50%; margin: 0 auto 6px; }
+.tc-name { font-size: 10px; font-weight: 700; color: white; margin-bottom: 2px; }
+.tc-type { font-size: 9px; color: rgba(255,255,255,0.4); }
+.tc-branches { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-family: var(--font-mono); }
+.separator-lines {
+  position: absolute; top: 96px; left: 0; right: 0;
+  display: flex; justify-content: space-around; pointer-events: none;
+}
+
+/* ========== TESTIMONIALS ========== */
+.testimonials { background: var(--bg-subtle); }
+.test-header { text-align: center; margin-bottom: 56px; }
+.test-header .section-eyebrow { justify-content: center; }
+.test-header .section-eyebrow::before { display: none; }
+
+.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.test-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.test-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.test-stars { display: flex; gap: 2px; margin-bottom: 16px; }
+.star-icon { color: #f59e0b; font-size: 14px; }
+.test-quote { font-size: 14.5px; color: var(--ink-2); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.test-author { display: flex; align-items: center; gap: 12px; }
+.test-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  font-size: 13px; font-weight: 700; color: white;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.test-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+.test-role { font-size: 12px; color: var(--ink-4); }
+.test-featured {
+  border-color: var(--accent-border);
+  background: linear-gradient(135deg, white 0%, var(--accent-bg) 100%);
+}
+
+/* ========== PRICING TEASER ========== */
+.pricing-teaser { background: var(--bg); }
+.pricing-header { text-align: center; margin-bottom: 48px; }
+.pricing-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.pricing-card {
+  border: 1.5px solid var(--border); border-radius: var(--radius-lg);
+  padding: 28px; transition: box-shadow 0.3s, transform 0.3s;
+}
+.pricing-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.pricing-card.popular {
+  border-color: var(--accent); background: var(--accent-bg);
+  position: relative;
+}
+.popular-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: white; font-size: 11px; font-weight: 700;
+  padding: 4px 16px; border-radius: 100px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.pc-plan { font-size: 12px; font-weight: 700; color: var(--ink-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+.pc-price { font-family: var(--font-mono); font-size: 36px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+.pc-price sup { font-size: 18px; vertical-align: super; line-height: 1; }
+.pc-period { font-size: 12px; color: var(--ink-4); margin-bottom: 20px; }
+.pc-desc { font-size: 14px; color: var(--ink-3); line-height: 1.6; margin-bottom: 24px; }
+.pc-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.pc-features li { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
+.pc-check { color: var(--green); flex-shrink: 0; }
+.pc-cta {
+  width: 100%; height: 42px; border-radius: 7px;
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); color: var(--ink);
+  transition: all 0.2s;
+}
+.pc-cta:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.pc-cta.primary { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,102,255,0.3); }
+.pc-cta.primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,102,255,0.4); }
+
+/* ========== CTA SECTION ========== */
+.cta-section {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 100px 0;
+  position: relative; overflow: hidden;
+}
+.cta-glow {
+  position: absolute; width: 600px; height: 300px;
+  border-radius: 50%; filter: blur(80px); opacity: 0.08;
+  background: radial-gradient(circle, #0066ff 0%, transparent 70%);
+  bottom: -100px; left: 50%; transform: translateX(-50%);
+}
+.cta-headline {
+  font-size: clamp(30px, 3.5vw, 48px); font-weight: 800;
+  letter-spacing: -0.025em; color: var(--ink);
+  margin-bottom: 14px; line-height: 1.1;
+}
+.cta-sub {
+  font-size: 17px; color: var(--ink-3); max-width: 500px;
+  margin: 0 auto 40px; line-height: 1.65;
+}
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-note { font-size: 12px; color: var(--ink-4); margin-top: 20px; }
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.8);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand {}
+.footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-brand-name { font-size: 17px; font-weight: 800; color: white; letter-spacing: -0.02em; }
+.footer-brand-desc { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.65; max-width: 240px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 8px; }
+.social-btn {
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.social-btn:hover { background: rgba(0,102,255,0.2); border-color: rgba(0,102,255,0.4); color: #60a5fa; }
+.footer-col-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.footer-links a:hover { color: white; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.35); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 13px; color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.7); }
+.footer-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--green); }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s ease-in-out infinite; }
+
+/* Newsletter in footer */
+.footer-newsletter {}
+.fn-title { font-size: 13px; font-weight: 700; color: white; margin-bottom: 6px; }
+.fn-desc { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 12px; line-height: 1.5; }
+.fn-form { display: flex; gap: 6px; }
+.fn-input {
+  flex: 1; height: 36px; padding: 0 12px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px; color: white; font-family: var(--font-sans); font-size: 13px; outline: none;
+  transition: border-color 0.2s;
+}
+.fn-input::placeholder { color: rgba(255,255,255,0.3); }
+.fn-input:focus { border-color: rgba(0,102,255,0.5); background: rgba(0,102,255,0.05); }
+.fn-btn {
+  height: 36px; padding: 0 16px; background: var(--accent); color: white;
+  border-radius: 7px; font-size: 13px; font-weight: 600;
+  transition: background 0.2s; white-space: nowrap;
+}
+.fn-btn:hover { background: var(--accent-hover); }
+
+/* Sticky mobile CTA */
+.sticky-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border); padding: 12px 20px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.sticky-cta-inner { display: flex; gap: 10px; }
+.sticky-cta-btn {
+  flex: 1; height: 48px; border-radius: 8px;
+  font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.sticky-cta-primary { background: var(--accent); color: white; box-shadow: 0 2px 8px rgba(0,102,255,0.3); }
+.sticky-cta-secondary { border: 1.5px solid var(--border-strong); color: var(--ink-2); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  .nav-links, .nav-actions .btn-ghost { display: none; }
+  .hamburger { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; padding-top: 20px; }
+  .hero-visual { order: -1; }
+  .dashboard-mockup .db-layout { height: 300px; }
+  .trust-inner { grid-template-columns: 1fr 1fr; }
+  .trust-item:nth-child(2) { border-right: none; }
+  .showcase-content.active { grid-template-columns: 1fr; gap: 36px; }
+  .steps-row { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .steps-row::before { display: none; }
+  .mt-inner { grid-template-columns: 1fr; gap: 48px; }
+  .test-grid { grid-template-columns: 1fr; }
+  .pricing-cards { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  footer { padding: 48px 0 80px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; }
+  .sticky-cta { display: block; }
+  .container { padding: 0 20px; }
+  nav .nav-inner { padding: 0 20px; }
+  .trust-inner { padding: 0 20px; }
+  .section { padding: 72px 0; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 90px 0 60px; }
+  .hero-ctas { flex-direction: column; }
+  .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+  .trust-inner { grid-template-columns: 1fr; }
+  .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .trust-item:last-child { border-bottom: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .steps-row { grid-template-columns: 1fr; }
+  .mt-cards { grid-template-columns: 1fr; }
+  .tenant-cards { grid-template-columns: 1fr 1fr; }
+  .kpi-row { grid-template-columns: repeat(2,1fr); }
+  .db-row-2 { grid-template-columns: 1fr; }
+  .showcase-tabs { flex-wrap: wrap; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; }
+  .fn-form { flex-direction: column; }
+  .sticky-cta-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== NAVIGATION ====== -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <img src="https://shepherdstores.vercel.app/assets/logo-Cb259jet.png" alt="Shepherd Stores" class="logo-img" onerror="this.style.display='none'">
+      <span>Shepherd Stores</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#showcase">Product</a></li>
+      <li><a href="#howitworks">How it Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Customers</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="#" class="btn-ghost">Sign In</a>
+      <a href="#" class="btn-primary">
+        Start Free Trial
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="hamburger" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <ul class="mobile-nav-links">
+    <li><a href="#features" onclick="closeMobileMenu()">Features</a></li>
+    <li><a href="#showcase" onclick="closeMobileMenu()">Product</a></li>
+    <li><a href="#howitworks" onclick="closeMobileMenu()">How it Works</a></li>
+    <li><a href="#pricing" onclick="closeMobileMenu()">Pricing</a></li>
+    <li><a href="#testimonials" onclick="closeMobileMenu()">Customers</a></li>
+  </ul>
+  <div class="mobile-actions">
+    <a href="#" class="btn-outline-full">Sign In</a>
+    <a href="#" class="btn-primary-full">Start Free Trial →</a>
+  </div>
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="container hero-inner">
+    <!-- Content -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Cloud POS Platform · Multi-Tenant
+      </div>
+
+      <h1 class="hero-headline">
+        Run your entire<br>
+        business from one<br>
+        <span class="accent-word">intelligent</span> POS.
+      </h1>
+
+      <p class="hero-sub">
+        Shepherd Stores is the cloud-based POS platform built for modern retail, restaurants, and growing SMEs. Manage sales, inventory, staff, and analytics — across every branch, in real time.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#" class="btn-hero-primary">
+          Start Free Trial
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-hero-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Request Demo
+        </a>
+      </div>
+
+      <div class="hero-social-proof">
+        <div class="proof-avatars">
+          <div class="proof-avatar pa1">JK</div>
+          <div class="proof-avatar pa2">OM</div>
+          <div class="proof-avatar pa3">SA</div>
+          <div class="proof-avatar pa4">TN</div>
+        </div>
+        <p class="proof-text">
+          Trusted by <strong>2,400+</strong> businesses across East Africa
+        </p>
+      </div>
+    </div>
+
+    <!-- Dashboard Mockup -->
+    <div class="hero-visual">
+      <div class="dashboard-mockup">
+        <div class="db-header">
+          <div class="db-dots">
+            <div class="db-dot dd1"></div>
+            <div class="db-dot dd2"></div>
+            <div class="db-dot dd3"></div>
+          </div>
+          <div class="db-title">Shepherd Stores — Dashboard</div>
+          <div class="db-actions">
+            <div class="db-action"></div>
+            <div class="db-action"></div>
+          </div>
+        </div>
+
+        <div class="db-layout">
+          <!-- Sidebar -->
+          <div class="db-sidebar">
+            <div class="db-sidebar-logo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="db-nav-item active">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="db-nav-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div class="db-nav-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            </div>
+            <div class="db-nav-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="db-nav-item" style="margin-top:auto">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            </div>
+          </div>
+
+          <!-- Main Area -->
+          <div class="db-main">
+            <div class="db-topbar">
+              <div class="db-page-title">Overview · All Branches</div>
+              <div class="db-topbar-right">
+                <div class="db-search">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  Search...
+                </div>
+                <div style="font-size:10px;font-weight:600;color:var(--ink-4);padding:2px 8px;border:1px solid var(--border);border-radius:5px;background:var(--bg-subtle);">June 2026</div>
+                <div class="db-avatar">JK</div>
+              </div>
+            </div>
+
+            <div class="db-content">
+              <!-- KPI Cards -->
+              <div class="kpi-row">
+                <div class="kpi-card">
+                  <div class="kpi-label">Revenue</div>
+                  <div class="kpi-value">KSh 847k</div>
+                  <div class="kpi-delta kpi-up">
+                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                    +18.2%
+                  </div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Orders</div>
+                  <div class="kpi-value">2,341</div>
+                  <div class="kpi-delta kpi-up">
+                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                    +9.4%
+                  </div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Avg. Value</div>
+                  <div class="kpi-value">KSh 362</div>
+                  <div class="kpi-delta kpi-down">
+                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                    -2.1%
+                  </div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Branches</div>
+                  <div class="kpi-value">7</div>
+                  <div class="kpi-delta" style="color:var(--ink-4);font-size:9px;">Active</div>
+                </div>
+              </div>
+
+              <!-- Chart Row -->
+              <div class="db-row-2">
+                <div class="db-card">
+                  <div class="db-card-title">Sales This Month</div>
+                  <div class="mini-chart">
+                    <div class="bar" style="height:40%"></div>
+                    <div class="bar highlight" style="height:55%"></div>
+                    <div class="bar" style="height:45%"></div>
+                    <div class="bar highlight" style="height:70%"></div>
+                    <div class="bar" style="height:60%"></div>
+                    <div class="bar highlight" style="height:80%"></div>
+                    <div class="bar" style="height:65%"></div>
+                    <div class="bar highlight" style="height:75%"></div>
+                    <div class="bar" style="height:55%"></div>
+                    <div class="bar highlight" style="height:90%"></div>
+                    <div class="bar active" style="height:100%"></div>
+                    <div class="bar" style="height:20%"></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                    <span style="font-size:8px;color:var(--ink-4)">Jun 1</span>
+                    <span style="font-size:8px;color:var(--ink-4)">Jun 30</span>
+                  </div>
+                </div>
+
+                <div class="db-card">
+                  <div class="db-card-title">Low Stock Alerts</div>
+                  <table class="mini-table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Maize Flour 2kg</td>
+                        <td>8</td>
+                        <td><span class="stock-badge stock-low">Low</span></td>
+                      </tr>
+                      <tr>
+                        <td>Sugar 1kg</td>
+                        <td>0</td>
+                        <td><span class="stock-badge stock-out">Out</span></td>
+                      </tr>
+                      <tr>
+                        <td>Cooking Oil</td>
+                        <td>24</td>
+                        <td><span class="stock-badge stock-ok">OK</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Transactions + Branches -->
+              <div class="db-row-3">
+                <div class="db-card">
+                  <div class="db-card-title">Recent Transactions</div>
+                  <div class="txn-item">
+                    <div class="txn-info">
+                      <div class="txn-icon">🛍</div>
+                      <div>
+                        <div class="txn-name">Westlands Branch</div>
+                        <div class="txn-time">2 min ago</div>
+                      </div>
+                    </div>
+                    <div class="txn-amount">+KSh 1,240</div>
+                  </div>
+                  <div class="txn-item">
+                    <div class="txn-info">
+                      <div class="txn-icon">🛍</div>
+                      <div>
+                        <div class="txn-name">CBD Branch</div>
+                        <div class="txn-time">8 min ago</div>
+                      </div>
+                    </div>
+                    <div class="txn-amount">+KSh 680</div>
+                  </div>
+                  <div class="txn-item">
+                    <div class="txn-info">
+                      <div class="txn-icon">🔄</div>
+                      <div>
+                        <div class="txn-name">Refund · Ngong Rd</div>
+                        <div class="txn-time">14 min ago</div>
+                      </div>
+                    </div>
+                    <div class="txn-amount" style="color:var(--red)">-KSh 320</div>
+                  </div>
+                </div>
+
+                <div class="db-card">
+                  <div class="db-card-title">Branch Performance</div>
+                  <div class="branch-item">
+                    <div class="branch-dot" style="background:#0066ff"></div>
+                    <div class="branch-name">Westlands</div>
+                    <div class="branch-bar-wrap"><div class="branch-bar-fill" style="width:82%"></div></div>
+                    <div class="branch-pct">82%</div>
+                  </div>
+                  <div class="branch-item">
+                    <div class="branch-dot" style="background:#10b759"></div>
+                    <div class="branch-name">CBD</div>
+                    <div class="branch-bar-wrap"><div class="branch-bar-fill" style="width:67%;background:#10b759"></div></div>
+                    <div class="branch-pct">67%</div>
+                  </div>
+                  <div class="branch-item">
+                    <div class="branch-dot" style="background:#f59e0b"></div>
+                    <div class="branch-name">Ngong Rd</div>
+                    <div class="branch-bar-wrap"><div class="branch-bar-fill" style="width:51%;background:#f59e0b"></div></div>
+                    <div class="branch-pct">51%</div>
+                  </div>
+                  <div class="branch-item">
+                    <div class="branch-dot" style="background:#6366f1"></div>
+                    <div class="branch-name">Kiambu</div>
+                    <div class="branch-bar-wrap"><div class="branch-bar-fill" style="width:34%;background:#6366f1"></div></div>
+                    <div class="branch-pct">34%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TRUST STRIP ====== -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Secure Cloud Infrastructure</div>
+        <div class="trust-desc">Bank-grade encryption & backups</div>
+      </div>
+    </div>
+    <div class="trust-item reveal d1">
+      <div class="trust-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Multi-Branch Support</div>
+        <div class="trust-desc">Manage unlimited locations</div>
+      </div>
+    </div>
+    <div class="trust-item reveal d2">
+      <div class="trust-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Real-Time Reporting</div>
+        <div class="trust-desc">Live sales & inventory data</div>
+      </div>
+    </div>
+    <div class="trust-item reveal d3">
+      <div class="trust-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Role-Based Access</div>
+        <div class="trust-desc">Granular permissions per staff</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FEATURES ====== -->
+<section class="features section" id="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-eyebrow">Platform Features</div>
+      <h2 class="section-headline">Everything you need to run<br>a smarter operation</h2>
+      <p class="section-sub">From the checkout counter to the boardroom dashboard — Shepherd Stores gives you complete control over your business.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal d1">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div class="feature-title">Sales Management</div>
+        <div class="feature-desc">Fast, intuitive POS checkout with receipt printing, split payments, discounts, and customer loyalty — built for speed under pressure.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Fast Checkout</span>
+          <span class="feature-tag">Receipts</span>
+          <span class="feature-tag">M-Pesa</span>
+          <span class="feature-tag">Cash</span>
+        </div>
+      </div>
+
+      <div class="feature-card reveal d2">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div class="feature-title">Inventory Control</div>
+        <div class="feature-desc">Track stock levels in real time. Get low-stock alerts, auto-reorder suggestions, and full audit trails across all your branches.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Stock Alerts</span>
+          <span class="feature-tag">Barcode Scan</span>
+          <span class="feature-tag">Categories</span>
+        </div>
+      </div>
+
+      <div class="feature-card reveal d3">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="feature-title">Multi-Branch Control</div>
+        <div class="feature-desc">One dashboard to rule all locations. Compare branch performance, transfer stock between outlets, and standardize operations.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Unlimited Branches</span>
+          <span class="feature-tag">Stock Transfer</span>
+        </div>
+      </div>
+
+      <div class="feature-card reveal d1">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feature-title">Staff & Permissions</div>
+        <div class="feature-desc">Assign roles — cashier, manager, admin — with granular permissions. Track who did what, when, and where across all shifts.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Role-Based</span>
+          <span class="feature-tag">Shift Reports</span>
+          <span class="feature-tag">Audit Logs</span>
+        </div>
+      </div>
+
+      <div class="feature-card reveal d2">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="feature-title">Analytics Dashboard</div>
+        <div class="feature-desc">Visual, real-time dashboards with revenue trends, top products, customer data, and branch comparisons — exportable to Excel.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Live Charts</span>
+          <span class="feature-tag">Export CSV</span>
+          <span class="feature-tag">Forecasting</span>
+        </div>
+      </div>
+
+      <div class="feature-card reveal d3">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <div class="feature-title">Offline + Online Sync</div>
+        <div class="feature-desc">Never stop selling. Shepherd Stores works offline and automatically syncs all transactions when connectivity is restored.</div>
+        <div class="feature-tags">
+          <span class="feature-tag">Offline Mode</span>
+          <span class="feature-tag">Auto-Sync</span>
+          <span class="feature-tag">Zero Downtime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRODUCT SHOWCASE ====== -->
+<section class="showcase section" id="showcase">
+  <div class="container">
+    <div class="showcase-header reveal">
+      <div class="section-eyebrow">Product Preview</div>
+      <h2 class="section-headline">See it in action</h2>
+      <p class="section-sub">A real look at the interfaces your team will use every day — designed for speed, clarity, and zero training time.</p>
+    </div>
+
+    <div class="showcase-tabs reveal d1">
+      <button class="showcase-tab active" onclick="switchTab(this,'tab-checkout')">POS Checkout</button>
+      <button class="showcase-tab" onclick="switchTab(this,'tab-analytics')">Analytics</button>
+      <button class="showcase-tab" onclick="switchTab(this,'tab-inventory')">Inventory</button>
+    </div>
+
+    <!-- Checkout Tab -->
+    <div class="showcase-content active" id="tab-checkout">
+      <div class="showcase-desc reveal">
+        <div class="section-eyebrow">POS Checkout</div>
+        <h3 class="section-headline" style="font-size:28px;">Faster sales,<br>fewer errors.</h3>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.65;margin-bottom:8px;">A clean, intuitive checkout interface designed for speed. Your cashiers can process sales in seconds — no training required.</p>
+        <ul class="showcase-list">
+          <li>
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Barcode scanning and manual item search
+          </li>
+          <li>
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            M-Pesa, Cash, Card, and split payments
+          </li>
+          <li>
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Automatic receipt generation and email/SMS send
+          </li>
+          <li>
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Discounts, promotions, and loyalty redemption
+          </li>
+        </ul>
+      </div>
+
+      <div class="reveal d2">
+        <div class="checkout-mockup">
+          <div class="checkout-header">
+            <div>
+              <div class="checkout-title">POS Terminal</div>
+              <div class="checkout-branch">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                Westlands Branch · Cashier: Sarah M.
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:18px;color:white;font-weight:500;">10:42 AM</div>
+          </div>
+
+          <div class="checkout-body">
+            <div class="checkout-items">
+              <div class="checkout-items-title">Current Order</div>
+              <div class="checkout-item">
+                <div class="item-img">🌽</div>
+                <div class="item-name">Unga Maize Flour 2kg</div>
+                <div class="item-qty">x2</div>
+                <div class="item-price">KSh 320</div>
+              </div>
+              <div class="checkout-item">
+                <div class="item-img">🧴</div>
+                <div class="item-name">Cooking Oil 1L</div>
+                <div class="item-qty">x1</div>
+                <div class="item-price">KSh 240</div>
+              </div>
+              <div class="checkout-item">
+                <div class="item-img">🥛</div>
+                <div class="item-name">KCC Milk 500ml</div>
+                <div class="item-qty">x3</div>
+                <div class="item-price">KSh 195</div>
+              </div>
+              <div class="checkout-item">
+                <div class="item-img">🍞</div>
+                <div class="item-name">Bread Loaf White</div>
+                <div class="item-qty">x1</div>
+                <div class="item-price">KSh 55</div>
+              </div>
+              <div style="margin-top:8px;">
+                <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px dashed var(--border);border-radius:6px;background:var(--bg-subtle);">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--ink-4)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <span style="font-size:10px;color:var(--ink-4)">Search or scan product...</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-summary">
+              <div class="summary-row"><div class="summary-label">Subtotal</div><div class="summary-value">KSh 810</div></div>
+              <div class="summary-row"><div class="summary-label">Discount (5%)</div><div class="summary-value" style="color:var(--green)">-KSh 40</div></div>
+              <div class="summary-row"><div class="summary-label">Tax (16% VAT)</div><div class="summary-value">KSh 124</div></div>
+              <div class="summary-total summary-row">
+                <div class="summary-label">Total</div>
+                <div class="summary-value">KSh 894</div>
+              </div>
+              <button class="pay-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Charge KSh 894
+              </button>
+              <div class="pay-method">
+                <div class="pm">💚 M-Pesa</div>
+                <div class="pm">💵 Cash</div>
+                <div class="pm">💳 Card</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Tab -->
+    <div class="showcase-content" id="tab-analytics">
+      <div class="showcase-desc reveal">
+        <div class="section-eyebrow">Analytics</div>
+        <h3 class="section-headline" style="font-size:28px;">Data-driven<br>decisions, always.</h3>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.65;margin-bottom:8px;">Stop guessing. Shepherd Stores gives you beautiful, real-time dashboards that turn your sales data into actionable business intelligence.</p>
+        <ul class="showcase-list">
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Revenue, orders, and margin trend lines</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Top-selling products and slow movers</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Branch-by-branch performance comparison</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Export reports to Excel, PDF, or CSV</li>
+        </ul>
+      </div>
+      <div class="reveal d2">
+        <div class="analytics-mockup">
+          <div class="am-header">
+            <div class="am-title">Revenue Analytics</div>
+            <div class="am-period">Last 30 days ▾</div>
+          </div>
+          <div class="am-kpis">
+            <div class="am-kpi">
+              <div class="am-kpi-label">Revenue</div>
+              <div class="am-kpi-value">847k</div>
+              <div class="am-kpi-delta" style="color:var(--green)">↑ +18.2%</div>
+            </div>
+            <div class="am-kpi">
+              <div class="am-kpi-label">Transactions</div>
+              <div class="am-kpi-value">2,341</div>
+              <div class="am-kpi-delta" style="color:var(--green)">↑ +9.4%</div>
+            </div>
+            <div class="am-kpi">
+              <div class="am-kpi-label">Avg Order</div>
+              <div class="am-kpi-value">362</div>
+              <div class="am-kpi-delta" style="color:var(--red)">↓ -2.1%</div>
+            </div>
+          </div>
+          <!-- SVG Line Chart -->
+          <div class="am-chart" style="padding:12px;">
+            <svg viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+              <defs>
+                <linearGradient id="chartGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#0066ff" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="#0066ff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid lines -->
+              <line x1="0" y1="20" x2="400" y2="20" stroke="#e4e7ed" stroke-width="0.5"/>
+              <line x1="0" y1="40" x2="400" y2="40" stroke="#e4e7ed" stroke-width="0.5"/>
+              <line x1="0" y1="60" x2="400" y2="60" stroke="#e4e7ed" stroke-width="0.5"/>
+              <!-- Fill area -->
+              <path d="M0 60 L40 52 L80 45 L120 50 L160 35 L200 28 L240 38 L280 22 L320 18 L360 10 L400 8 L400 80 L0 80 Z"
+                fill="url(#chartGrad)"/>
+              <!-- Line -->
+              <path d="M0 60 L40 52 L80 45 L120 50 L160 35 L200 28 L240 38 L280 22 L320 18 L360 10 L400 8"
+                fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Data points -->
+              <circle cx="400" cy="8" r="4" fill="white" stroke="#0066ff" stroke-width="2"/>
+              <circle cx="280" cy="22" r="3" fill="#0066ff"/>
+              <circle cx="160" cy="35" r="3" fill="#0066ff"/>
+            </svg>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;">
+            <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+              <div style="font-size:9px;font-weight:700;color:var(--ink-4);text-transform:uppercase;margin-bottom:3px;">Top Product</div>
+              <div style="font-size:12px;font-weight:700;color:var(--ink)">Unga 2kg</div>
+              <div style="font-size:10px;color:var(--green);font-weight:600">342 sold</div>
+            </div>
+            <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+              <div style="font-size:9px;font-weight:700;color:var(--ink-4);text-transform:uppercase;margin-bottom:3px;">Best Branch</div>
+              <div style="font-size:12px;font-weight:700;color:var(--ink)">Westlands</div>
+              <div style="font-size:10px;color:var(--accent);font-weight:600">KSh 218k</div>
+            </div>
+            <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+              <div style="font-size:9px;font-weight:700;color:var(--ink-4);text-transform:uppercase;margin-bottom:3px;">Peak Hour</div>
+              <div style="font-size:12px;font-weight:700;color:var(--ink)">12–2 PM</div>
+              <div style="font-size:10px;color:var(--orange);font-weight:600">28% of sales</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory Tab -->
+    <div class="showcase-content" id="tab-inventory">
+      <div class="showcase-desc reveal">
+        <div class="section-eyebrow">Inventory</div>
+        <h3 class="section-headline" style="font-size:28px;">Never run out.<br>Never overstock.</h3>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.65;margin-bottom:8px;">Smart inventory management that tracks every unit across every branch — with alerts before you run out, not after.</p>
+        <ul class="showcase-list">
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Real-time stock levels across all branches</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Automatic low-stock and out-of-stock alerts</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Bulk import via CSV or barcode scan</li>
+          <li><div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Full audit trail — who adjusted what, when</li>
+        </ul>
+      </div>
+      <div class="reveal d2">
+        <div class="inventory-mockup">
+          <div class="inv-header">
+            <div class="inv-title">Inventory · Westlands Branch</div>
+            <div class="inv-actions">
+              <button class="inv-btn">Import CSV</button>
+              <button class="inv-btn">Filter</button>
+              <button class="inv-btn inv-btn-primary">+ Add Item</button>
+            </div>
+          </div>
+          <table class="inv-table">
+            <thead>
+              <tr>
+                <th class="inv-th">Product</th>
+                <th class="inv-th">SKU</th>
+                <th class="inv-th">Category</th>
+                <th class="inv-th">Stock</th>
+                <th class="inv-th">Price</th>
+                <th class="inv-th">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="inv-row">
+                <td class="inv-td">Unga Maize Flour 2kg</td>
+                <td class="inv-td"><span class="inv-sku">UMF-2KG-001</span></td>
+                <td class="inv-td">Groceries</td>
+                <td class="inv-td">8 units</td>
+                <td class="inv-td" style="font-family:var(--font-mono)">KSh 160</td>
+                <td class="inv-td"><span class="stock-badge stock-low">Low Stock</span></td>
+              </tr>
+              <tr class="inv-row">
+                <td class="inv-td">Sugar Mumias 1kg</td>
+                <td class="inv-td"><span class="inv-sku">SGR-1KG-003</span></td>
+                <td class="inv-td">Groceries</td>
+                <td class="inv-td">0 units</td>
+                <td class="inv-td" style="font-family:var(--font-mono)">KSh 120</td>
+                <td class="inv-td"><span class="stock-badge stock-out">Out of Stock</span></td>
+              </tr>
+              <tr class="inv-row">
+                <td class="inv-td">Cooking Oil 1L</td>
+                <td class="inv-td"><span class="inv-sku">OIL-1LT-007</span></td>
+                <td class="inv-td">Cooking</td>
+                <td class="inv-td">241 units</td>
+                <td class="inv-td" style="font-family:var(--font-mono)">KSh 240</td>
+                <td class="inv-td"><span class="stock-badge stock-ok">In Stock</span></td>
+              </tr>
+              <tr class="inv-row">
+                <td class="inv-td">KCC Milk 500ml</td>
+                <td class="inv-td"><span class="inv-sku">MLK-500-012</span></td>
+                <td class="inv-td">Dairy</td>
+                <td class="inv-td">86 units</td>
+                <td class="inv-td" style="font-family:var(--font-mono)">KSh 65</td>
+                <td class="inv-td"><span class="stock-badge stock-ok">In Stock</span></td>
+              </tr>
+              <tr class="inv-row">
+                <td class="inv-td">Shower Gel 250ml</td>
+                <td class="inv-td"><span class="inv-sku">BCR-250-019</span></td>
+                <td class="inv-td">Personal Care</td>
+                <td class="inv-td">15 units</td>
+                <td class="inv-td" style="font-family:var(--font-mono)">KSh 180</td>
+                <td class="inv-td"><span class="stock-badge stock-low">Low Stock</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="how-it-works section" id="howitworks">
+  <div class="container">
+    <div class="how-header reveal">
+      <div class="section-eyebrow" style="justify-content:center;display:inline-flex;">Getting Started</div>
+      <h2 class="section-headline">Up and running in minutes,<br>not months.</h2>
+      <p class="section-sub">No lengthy onboarding. No consultant required. Shepherd Stores is built to be self-serve from day one.</p>
+    </div>
+
+    <div class="steps-row">
+      <div class="step reveal d1">
+        <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="step-title">Create Your Account</div>
+        <div class="step-desc">Sign up in 30 seconds with your email. No credit card required. Your business data is isolated and secure from day one.</div>
+      </div>
+
+      <div class="step reveal d2">
+        <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="step-title">Add Your Business</div>
+        <div class="step-desc">Set up your store profile, add branches, configure staff roles, and import your product catalog via CSV or manual entry.</div>
+      </div>
+
+      <div class="step reveal d3">
+        <div class="step-number">3</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div class="step-title">Start Selling</div>
+        <div class="step-desc">Your cashiers log in and start processing sales immediately. Accept cash, M-Pesa, and cards with a tap. Receipts print instantly.</div>
+      </div>
+
+      <div class="step reveal d4">
+        <div class="step-number">4</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="step-title">Grow with Analytics</div>
+        <div class="step-desc">Watch your business performance in real time. Identify top sellers, underperforming branches, and peak hours to make smarter decisions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== MULTI-TENANT ====== -->
+<section class="multitenant section">
+  <div class="mt-grid-bg"></div>
+  <div class="mt-glow"></div>
+  <div class="container mt-inner">
+    <div class="mt-content">
+      <div class="mt-eyebrow">Multi-Tenant Architecture</div>
+      <h2 class="mt-headline">One platform.<br>Every business.<br>Completely isolated.</h2>
+      <p class="mt-sub">Shepherd Stores is built on a true multi-tenant cloud architecture. Each business operates in a fully isolated, secure environment — with shared infrastructure that keeps costs low and performance high.</p>
+
+      <div class="mt-cards">
+        <div class="mt-card reveal d1">
+          <div class="mt-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="mt-card-title">Full Data Isolation</div>
+          <div class="mt-card-desc">Every tenant's data is fully isolated. No cross-contamination, ever.</div>
+        </div>
+        <div class="mt-card reveal d2">
+          <div class="mt-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="mt-card-title">Scalable Architecture</div>
+          <div class="mt-card-desc">Add branches, users, and volume without performance degradation.</div>
+        </div>
+        <div class="mt-card reveal d3">
+          <div class="mt-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="mt-card-title">99.9% Uptime SLA</div>
+          <div class="mt-card-desc">Enterprise-grade reliability backed by a formal SLA guarantee.</div>
+        </div>
+        <div class="mt-card reveal d4">
+          <div class="mt-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="mt-card-title">Per-Tenant Roles</div>
+          <div class="mt-card-desc">Each tenant manages their own staff, roles, and permission structure.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tenant-diagram reveal d2">
+      <div class="tenant-platform">
+        <div class="tp-label">Cloud Platform</div>
+        <div class="tp-name">Shepherd Stores</div>
+        <div class="tp-sub">Multi-tenant infrastructure · Fully isolated per business</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-around;margin-bottom:6px;">
+        <svg height="24" width="1" style="overflow:visible"><line x1="0.5" y1="0" x2="0.5" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+        <svg height="24" width="1" style="overflow:visible"><line x1="0.5" y1="0" x2="0.5" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+        <svg height="24" width="1" style="overflow:visible"><line x1="0.5" y1="0" x2="0.5" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+      </div>
+
+      <div class="tenant-cards">
+        <div class="tenant-card">
+          <div class="tc-indicator" style="background:#3b82f6"></div>
+          <div class="tc-name">Nakumatt Ltd</div>
+          <div class="tc-type">Supermarket</div>
+          <div class="tc-branches">12 branches</div>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-indicator" style="background:#10b981"></div>
+          <div class="tc-name">Mama Pima</div>
+          <div class="tc-type">Restaurant</div>
+          <div class="tc-branches">3 branches</div>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-indicator" style="background:#f59e0b"></div>
+          <div class="tc-name">Zawadi Duka</div>
+          <div class="tc-type">Retail Shop</div>
+          <div class="tc-branches">1 branch</div>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-indicator" style="background:#6366f1"></div>
+          <div class="tc-name">Furaha Stores</div>
+          <div class="tc-type">Pharmacy</div>
+          <div class="tc-branches">5 branches</div>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-indicator" style="background:#ec4899"></div>
+          <div class="tc-name">City Market</div>
+          <div class="tc-type">Wholesale</div>
+          <div class="tc-branches">2 branches</div>
+        </div>
+        <div class="tenant-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;">
+          <div style="font-size:20px;opacity:0.3;color:white">+</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:10px 14px;background:rgba(0,102,255,0.12);border:1px solid rgba(0,102,255,0.25);border-radius:8px;text-align:center;">
+        <div style="font-size:10px;color:#60a5fa;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:2px;">Each tenant gets</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.7);display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+          <span>🔒 Isolated DB</span>
+          <span>📊 Own Analytics</span>
+          <span>👥 Own Staff</span>
+          <span>🏪 Own Branches</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="test-header reveal">
+      <div class="section-eyebrow">Customer Stories</div>
+      <h2 class="section-headline">Trusted by businesses that<br>can't afford to get it wrong.</h2>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card test-featured reveal d1">
+        <div class="test-stars">
+          <span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span>
+        </div>
+        <p class="test-quote">"We have 7 branches across Nairobi and managing inventory used to be a nightmare. Shepherd Stores gave us one screen to see everything. We cut stock wastage by 34% in the first month."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#3b82f6">JK</div>
+          <div>
+            <div class="test-name">James Kariuki</div>
+            <div class="test-role">Owner, Kariuki Supermarket Group · 7 branches</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card reveal d2">
+        <div class="test-stars">
+          <span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span>
+        </div>
+        <p class="test-quote">"My cashiers were trained in under an hour. The POS is incredibly simple. M-Pesa integration works flawlessly — no more manual reconciliation at end of day."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#10b981">FO</div>
+          <div>
+            <div class="test-name">Fatuma Odhiambo</div>
+            <div class="test-role">Manager, Mama Pima Restaurant · Westlands</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card reveal d3">
+        <div class="test-stars">
+          <span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span>
+        </div>
+        <p class="test-quote">"The analytics dashboard alone is worth the subscription. I now know which products sell by the hour. I've optimized my buying by 40% and it shows in the margins."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#6366f1">SM</div>
+          <div>
+            <div class="test-name">Samuel Mwangi</div>
+            <div class="test-role">Director, Zawadi Retail Stores · Nakuru</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logos bar -->
+    <div style="margin-top:56px;text-align:center;" class="reveal d2">
+      <p style="font-size:12px;font-weight:700;color:var(--ink-4);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:24px;">Used by businesses across East Africa</p>
+      <div style="display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;opacity:0.4;">
+        <span style="font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.02em">KARIUKI GROUP</span>
+        <span style="font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.02em">MAMA PIMA</span>
+        <span style="font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.02em">ZAWADI STORES</span>
+        <span style="font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.02em">FURAHA PHARMACY</span>
+        <span style="font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.02em">CITY MARKET</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section class="pricing-teaser section" id="pricing" style="background:var(--bg-subtle);">
+  <div class="container">
+    <div class="pricing-header reveal">
+      <div class="section-eyebrow" style="justify-content:center;display:inline-flex;">Pricing</div>
+      <h2 class="section-headline">Simple, transparent pricing.<br>No surprises.</h2>
+      <p style="font-size:16px;color:var(--ink-3);max-width:480px;margin:0 auto;">Start free. Scale as you grow. Cancel any time. All plans include a 14-day free trial.</p>
+    </div>
+
+    <div class="pricing-cards">
+      <div class="pricing-card reveal d1">
+        <div class="pc-plan">Starter</div>
+        <div class="pc-price"><sup>KSh</sup>1,999</div>
+        <div class="pc-period">per month</div>
+        <div class="pc-desc">Perfect for single-location shops just getting started with POS management.</div>
+        <ul class="pc-features">
+          <li><span class="pc-check">✓</span> 1 branch</li>
+          <li><span class="pc-check">✓</span> Up to 3 staff</li>
+          <li><span class="pc-check">✓</span> Sales & inventory</li>
+          <li><span class="pc-check">✓</span> Basic reports</li>
+          <li><span class="pc-check">✓</span> Email support</li>
+        </ul>
+        <button class="pc-cta">Start Free Trial</button>
+      </div>
+
+      <div class="pricing-card popular reveal d2">
+        <div class="popular-badge">MOST POPULAR</div>
+        <div class="pc-plan">Business</div>
+        <div class="pc-price"><sup>KSh</sup>5,999</div>
+        <div class="pc-period">per month</div>
+        <div class="pc-desc">For growing businesses with multiple branches and teams that need full analytics.</div>
+        <ul class="pc-features">
+          <li><span class="pc-check">✓</span> Up to 5 branches</li>
+          <li><span class="pc-check">✓</span> Up to 20 staff</li>
+          <li><span class="pc-check">✓</span> Full analytics dashboard</li>
+          <li><span class="pc-check">✓</span> Role-based access</li>
+          <li><span class="pc-check">✓</span> Priority support</li>
+        </ul>
+        <button class="pc-cta primary">Start Free Trial</button>
+      </div>
+
+      <div class="pricing-card reveal d3">
+        <div class="pc-plan">Enterprise</div>
+        <div class="pc-price" style="font-size:28px;padding-top:8px;">Custom</div>
+        <div class="pc-period">contact sales</div>
+        <div class="pc-desc">For large retail chains, wholesale operations, and enterprise deployments with custom needs.</div>
+        <ul class="pc-features">
+          <li><span class="pc-check">✓</span> Unlimited branches</li>
+          <li><span class="pc-check">✓</span> Unlimited staff</li>
+          <li><span class="pc-check">✓</span> Custom integrations</li>
+          <li><span class="pc-check">✓</span> Dedicated SLA</li>
+          <li><span class="pc-check">✓</span> Dedicated account manager</li>
+        </ul>
+        <button class="pc-cta">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA SECTION ====== -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="reveal">
+      <div class="section-eyebrow" style="justify-content:center;display:inline-flex;margin-bottom:20px;">Ready to get started?</div>
+      <h2 class="cta-headline">Start managing your business<br>smarter today.</h2>
+      <p class="cta-sub">Join 2,400+ businesses already using Shepherd Stores to control their sales, inventory, and growth — from anywhere.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-hero-primary" style="height:52px;padding:0 32px;font-size:16px;">
+          Start Free Trial — 14 days free
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-hero-secondary" style="height:52px;padding:0 28px;font-size:15px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Request a Demo
+        </a>
+      </div>
+      <p class="cta-note">No credit card required · Setup in under 5 minutes · Cancel anytime</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <div class="nav-logo-mark" style="width:28px;height:28px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <img src="https://shepherdstores.vercel.app/assets/logo-Cb259jet.png" alt="Shepherd" style="height:24px;width:auto;filter:brightness(10)" onerror="this.style.display='none'">
+          <span class="footer-brand-name">Shepherd Stores</span>
+        </div>
+        <p class="footer-brand-desc">The intelligent cloud POS platform for modern retail, restaurants, and growing businesses across East Africa.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Twitter">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">POS Checkout</a></li>
+          <li><a href="#">Inventory</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Multi-Branch</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Mobile App</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">System Status</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        <div class="footer-col-title">Newsletter</div>
+        <div class="fn-title">Stay in the loop</div>
+        <div class="fn-desc">Product updates, tips, and business growth insights — delivered weekly.</div>
+        <div class="fn-form">
+          <input type="email" class="fn-input" placeholder="your@business.com">
+          <button class="fn-btn">Subscribe</button>
+        </div>
+        <div style="margin-top:16px;" class="footer-status">
+          <span class="status-dot"></span>
+          All systems operational
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Shepherd Stores Technologies Ltd. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta">
+  <div class="sticky-cta-inner">
+    <a href="#" class="sticky-cta-btn sticky-cta-secondary">Request Demo</a>
+    <a href="#" class="sticky-cta-btn sticky-cta-primary">Start Free Trial →</a>
+  </div>
+</div>
+
+<script>
+// Nav scroll
+const mainNav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('elevated', window.scrollY > 20);
+});
+
+// Mobile menu
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuClose = document.getElementById('menuClose');
+hamburgerBtn.addEventListener('click', () => {
+  mobileMenu.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+menuClose.addEventListener('click', closeMobileMenu);
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Hero — reveal immediately
+document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+document.querySelectorAll('.trust-strip .reveal').forEach(el => {
+  setTimeout(() => el.classList.add('visible'), 600);
+});
+
+// Tab switching
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.showcase-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const tab = document.getElementById(tabId);
+  tab.classList.add('active');
+  tab.querySelectorAll('.reveal').forEach(el => {
+    el.classList.remove('visible');
+    setTimeout(() => el.classList.add('visible'), 50);
+  });
+}
+</script>
+</body>
+</html>
